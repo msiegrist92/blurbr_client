@@ -10,10 +10,11 @@ const Register = () => {
 
   const registerUser = e => {
     e.preventDefault();
-    axios.post('http://' + process.env.NEXT_PUBLIC_DEV_API + '/user/register', {
+    axios.post(process.env.NEXT_PUBLIC_DEV_API + '/user/register', {
       email,
       password,
       username,
+      //remove signature when recreating database
       signature: 'this is a temp signature'
     }).then((res) => {
       //on success redirect user to customize with signature and avatar

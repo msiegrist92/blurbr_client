@@ -15,7 +15,7 @@ const RegisterUser = () => {
       password,
       username,
       //remove signature when recreating database
-      signature: 'this is a temp signature'
+      signature: ''
     }).then((res) => {
       //store token in sessionStorage for adding to API requests
       //on success redirect user to customize with signature and avatar

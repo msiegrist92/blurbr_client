@@ -6,7 +6,7 @@ const AvatarInfo = (props) => {
 
   return (
     <div>
-      <div>Hello</div>
+      <h2>Current Avatar</h2>
       <img src={process.env.NEXT_PUBLIC_AVATAR_DIR + props.img_src}></img>
     </div>
   )

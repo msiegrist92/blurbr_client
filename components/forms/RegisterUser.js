@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 
 const RegisterUser = () => {
 
@@ -16,8 +17,10 @@ const RegisterUser = () => {
       //remove signature when recreating database
       signature: 'this is a temp signature'
     }).then((res) => {
+      //store token in sessionStorage for adding to API requests
       //on success redirect user to customize with signature and avatar
       console.log(res);
+      sessionStorage.setItem('token', res.data.token);
     }).catch((e) => {
       console.log(e);
     })

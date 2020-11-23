@@ -37,7 +37,7 @@ const RegisterUser = () => {
         <label htmlFor='email'>Email</label>
         <input
           required id="email" type='text'
-          value={email}
+          value={email} name='email'
           onChange={e => setEmail(e.target.value)}
         />
         <br />

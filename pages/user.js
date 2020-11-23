@@ -14,22 +14,27 @@ import getSig from '../lib/api/user/getSig';
 
 const User = () => {
 
-
   const [avatar, setAvatar] = useState('');
   const [sig, setSig] = useState('');
   const [DBSig, setDBSig] = useState('');
   const [DBAvatar, setDBAvatar] = useState('');
   const [userID, setUserID] = useState('');
+  const [session, setSession] = useState(true);
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
-    let id = jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET);
-    setUserID(id._id);
-    getAvatar(userID).then((res) => {
-      setDBAvatar(res);
-    })
-    getSig(userID).then((res) => {
-      setDBSig(res);
-    })
+    if(!sessionStorage.token){
+      return setSession(false);
+    } else {
+      let id = jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET);
+      setUserID(id._id);
+      getAvatar(userID).then((res) => {
+        setDBAvatar(res);
+      })
+      getSig(userID).then((res) => {
+        setDBSig(res);
+      })
+    }
   }, [DBSig, DBAvatar])
 
   const changeSig = (event, sig) => {
@@ -37,11 +42,16 @@ const User = () => {
     axios.post(process.env.NEXT_PUBLIC_DEV_API + '/user/' +
       userID + '/signature',
       {
-        signature: sig
+        signature: sig,
+        token: sessionStorage.token
       }).then((res) => {
+        setStatus('Signature changed!');
         setDBSig(res.data);
-      }).catch((e) => {
-        console.log(e);
+      }).catch((err) => {
+        setStatus(err.response.data);
+        if(err.response.status === 401){
+          setSession(false);
+        }
       })
   }
 
@@ -49,6 +59,7 @@ const User = () => {
     event.preventDefault();
     const data = new FormData();
     data.append("file", avatar);
+    data.append('token', sessionStorage.token)
     //replace ID with sessionStorage .token(decoded with secret)
     //or just allow user access to their ID in the client - is that safe?
     axios.post(process.env.NEXT_PUBLIC_DEV_API +
@@ -58,26 +69,38 @@ const User = () => {
         "Content-Type": "multipart/form-data"
       }
     }).then((res) => {
+      setStatus('Avatar changed!');
       setDBAvatar(res.data.avatar);
     }).catch((err) => {
-      console.log(err);
+      setStatus(err.response.data)
+      if(err.response.status === 401){
+        setSession(false);
+      }
     })
   }
 
 
   return (
     <div>
-      <AvatarInfo img_src={DBAvatar} />
-      <AvatarForm
-        setAvatar={setAvatar}
-        uploadAvatar={uploadAvatar}
-        img={avatar}
-       />
-      <SigInfo sig={DBSig}/>
-      <SigForm
-        updateSig={setSig}
-        changeSig={changeSig}
-        sig={sig}/>
+      {!session &&
+        <h1>Please Log In</h1>
+      }
+      {session &&
+        <div>
+          <AvatarInfo img_src={DBAvatar} />
+          <AvatarForm
+            setAvatar={setAvatar}
+            uploadAvatar={uploadAvatar}
+            img={avatar}
+           />
+          <SigInfo sig={DBSig}/>
+          <SigForm
+            updateSig={setSig}
+            changeSig={changeSig}
+            sig={sig}/>
+            <h2>{status}</h2>
+        </div>
+      }
     </div>
   )
 }

@@ -6,6 +6,7 @@ const RegisterUser = () => {
   const [email, setEmail] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [status, setStatus] = React.useState('');
 
 
   const registerUser = e => {
@@ -19,10 +20,12 @@ const RegisterUser = () => {
     }).then((res) => {
       //store token in sessionStorage for adding to API requests
       //on success redirect user to customize with signature and avatar
-      console.log(res);
+      if(res.status === 201){
+        setStatus('Register successful!')
+      }
       sessionStorage.setItem('token', res.data.token);
     }).catch((e) => {
-      console.log(e);
+      setStatus(e.response.data);
     })
   }
 
@@ -57,6 +60,7 @@ const RegisterUser = () => {
         <input type='submit' />
 
       </form>
+      <h2>{status}</h2>
     </div>
   )
 }

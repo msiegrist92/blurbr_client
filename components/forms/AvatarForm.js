@@ -13,6 +13,7 @@ const AvatarForm = (props) => {
       >
         <input id='file' required
           type='file' name='avatar'
+          accept='image/jpeg'
           onChange={(event) => props.setAvatar(event.target.files[0])}
         />
         <input type='submit' />

@@ -13,29 +13,26 @@ import PostBody from '../../components/posts/PostBody';
 const Page = ({topic_data}) => {
 
   const {topic} = topic_data;
-  const {topic_author} = topic_data;
+  const topic_author = topic.user;
 
   const {posts, _id, title, body, author, date_created} = topic;
-  const {username} = topic_author;
 
-  const timestamp = formatDateFromDB(date_created);
-
-  const topic_posts = topic.posts.map((topic) => {
+  const posts_list = topic.posts.map((post) => {
     return (
       <PostBody
-        key={topic._id}
-        author={author}
-        body={topic.body}
-        date_created={topic.date_created}
+        key={post._id}
+        author={post.user.username}
+        body={post.body}
+        date_created={formatDateFromDB(post.date_created)}
       />
     )
   })
 
   return (
     <div>
-      <TopicBody title={title} author={username}
-        body={body} date_created={timestamp} />
-      {topic_posts}
+      <TopicBody title={title} author={topic_author.username}
+        body={body} date_created={formatDateFromDB(date_created)} />
+      {posts_list}
       <PostForm id={_id}/>
     </div>
   )

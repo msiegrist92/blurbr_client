@@ -14,8 +14,10 @@ const Page = ({topic_data}) => {
 
   const {topic} = topic_data;
   const topic_author = topic.user;
+  console.log(topic_author);
 
   const {posts, _id, title, body, author, date_created} = topic;
+  console.log(topic.posts);
 
   const posts_list = topic.posts.map((post) => {
     return (
@@ -24,6 +26,8 @@ const Page = ({topic_data}) => {
         author={post.user.username}
         body={post.body}
         date_created={formatDateFromDB(post.date_created)}
+        avatar={post.user.avatar}
+        signature={post.user.signature}
       />
     )
   })
@@ -31,7 +35,9 @@ const Page = ({topic_data}) => {
   return (
     <div>
       <TopicBody title={title} author={topic_author.username}
-        body={body} date_created={formatDateFromDB(date_created)} />
+        body={body} date_created={formatDateFromDB(date_created)}
+        signature={topic_author.signature}
+      />
       {posts_list}
       <PostForm id={_id}/>
     </div>

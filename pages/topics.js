@@ -1,18 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import ListTopic from '../components/topics/ListTopic.js';
+import TopicList from '../components/topics/TopicList.js';
+import formatDateFromDB from '../lib/utils/formatDateFromDB';
 
 const Topics = ({topics}) => {
 
+  console.log(topics);
+
   const topic_list = topics.map((topic) => {
     return (
-      <ListTopic
+      <TopicList
         key={topic._id}
         title={topic.title}
         body={topic.body}
         author={topic.author.username}
-        date={topic.date_created}
+        date={formatDateFromDB(topic.date_created)}
         link={'/topics/' + topic._id}
+        length={topic.length}
       />
     )
   })

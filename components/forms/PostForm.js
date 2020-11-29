@@ -17,6 +17,7 @@ const PostForm = (props) => {
       token: sessionStorage.token
     }).then((res) => {
       console.log(res)
+      setStatus('Post created!');
     }).catch((err) => {
       console.log(err);
     })

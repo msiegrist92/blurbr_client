@@ -12,7 +12,7 @@ import getSig from '../lib/api/user/getSig';
 
 
 
-const User = () => {
+const Me = () => {
 
   const [avatar, setAvatar] = useState('');
   const [sig, setSig] = useState('');
@@ -107,4 +107,4 @@ const User = () => {
 
 
 
-export default User;
+export default Me;;

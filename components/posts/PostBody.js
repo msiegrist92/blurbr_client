@@ -1,15 +1,15 @@
 import React from 'react';
 import formatDateFromDB from '../../lib/utils/formatDateFromDB';
 
-const PostBody = (props) => {
-
-  const timestamp = props.date_created;
+const PostBody = ({author, body, date_created, signature, avatar}) => {
 
   return (
     <div>
-      <h2>{props.author}</h2>
-      <p>{props.body}</p>
-      <h2>{timestamp}</h2>
+      <h2>{author}</h2>
+      <p>{body}</p>
+      <h4>{date_created}</h4>
+      <p>{signature}</p>
+      <img src={process.env.NEXT_PUBLIC_AVATAR_DIR + avatar}></img>
     </div>
   )
 }

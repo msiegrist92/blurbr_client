@@ -12,6 +12,7 @@ const Topics = ({topics}) => {
         body={topic.body}
         author={topic.author.username}
         date={topic.date_created}
+        link={'/topics/' + topic._id}
       />
     )
   })

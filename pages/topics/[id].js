@@ -24,6 +24,7 @@ const Page = ({topic_data}) => {
       <PostBody
         key={post._id}
         author={post.user.username}
+        author_link={'/users/' + post.user._id}
         body={post.body}
         date_created={formatDateFromDB(post.date_created)}
         avatar={post.user.avatar}
@@ -36,7 +37,7 @@ const Page = ({topic_data}) => {
     <div>
       <TopicBody title={title} author={topic_author.username}
         body={body} date_created={formatDateFromDB(date_created)}
-        signature={topic_author.signature}
+        signature={topic_author.signature} author_link={'/users/' + topic_author._id}
       />
       {posts_list}
       <PostForm id={_id}/>

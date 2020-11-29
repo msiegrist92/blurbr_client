@@ -14,8 +14,9 @@ const Topics = ({topics}) => {
         title={topic.title}
         body={topic.body}
         author={topic.author.username}
+        author_link={'/users/' + topic.author._id}
         date={formatDateFromDB(topic.date_created)}
-        link={'/topics/' + topic._id}
+        topic_link={'/topics/' + topic._id}
         length={topic.length}
       />
     )

@@ -1,17 +1,24 @@
 import React from 'react';
 import axios from 'axios';
 
+import UserInfo from '../../components/user/UserInfo';
+
 import getUserIds from '../../lib/api/user/getUserIds';
 import getUserById from '../../lib/api/user/getUserById';
 
 const Page = (props) => {
 
-  const {username, avatar, signature} = props.user;
+  const {username, avatar, signature, number_posts} = props.user;
   const topics = props.user.topics;
 
 
   return (
-    <div>Test</div>
+    <div>
+      <UserInfo
+        username={username} avatar={avatar} signature={signature}
+        number_posts={number_posts} topics={topics}
+      />
+    </div>
   )
 }
 

@@ -1,17 +1,37 @@
 .topic_list {
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  grid-template-rows: repeat(2, auto);
+  grid-template-columns: 75% 25%;
+  grid-template-rows: repeat(3, auto);
   align-items: center;
   background-color: $pale-purple;
-  margin-bottom: 2%;
+  margin: 1em;
+  padding: 0 1em;
 
-  h4 {
-    grid-column: 3 / 4;
-    justify-self: flex-end;
+  h1 {
+    grid-row: 1 / 3;
+    grid-column: 1 / 2;
   }
 
   h3 {
-    justify-self: flex-end;
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
   }
+
+  .date {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+  }
+
+  p {
+    grid-row: 3 / 4;
+    grid-column: 1 / 2;
+  }
+
+  .replies {
+    grid-row: 3 / 4;
+    grid-column: 2 / 3;
+  }
+
+
+
 }

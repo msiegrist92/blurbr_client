@@ -13,22 +13,22 @@ const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
   })
 
   return (
-    <div>
+    <div className='user_info container'>
       <Head>
         <title>Blurbr User {username}</title>
       </Head>
-      <h1>{username}</h1>
+      <h1 className='username'>{username}</h1>
       <img src={avatar}></img>
       <p>{signature}</p>
-      <h4>{number_posts}</h4>
-      <h1>Topics</h1>
+      <h4 className='number_posts'>{number_posts}</h4>
+      <h1 className='topics'>Topics</h1>
       {topics_list.length > 0 &&
-        <ul>
+        <ul className='topics_list'>
           {topics_list}
         </ul>
       }
       {topics_list.length === 0 &&
-        <h4>User has not created any topics</h4>
+        <h4 className='topics_list'>User has not created any topics</h4>
       }
     </div>
   )

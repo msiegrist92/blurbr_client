@@ -16,9 +16,9 @@ const TopicList = ({title, body, author, date, topic_link, length, author_link})
       <Link href={author_link}>
         <h3>By : {author}</h3>
       </Link>
-      <h4>{date}</h4>
+      <h4 className='date'>{date}</h4>
       <p>{body}</p>
-      <h4>{replies}</h4>
+      <h4 className='replies'>{replies}</h4>
     </div>
   )
 }

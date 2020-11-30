@@ -11,6 +11,7 @@ const AvatarForm = (props) => {
         encType='multipart/form-data'
         accept='image/jpeg'
       >
+      <h2>Change Your Avatar</h2>
         <input id='file' required
           type='file' name='avatar'
           accept='image/jpeg'

@@ -1,14 +1,18 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
 
 import AvatarForm from '../components/forms/AvatarForm';
 import AvatarInfo from '../components/user/AvatarInfo';
 import SigInfo from '../components/user/SigInfo';
 import SigForm from '../components/forms/SigForm';
+import UserInfo from '../components/user/UserInfo';
+import Header from '../components/Header';
 
 import getAvatar from '../lib/api/user/getAvatar';
 import getSig from '../lib/api/user/getSig';
+import getUserById from '../lib/api/user/getUserById';
 
 
 
@@ -21,6 +25,7 @@ const Me = () => {
   const [userID, setUserID] = useState('');
   const [session, setSession] = useState(true);
   const [status, setStatus] = useState('');
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     if(!sessionStorage.token){
@@ -36,6 +41,12 @@ const Me = () => {
       })
     }
   }, [DBSig, DBAvatar])
+
+  useEffect(() => {
+    getUserById(jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id).then((res) => {
+      setUser(res.data);
+    })
+  }, [])
 
   const changeSig = (event, sig) => {
     event.preventDefault();
@@ -82,18 +93,23 @@ const Me = () => {
 
   return (
     <div>
+      <Header />
       {!session &&
         <h1>Please Log In</h1>
       }
       {session &&
         <div>
-          <AvatarInfo img_src={DBAvatar} />
+          {user &&
+            <UserInfo username={user.username} avatar={DBAvatar}
+              signature={DBSig} number_posts={user.number_posts}
+              topics={user.topics}
+            />
+          }
           <AvatarForm
             setAvatar={setAvatar}
             uploadAvatar={uploadAvatar}
             img={avatar}
            />
-          <SigInfo sig={DBSig}/>
           <SigForm
             updateSig={setSig}
             changeSig={changeSig}
@@ -107,4 +123,4 @@ const Me = () => {
 
 
 
-export default Me;;
+export default Me;

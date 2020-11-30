@@ -1,5 +1,6 @@
 import React from 'react';
 import TopicListUser from '../topics/TopicListUser';
+import Head from 'next/head';
 
 const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
 
@@ -13,6 +14,9 @@ const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
 
   return (
     <div>
+      <Head>
+        <title>Blurbr User {username}</title>
+      </Head>
       <h1>{username}</h1>
       <img src={avatar}></img>
       <p>{signature}</p>

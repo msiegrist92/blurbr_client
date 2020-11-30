@@ -1,5 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import Head from 'next/head';
+
+import Header from '../components/Header';
+
 import TopicList from '../components/topics/TopicList.js';
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 
@@ -24,6 +28,10 @@ const Topics = ({topics}) => {
 
   return (
     <div>
+      <Head>
+          <title>Blurbr Topics</title>
+      </Head>
+      <Header />
       <ul>{topic_list}</ul>
     </div>
   )

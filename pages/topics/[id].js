@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Head from 'next/head';
 
 import getTopicIds from '../../lib/api/topics/getTopicIds';
 import getTopicById from '../../lib/api/topics/getTopicById';
@@ -35,6 +36,9 @@ const Page = ({topic_data}) => {
 
   return (
     <div>
+      <Head>
+        <title>Blurbr - {title}</title>
+      </Head>
       <TopicBody title={title} author={topic_author.username}
         body={body} date_created={formatDateFromDB(date_created)}
         signature={topic_author.signature} author_link={'/users/' + topic_author._id}

@@ -1,0 +1,17 @@
+.topic_list {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(2, auto);
+  align-items: center;
+  background-color: $pale-purple;
+  margin-bottom: 2%;
+
+  h4 {
+    grid-column: 3 / 4;
+    justify-self: flex-end;
+  }
+
+  h3 {
+    justify-self: flex-end;
+  }
+}

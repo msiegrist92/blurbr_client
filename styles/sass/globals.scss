@@ -1,3 +1,7 @@
+@import './variables.scss';
+@import './_header.scss';
+@import './topic_list.scss';
+
 html,
 body {
   padding: 0;
@@ -22,4 +26,10 @@ ul {
 
 li {
   text-decoration: none;
+}
+
+.container {
+  width: 75%;
+  display: block;
+  margin: 0 auto;
 }

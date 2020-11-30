@@ -32,7 +32,7 @@ const Topics = ({topics}) => {
           <title>Blurbr Topics</title>
       </Head>
       <Header />
-      <ul>{topic_list}</ul>
+      <ul className='container'>{topic_list}</ul>
     </div>
   )
 }

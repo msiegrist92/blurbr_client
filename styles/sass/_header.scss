@@ -1,0 +1,39 @@
+.header {
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  background-color: $midnight-purple;
+  color: white;
+
+  h1, h4 {
+    font-family: Ubuntu, sans-serif;
+    display: inline;
+    float: left;
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+
+  .branding {
+    grid-column: 0 / 1;
+  }
+
+  nav {
+    grid-column: 2 / 3;
+    justify-self: end;
+
+    a {
+      display: inline;
+
+      h2 {
+        display: inline;
+      }
+    }
+
+  }
+
+
+
+}

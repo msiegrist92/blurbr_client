@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import TopicForm from '../components/forms/TopicForm';
-import Header from './Header';
+import Header from '../components/Header';
 
 const CreateTopic = () => {
 

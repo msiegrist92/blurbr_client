@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import TopicListUser from '../topics/TopicListUser';
 import Head from 'next/head';
 
@@ -9,19 +9,21 @@ const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
 
   const [display, setDisplay] = useState(false);
 
-  useEffect(() => {
-    if (display === false){
-      console.log('false')
-    } else {
-      console.log('true')
-    }
-  }, [display])
 
   const dropTopics = (e, display) => {
     e.preventDefault();
+    const list = document.querySelector('.topics_list');
+
     if (display === false){
+      list.classList.remove('slide_up');
+      list.classList.add('drop_down')
+      list.style.display = 'block';
       setDisplay(true);
+      setTimeout(() => {
+        list.classList.remove('drop_down');
+      }, 2000)
     } else {
+      list.classList.toggle('slide_up');
       setDisplay(false);
     }
   }
@@ -40,12 +42,24 @@ const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
       <p>{signature}</p>
       <h4 className='number_posts'>{number_posts}</h4>
       <h1 className='topics'>
-        Topics<i
-        onClick={(e) => {dropTopics(e, display)}}
-        className='caret down icon'></i>
+        Topics
+
+        {display === true &&
+          <i
+          onClick={(e) => {dropTopics(e, display)}}
+          className='caret down icon'></i>
+        }
+
+        {display === false &&
+          <i
+          onClick={(e) => {dropTopics(e, display)}}
+          className='caret right icon'></i>
+        }
     </h1>
       {topics_list.length > 0 &&
-        <ul className='topics_list'>
+        <ul className='topics_list'
+            style={{display:'none'}}
+          >
           {topics_list}
         </ul>
       }

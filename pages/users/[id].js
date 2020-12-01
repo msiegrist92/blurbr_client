@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import UserInfo from '../../components/user/UserInfo';
+import Header from '../../components/Header';
 
 import getUserIds from '../../lib/api/user/getUserIds';
 import getUserById from '../../lib/api/user/getUserById';
@@ -14,6 +15,7 @@ const Page = (props) => {
 
   return (
     <div>
+      <Header />
       <UserInfo
         username={username} avatar={avatar} signature={signature}
         number_posts={number_posts} topics={topics}

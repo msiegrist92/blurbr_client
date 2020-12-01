@@ -43,6 +43,9 @@ const Me = () => {
   }, [DBSig, DBAvatar])
 
   useEffect(() => {
+    if(!sessionStorage.token){
+      return setSession(false);
+    }
     getUserById(jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id).then((res) => {
       setUser(res.data);
     })

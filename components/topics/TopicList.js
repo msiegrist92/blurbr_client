@@ -10,12 +10,12 @@ const TopicList = ({title, body, author, date, topic_link, length, author_link})
 
   return (
     <div className='topic_list'>
-      <Link href={topic_link}>
+      <a href={topic_link}>
         <h1>{title}</h1>
-      </Link>
-      <Link href={author_link}>
+      </a>
+      <a href={author_link}>
         <h3>By : {author}</h3>
-      </Link>
+      </a>
       <h4 className='date'>{date}</h4>
       <p>{body}</p>
       <h4 className='replies'>{replies}</h4>

@@ -9,9 +9,9 @@ const TopicBody = ({title, author, body, date_created, signature, avatar, author
     <div>
       <h1>{title}</h1>
       <p>{body}</p>
-      <Link href={author_link}>
+      <a href={author_link}>
         <h2>{author}</h2>
-      </Link>
+      </a>
       <h4>{date_created}</h4>
       <p>{signature}</p>
       <img src={process.env.NEXT_PUBLIC_AVATAR_DIR + avatar}></img>

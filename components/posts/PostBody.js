@@ -6,9 +6,9 @@ const PostBody = ({author, body, date_created, signature, avatar, author_link}) 
 
   return (
     <div>
-      <Link href={author_link}>
+      <a className='link' href={author_link}>
         <h2>{author}</h2>
-      </Link>
+      </a>
       <p>{body}</p>
       <h4>{date_created}</h4>
       <p>{signature}</p>

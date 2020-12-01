@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import TopicListUser from '../topics/TopicListUser';
 import Head from 'next/head';
 
@@ -7,9 +7,27 @@ const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
   avatar = process.env.NEXT_PUBLIC_AVATAR_DIR + avatar;
   number_posts = 'Posts: ' + number_posts;
 
-  console.log(topics);
+  const [display, setDisplay] = useState(false);
+
+  useEffect(() => {
+    if (display === false){
+      console.log('false')
+    } else {
+      console.log('true')
+    }
+  }, [display])
+
+  const dropTopics = (e, display) => {
+    e.preventDefault();
+    if (display === false){
+      setDisplay(true);
+    } else {
+      setDisplay(false);
+    }
+  }
+
   const topics_list = topics.map((topic) => {
-    return <TopicListUser topic={topic} />
+    return <TopicListUser key={topic._id} topic={topic} />
   })
 
   return (
@@ -21,7 +39,11 @@ const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
       <img src={avatar}></img>
       <p>{signature}</p>
       <h4 className='number_posts'>{number_posts}</h4>
-      <h1 className='topics'>Topics</h1>
+      <h1 className='topics'>
+        Topics<i
+        onClick={(e) => {dropTopics(e, display)}}
+        className='caret down icon'></i>
+    </h1>
       {topics_list.length > 0 &&
         <ul className='topics_list'>
           {topics_list}

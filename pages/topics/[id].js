@@ -9,6 +9,7 @@ import formatDateFromDB from '../../lib/utils/formatDateFromDB';
 import TopicBody from '../../components/topics/TopicBody';
 import PostForm from '../../components/forms/PostForm';
 import PostBody from '../../components/posts/PostBody';
+import Header from '../../components/Header';
 
 
 const Page = ({topic_data}) => {
@@ -39,6 +40,7 @@ const Page = ({topic_data}) => {
       <Head>
         <title>Blurbr - {title}</title>
       </Head>
+      <Header />
       <TopicBody title={title} author={topic_author.username}
         body={body} date_created={formatDateFromDB(date_created)}
         signature={topic_author.signature} author_link={'/users/' + topic_author._id}

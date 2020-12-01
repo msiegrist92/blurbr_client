@@ -1,6 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
-import TopicListUser from '../topics/TopicListUser';
 import Head from 'next/head';
+
+import TopicListUser from '../topics/TopicListUser';
+import animateBlock from '../../lib/utils/animationHandler';
 
 const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
 
@@ -15,16 +17,15 @@ const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
     const list = document.querySelector('.topics_list');
 
     if (display === false){
-      list.classList.remove('slide_up');
-      list.classList.add('drop_down')
-      list.style.display = 'block';
+      animateBlock(list, 'slide_up', 'drop_down', 2000);
       setDisplay(true);
-      setTimeout(() => {
-        list.classList.remove('drop_down');
-      }, 2000)
+
     } else {
       list.classList.toggle('slide_up');
       setDisplay(false);
+      setTimeout(() => {
+        list.style.display = 'none';
+      }, 300)
     }
   }
 

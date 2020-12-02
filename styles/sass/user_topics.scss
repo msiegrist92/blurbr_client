@@ -1,0 +1,19 @@
+.topics {
+  text-align: center;
+}
+
+.topics_list {
+  text-align: center;
+  display: grid;
+  border: 2px solid black;
+  width: 400px;
+  margin: 0 auto 2em auto;
+  box-shadow: 5px 2px 4px grey;
+}
+
+.topics_list li {
+  border: 2px solid lightgrey;
+  width: 60%;
+  margin: .5em auto;
+  padding: .5em;
+}

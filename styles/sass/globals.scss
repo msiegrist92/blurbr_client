@@ -3,6 +3,8 @@
 @import './topic_list.scss';
 @import './user_info.scss';
 @import './animations.scss';
+@import './user_topics.scss';
+@import './me_form_cont.scss';
 
 html,
 body {
@@ -34,4 +36,27 @@ li {
   width: 75%;
   display: block;
   margin: 0 auto;
+}
+
+input[type='submit']{
+  padding: 8px 12px;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: lightblue;
+    cursor: pointer;
+  }
+  &:active {
+    background-color: orange;
+  }
+}
+
+.relative {
+  position: absolute;
+  right: calc(100vh - 25%);
+}
+
+.off_right {
+  position: absolute;
+  right: -2000px;
 }

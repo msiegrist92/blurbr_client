@@ -104,19 +104,21 @@ const Me = () => {
             <UserInfo username={user.username} avatar={DBAvatar}
               signature={DBSig} number_posts={user.number_posts}
             />
-            <AvatarForm
-              setAvatar={setAvatar}
-              uploadAvatar={uploadAvatar}
-              img={avatar}
-             />
+          <div id='me_form_cont'>
             <SigForm
               updateSig={setSig}
               changeSig={changeSig}
               sig={sig}/>
+              <AvatarForm
+                setAvatar={setAvatar}
+                uploadAvatar={uploadAvatar}
+                img={avatar}
+               />
+          </div>
+          <h2 style={{textAlign: 'center'}}>{status}</h2>
             <TopicsDropDown topics={user.topics} />
           </>
           }
-          <h2>{status}</h2>
         </div>
       }
     </div>

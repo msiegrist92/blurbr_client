@@ -1,0 +1,14 @@
+#me_form_cont {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(2, 1fr);
+  width: 75%;
+  margin: 0 auto;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+
+#file, #sub_file {
+  transition: right 1s linear;
+}

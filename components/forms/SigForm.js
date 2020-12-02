@@ -4,7 +4,7 @@ import axios from 'axios';
 const SigForm = (props) => {
 
   return (
-    <div>
+    <div id='sig_form'>
       <form onSubmit={(e) => {props.changeSig(e, props.sig)}}>
         <h2>Change Your Signature</h2>
         <input required id='signature'

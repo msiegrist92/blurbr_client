@@ -6,10 +6,20 @@ import Header from '../components/Header';
 
 const CreateTopic = () => {
 
+  const [session, setSession] = useState(true);
+
+  useEffect(() => {
+    if(!sessionStorage.token){
+      return setSession(false)
+    }
+  })
+
   return (
     <div>
       <Header />
-      <TopicForm />
+      {session &&
+        <TopicForm />
+      }
     </div>
   )
 }

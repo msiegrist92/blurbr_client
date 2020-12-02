@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import UserInfo from '../../components/user/UserInfo';
 import Header from '../../components/Header';
+import TopicsDropDown from '../../components/user/TopicsDropDown';
 
 import getUserIds from '../../lib/api/user/getUserIds';
 import getUserById from '../../lib/api/user/getUserById';
@@ -20,6 +21,7 @@ const Page = (props) => {
         username={username} avatar={avatar} signature={signature}
         number_posts={number_posts} topics={topics}
       />
+    <TopicsDropDown topics={topics} />
     </div>
   )
 }

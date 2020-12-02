@@ -11,7 +11,7 @@ const Header = () => {
     </Head>
     <header className='header'>
       <div className='branding'>
-        <h1>Blurbr</h1>
+        <a href='/'><h1>Blurbr</h1></a>
         <h4>Say whatever</h4>
       </div>
       <nav>

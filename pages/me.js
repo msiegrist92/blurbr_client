@@ -4,16 +4,15 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 
 import AvatarForm from '../components/forms/AvatarForm';
-import AvatarInfo from '../components/user/AvatarInfo';
-import SigInfo from '../components/user/SigInfo';
 import SigForm from '../components/forms/SigForm';
 import UserInfo from '../components/user/UserInfo';
 import Header from '../components/Header';
+import TopicsDropDown from '../components/user/TopicsDropDown';
 
 import getAvatar from '../lib/api/user/getAvatar';
 import getSig from '../lib/api/user/getSig';
 import getUserById from '../lib/api/user/getUserById';
-
+import handleSessionErr from '../lib/utils/handleSessionErr';
 
 
 const Me = () => {
@@ -22,10 +21,22 @@ const Me = () => {
   const [sig, setSig] = useState('');
   const [DBSig, setDBSig] = useState('');
   const [DBAvatar, setDBAvatar] = useState('');
+
   const [userID, setUserID] = useState('');
   const [session, setSession] = useState(true);
   const [status, setStatus] = useState('');
   const [user, setUser] = useState(null);
+
+
+  useEffect(() => {
+    if(!sessionStorage.token){
+      return setSession(false);
+    }
+    getUserById(jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id).then((res) => {
+      setUser(res.data);
+    })
+  }, [])
+
 
   useEffect(() => {
     if(!sessionStorage.token){
@@ -42,14 +53,6 @@ const Me = () => {
     }
   }, [DBSig, DBAvatar])
 
-  useEffect(() => {
-    if(!sessionStorage.token){
-      return setSession(false);
-    }
-    getUserById(jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id).then((res) => {
-      setUser(res.data);
-    })
-  }, [])
 
   const changeSig = (event, sig) => {
     event.preventDefault();
@@ -62,20 +65,16 @@ const Me = () => {
         setStatus('Signature changed!');
         setDBSig(res.data);
       }).catch((err) => {
-        setStatus(err.response.data);
-        if(err.response.status === 401){
-          setSession(false);
-        }
+        handleSessionErr(err, setStatus, setSession);
       })
   }
+
 
   const uploadAvatar = (event, avatar) => {
     event.preventDefault();
     const data = new FormData();
     data.append("file", avatar);
     data.append('token', sessionStorage.token)
-    //replace ID with sessionStorage .token(decoded with secret)
-    //or just allow user access to their ID in the client - is that safe?
     axios.post(process.env.NEXT_PUBLIC_DEV_API +
         '/user/' + userID + '/avatar', data,
       {
@@ -86,12 +85,10 @@ const Me = () => {
       setStatus('Avatar changed!');
       setDBAvatar(res.data.avatar);
     }).catch((err) => {
-      setStatus(err.response.data)
-      if(err.response.status === 401){
-        setSession(false);
-      }
+      handleSessionErr(err, setStatus, setSession);
     })
   }
+
 
 
   return (
@@ -103,21 +100,23 @@ const Me = () => {
       {session &&
         <div>
           {user &&
+            <>
             <UserInfo username={user.username} avatar={DBAvatar}
               signature={DBSig} number_posts={user.number_posts}
-              topics={user.topics}
             />
+            <AvatarForm
+              setAvatar={setAvatar}
+              uploadAvatar={uploadAvatar}
+              img={avatar}
+             />
+            <SigForm
+              updateSig={setSig}
+              changeSig={changeSig}
+              sig={sig}/>
+            <TopicsDropDown topics={user.topics} />
+          </>
           }
-          <AvatarForm
-            setAvatar={setAvatar}
-            uploadAvatar={uploadAvatar}
-            img={avatar}
-           />
-          <SigForm
-            updateSig={setSig}
-            changeSig={changeSig}
-            sig={sig}/>
-            <h2>{status}</h2>
+          <h2>{status}</h2>
         </div>
       }
     </div>

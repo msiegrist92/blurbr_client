@@ -13,6 +13,7 @@ import getAvatar from '../lib/api/user/getAvatar';
 import getSig from '../lib/api/user/getSig';
 import getUserById from '../lib/api/user/getUserById';
 import handleSessionErr from '../lib/utils/handleSessionErr';
+import {animateToggle, animateToggleDisplayTimeOut} from '../lib/utils/animationHandler';
 
 
 const Me = () => {
@@ -89,6 +90,13 @@ const Me = () => {
     })
   }
 
+  const animationControl = (e, [...ids], outClass, inClass, length, display ) => {
+    e.preventDefault();
+    for(let id of ids){
+      animateToggle(document.getElementById(id), outClass, inClass, length, display)
+    }
+  }
+
 
 
   return (
@@ -108,12 +116,15 @@ const Me = () => {
             <SigForm
               updateSig={setSig}
               changeSig={changeSig}
-              sig={sig}/>
-              <AvatarForm
-                setAvatar={setAvatar}
-                uploadAvatar={uploadAvatar}
-                img={avatar}
-               />
+              sig={sig}
+              showForm={animationControl}
+            />
+            <AvatarForm
+              setAvatar={setAvatar}
+              uploadAvatar={uploadAvatar}
+              img={avatar}
+              showForm={animationControl}
+            />
           </div>
           <h2 style={{textAlign: 'center'}}>{status}</h2>
             <TopicsDropDown topics={user.topics} />

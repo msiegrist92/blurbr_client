@@ -8,13 +8,7 @@ const AvatarForm = (props) => {
 
   //process.env.NEXT_PUBLIC_DEV_API + '/user/' + "5fb4082408eb0123095db14e" + '/avatar'
 
-  const showForm = e =>{
-    e.preventDefault();
-    const file = document.getElementById('file');
-    const sub_file = document.getElementById('sub_file');
-    animateToggle(file, 'off_right', 'relative', 2000, 'block');
-    animateToggle(sub_file, 'off_right', 'relative', 2000, 'block');
-  }
+  const [pressed, setPressed] = useState(false);
 
   return (
     <div id='avatar_form'>
@@ -22,16 +16,27 @@ const AvatarForm = (props) => {
         encType='multipart/form-data'
         accept='image/jpeg'
       >
-      <h2 onClick={(e) => {showForm(e)}}>Change Your Avatar</h2>
+      <button
+        disabled={pressed}
+        className='clickable'
+        onClick={(e) => {
+          props.showForm(e, ['avatar_input'], 'off_right',
+            'absolute_avatar', 1000, 'block')
+          setPressed(true)}}
+        >
+        Change Your Avatar</button>
+      <div id='avatar_input'
+        className='off_right'>
         <input id='file' required
           type='file' name='avatar'
           accept='image/jpeg'
           onChange={(event) => props.setAvatar(event.target.files[0])}
-          className='off_right'
         />
-      <input id='sub_file' type='submit'
-          className='off_right'
-          />
+        <input
+          id='sub_file'
+          type='submit'
+        />
+      </div>
       </form>
     </div>
   )

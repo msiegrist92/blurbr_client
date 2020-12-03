@@ -3,8 +3,9 @@ import axios from 'axios';
 import Head from 'next/head';
 
 import Header from '../components/Header';
-
 import TopicList from '../components/topics/TopicList.js';
+import TopicForm from '../components/forms/TopicForm';
+
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 
 const Topics = ({topics}) => {
@@ -32,6 +33,8 @@ const Topics = ({topics}) => {
           <title>Blurbr Topics</title>
       </Head>
       <Header />
+      <h1>Create a new post</h1>
+      <TopicForm />
       <ul className='container'>{topic_list}</ul>
     </div>
   )

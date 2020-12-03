@@ -24,6 +24,7 @@ const RegisterUser = () => {
         setStatus('Register successful!')
       }
       sessionStorage.setItem('token', res.data.token);
+      window.location.href = ('/topics');
     }).catch((e) => {
       setStatus(e.response.data);
     })

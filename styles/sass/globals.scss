@@ -12,6 +12,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  overflow: hidden;
 }
 
 a {
@@ -41,6 +42,7 @@ li {
 input[type='submit']{
   padding: 8px 12px;
   border-radius: 4px;
+  margin: 10px;
 
   &:hover {
     background-color: lightblue;
@@ -51,12 +53,35 @@ input[type='submit']{
   }
 }
 
-.relative {
-  position: absolute;
-  right: calc(100vh - 25%);
-}
 
 .off_right {
   position: absolute;
   right: -2000px;
+}
+
+.off_left {
+  position: absolute;
+  left: -2000px;
+}
+
+button {
+  outline: none;
+  color: white;
+  background-color: #C52BC5;
+  border-radius: 12px;
+  border: 1px solid #651665;
+  box-shadow: 3px 3px grey;
+
+  &:hover {
+    background-color: #E790E7;
+    cursor: pointer;
+  }
+
+  &:active {
+    // border: 6px solid #651665;
+  }
+
+  &:disabled {
+    background-color: #551355;
+  }
 }

@@ -27,7 +27,7 @@ const TopicForm = () => {
   }
 
   return (
-    <div>
+    <div className='topic_form'>
       <form onSubmit={(e) => {createTopic(e, title, body)}}>
         <label htmlFor='title'>Post Title</label>
         <input
@@ -35,9 +35,9 @@ const TopicForm = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <label htmlFor='body'>Body</label>
-        <input
-          type='text' required id="body"
+      <textarea required id="body"
+          rows='6'
+          cols='50'
           value={body}
           onChange={(e) => setBody(e.target.value)}
         />

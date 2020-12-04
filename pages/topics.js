@@ -33,7 +33,7 @@ const Topics = ({topics}) => {
           <title>Blurbr Topics</title>
       </Head>
       <Header />
-      <h1>Create a new post</h1>
+      <h1 class='center_text'>Create a new post</h1>
       <TopicForm />
       <ul className='container'>{topic_list}</ul>
     </div>

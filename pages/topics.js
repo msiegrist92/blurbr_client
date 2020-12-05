@@ -61,6 +61,14 @@ const Topics = ({topics}) => {
       <ul className='container'>
         {topic_list}
       </ul>
+      <div className='container'>
+        <button
+          style={{marginBottom: '20px'}}
+          className='big_button pos_right'
+          onClick={(e, modal) => {
+            toggleModal(e, modal)
+            }}>Create Post</button>
+      </div>
     </div>
   )
 }

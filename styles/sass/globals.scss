@@ -7,6 +7,7 @@
 @import './me_form_cont.scss';
 @import './create_topic_form.scss';
 @import './modal.scss';
+@import './register_form.scss';
 
 
 html,
@@ -40,6 +41,10 @@ li {
   width: 75%;
   display: grid;
   margin: 0 auto;
+
+  .center_cont {
+    justify-self: center;
+  }
 }
 
 

@@ -32,8 +32,10 @@ const RegisterUser = () => {
 
 
   return (
-    <div>
-      <form onSubmit={(e) => {registerUser(e)}}>
+    <div className='center_cont'>
+      <form
+        className='register_form'
+        onSubmit={(e) => {registerUser(e)}}>
 
         <label htmlFor='email'>Email</label>
         <input
@@ -41,7 +43,7 @@ const RegisterUser = () => {
           value={email} name='email'
           onChange={e => setEmail(e.target.value)}
         />
-        <br />
+
 
         <label htmlFor='username'>Username</label>
         <input
@@ -49,16 +51,18 @@ const RegisterUser = () => {
           value={username}
           onChange={e => setUsername(e.target.value)}
         />
-        <br />
+
 
         <label htmlFor='password'>Password</label>
         <input required id="password" type='password'
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <br />
 
-        <input type='submit' />
+
+        <input
+          className='center_cont'
+          type='submit' />
 
       </form>
       <h2>{status}</h2>

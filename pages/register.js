@@ -9,7 +9,13 @@ const Register = () => {
   return (
     <div>
       <Header />
-      <RegisterUser />
+      <h1 className='center_text'>Let's hear it!</h1>
+      <div className='container'
+        style={{marginTop: '20px'}}>
+        <i className='yellow bullhorn icon massive center_cont'
+          ></i>
+        <RegisterUser />
+      </div>
     </div>
   )
 }

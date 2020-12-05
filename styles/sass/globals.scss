@@ -116,3 +116,15 @@ textarea {
     font-size: 1.45em;
     width: 200px;
 }
+
+.text_focus {
+
+    &:hover{
+      border-color: #C52BC5;
+    }
+
+    &:focus {
+      border-left: 6px solid #C52BC5;
+      outline: none;
+    }
+}

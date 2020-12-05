@@ -37,24 +37,28 @@ const RegisterUser = () => {
         className='register_form'
         onSubmit={(e) => {registerUser(e)}}>
 
-        <label htmlFor='email'>Email</label>
         <input
+          className='text_focus'
+          placeholder='Email'
           required id="email" type='text'
           value={email} name='email'
           onChange={e => setEmail(e.target.value)}
         />
 
 
-        <label htmlFor='username'>Username</label>
         <input
+          className='text_focus'
+          placeholder="Username"
           required id="username" type='text'
           value={username}
           onChange={e => setUsername(e.target.value)}
         />
 
 
-        <label htmlFor='password'>Password</label>
-        <input required id="password" type='password'
+        <input
+          className='text_focus'
+          placeholder='Password'
+          required id="password" type='password'
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
@@ -62,7 +66,8 @@ const RegisterUser = () => {
 
         <input
           className='center_cont'
-          type='submit' />
+          type='submit'
+          value='Register'/>
 
       </form>
       <h2>{status}</h2>

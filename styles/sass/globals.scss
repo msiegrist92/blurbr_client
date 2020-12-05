@@ -6,6 +6,9 @@
 @import './user_topics.scss';
 @import './me_form_cont.scss';
 @import './create_topic_form.scss';
+@import './modal.scss';
+@import './topics_page.scss';
+
 
 html,
 body {
@@ -89,6 +92,10 @@ button {
 
 .center_text {
   text-align: center;
+}
+
+h1 {
+  font-size: 2.5em;
 }
 
 textarea {

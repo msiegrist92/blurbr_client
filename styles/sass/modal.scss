@@ -1,0 +1,11 @@
+.modal {
+  position: absolute;
+  width: 70vw;
+  background-color: rgba(0, 0, 0, .6);
+  top: 30vh;
+  left: 15vw;
+}
+
+.hide_modal {
+  visibility: hidden;
+}

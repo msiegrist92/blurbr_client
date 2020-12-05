@@ -5,12 +5,13 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import TopicList from '../components/topics/TopicList.js';
 import TopicForm from '../components/forms/TopicForm';
+import Modal from '../components/Modal';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 
 const Topics = ({topics}) => {
 
-  console.log(topics);
+  const [modal, setModal] = useState(false);
 
   const topic_list = topics.map((topic) => {
     return (
@@ -28,14 +29,32 @@ const Topics = ({topics}) => {
   })
 
   return (
-    <div>
+    <div id='topics'>
       <Head>
           <title>Blurbr Topics</title>
       </Head>
       <Header />
-      <h1 class='center_text'>Create a new post</h1>
-      <TopicForm />
-      <ul className='container'>{topic_list}</ul>
+      <Modal show={modal}>
+        <h1 className='center_text'>Create a new post</h1>
+        <TopicForm />
+      </Modal>
+      <h1 className='center_text'>Topics</h1>
+      <div className='container'>
+      <button onClick={(e) => {
+          e.preventDefault();
+          console.log('click');
+          if(modal){
+            setModal(false)
+          } else {
+            setModal(true);
+          }
+
+
+          }}>Create Post</button>
+      </div>
+      <ul className='container'>
+        {topic_list}
+      </ul>
     </div>
   )
 }

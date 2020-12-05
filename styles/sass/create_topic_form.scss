@@ -15,13 +15,15 @@
     }
 
     #title {
-      width: 60%;
+      width: 80%;
+      font-size: 1.75em;
     }
 
   input[type=submit]{
     grid-column: 1 / 3;
     width: 100px;
     justify-self: center;
+
   }
 
   textarea {

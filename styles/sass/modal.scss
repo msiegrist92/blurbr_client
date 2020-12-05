@@ -1,11 +1,21 @@
 .modal {
   position: absolute;
   width: 70vw;
-  background-color: rgba(0, 0, 0, .6);
+  background-color: rgba(255, 255, 255, .95);
   top: 30vh;
   left: 15vw;
+  display: grid;
+  padding: 20px;
+  border: 3px solid #6C186C;
+  border-radius: 12px;
+  transition: 750ms opacity linear;
+
 }
 
 .hide_modal {
-  visibility: hidden;
+  opacity: 0;
+}
+
+.show_modal {
+  opacity: 1;
 }

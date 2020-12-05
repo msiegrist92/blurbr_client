@@ -41,7 +41,9 @@ const TopicForm = () => {
           value={body}
           onChange={(e) => setBody(e.target.value)}
         />
-        <input type='submit' />
+        <input
+          className='big_button'
+          type='submit' />
       </form>
       <h2>{status}</h2>
     </div>

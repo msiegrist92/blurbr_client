@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useLayoutEffect} from 'react';
 
-const Modal = ({children, show}) => {
+const Modal = ({children, show, toggle}) => {
 
   let modal_class = '';
 
@@ -14,11 +14,9 @@ const Modal = ({children, show}) => {
   return (
       <div className={modal_class + " modal"}>
         {children}
-        <button onClick={(e) => {e.preventDefault();
-          //THIS FUNCTION JUST NEEDS TO LIFT STATE UP TO PARENT TO TOGGLE
-          document.querySelector('.modal').classList.toggle('hide_modal')
-          document.querySelector('.modal').classList.toggle('show_modal')
-        }}>
+        <button
+          className='big_button pos_right'
+          onClick={(e) => toggle(e, show)}>
           Hide
         </button>
       </div>

@@ -11,6 +11,15 @@ import formatDateFromDB from '../lib/utils/formatDateFromDB';
 
 const Topics = ({topics}) => {
 
+  const toggleModal = (e, modal) => {
+    e.preventDefault();
+    if(modal) {
+      setModal(false)
+    } else {
+      setModal(true)
+    }
+  }
+
   const [modal, setModal] = useState(false);
 
   const topic_list = topics.map((topic) => {
@@ -34,22 +43,19 @@ const Topics = ({topics}) => {
           <title>Blurbr Topics</title>
       </Head>
       <Header />
-      <Modal show={modal}>
+      <Modal
+        show={modal}
+        toggle={toggleModal}
+      >
         <h1 className='center_text'>Create a new post</h1>
         <TopicForm />
       </Modal>
       <h1 className='center_text'>Topics</h1>
       <div className='container'>
-      <button onClick={(e) => {
-          e.preventDefault();
-          console.log('click');
-          if(modal){
-            setModal(false)
-          } else {
-            setModal(true);
-          }
-
-
+      <button
+        className='big_button pos_right'
+        onClick={(e, modal) => {
+          toggleModal(e, modal)
           }}>Create Post</button>
       </div>
       <ul className='container'>

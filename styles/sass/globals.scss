@@ -7,7 +7,6 @@
 @import './me_form_cont.scss';
 @import './create_topic_form.scss';
 @import './modal.scss';
-@import './topics_page.scss';
 
 
 html,
@@ -39,9 +38,14 @@ li {
 
 .container {
   width: 75%;
-  display: block;
+  display: grid;
   margin: 0 auto;
 }
+
+
+  .pos_right {
+    margin-left: auto;
+  }
 
 input[type='submit']{
   padding: 8px 12px;
@@ -100,4 +104,10 @@ h1 {
 
 textarea {
   resize: none;
+}
+
+.big_button {
+    padding: 25px;
+    font-size: 1.45em;
+    width: 200px;
 }

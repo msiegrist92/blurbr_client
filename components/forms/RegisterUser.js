@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-const RegisterUser = () => {
+const RegisterUser = ({toggle, show}) => {
 
   const [email, setEmail] = React.useState('');
   const [username, setUsername] = React.useState('');
@@ -22,6 +22,8 @@ const RegisterUser = () => {
       //on success redirect user to customize with signature and avatar
       if(res.status === 201){
         setStatus('Register successful!')
+        toggleModal(e, show)
+
       }
       sessionStorage.setItem('token', res.data.token);
       window.location.href = ('/topics');
@@ -30,15 +32,16 @@ const RegisterUser = () => {
     })
   }
 
+  //we want modal to pop up with a welcome message when new user registers
 
   return (
-    <div className='center_cont'>
+    <div className='container'>
       <form
-        className='register_form'
+        className='register_form center_cont'
         onSubmit={(e) => {registerUser(e)}}>
 
         <input
-          className='text_focus'
+          className='text_focus center_cont'
           placeholder='Email'
           required id="email" type='text'
           value={email} name='email'
@@ -47,7 +50,7 @@ const RegisterUser = () => {
 
 
         <input
-          className='text_focus'
+          className='text_focus center_cont'
           placeholder="Username"
           required id="username" type='text'
           value={username}
@@ -56,7 +59,7 @@ const RegisterUser = () => {
 
 
         <input
-          className='text_focus'
+          className='text_focus center_cont'
           placeholder='Password'
           required id="password" type='password'
           value={password}

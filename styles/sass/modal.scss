@@ -5,17 +5,19 @@
   top: 30vh;
   left: 15vw;
   display: grid;
-  padding: 20px;
   border: 3px solid #6C186C;
   border-radius: 12px;
-  transition: 750ms opacity linear;
-
-}
-
-.hide_modal {
+  transition: 1s opacity linear;
+  height: 0;
   opacity: 0;
 }
 
+// .hide_modal {
+//   opacity: 0;
+// }
+
 .show_modal {
-  opacity: 1;
+  opacity: 1 !important;
+  padding: 20px !important;
+  height: auto !important;
 }

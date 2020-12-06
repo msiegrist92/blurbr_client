@@ -2,22 +2,24 @@
   position: absolute;
   width: 70vw;
   background-color: rgba(255, 255, 255, .95);
-  top: 30vh;
-  left: 15vw;
+  top: 15vh;
+  left: -80vw;
   display: grid;
   border: 3px solid #6C186C;
   border-radius: 12px;
   transition: 1s opacity linear;
-  height: 0;
   opacity: 0;
+  padding: 20px;
 }
 
 // .hide_modal {
 //   opacity: 0;
 // }
 
-.show_modal {
-  opacity: 1 !important;
-  padding: 20px !important;
-  height: auto !important;
+.show_modal_opacity {
+  opacity: 1;
+}
+
+.show_modal_pos {
+  left: 15vw;
 }

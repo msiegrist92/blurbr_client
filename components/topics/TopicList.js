@@ -11,7 +11,7 @@ const TopicList = ({title, body, author, date, topic_link, length, author_link})
   return (
     <div className='topic_list'>
       <a href={topic_link}>
-        <h1>{title}</h1>
+        <h1>{title}<i className='chevron right icon'></i></h1>
       </a>
       <a href={author_link}>
         <h3>By : {author}</h3>

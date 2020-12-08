@@ -9,6 +9,7 @@
 @import './modal.scss';
 @import './register_form.scss';
 @import './thread.scss';
+@import './post_form.scss';
 
 
 html,
@@ -64,13 +65,15 @@ input[type='submit']{
   padding: 8px 12px;
   border-radius: 4px;
   margin: 10px;
+  background-color: $midnight-purple;
+  color: white;
 
   &:hover {
-    background-color: lightblue;
     cursor: pointer;
+    background-color: $steel-pink;
   }
   &:active {
-    background-color: orange;
+    background-color: $dark-blue-green;
   }
 }
 
@@ -140,5 +143,3 @@ textarea {
 .hide {
   display: none;
 }
-
-.show {}

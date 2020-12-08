@@ -46,7 +46,7 @@ const TopicForm = () => {
           className='big_button'
           type='submit' />
       </form>
-      <h2>{status}</h2>
+      <h2 className='center_text'>{status}</h2>
     </div>
   )
 }

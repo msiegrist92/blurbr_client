@@ -1,0 +1,19 @@
+.post_form {
+  width: 50%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, auto);
+  justify-self: center;
+  grid-gap: 1em;
+
+
+  input[type=submit]{
+    width: 50%;
+    justify-self: center;
+  }
+
+  label {
+    font-weight: 800;
+    font-size: 1.5em;
+  }
+}

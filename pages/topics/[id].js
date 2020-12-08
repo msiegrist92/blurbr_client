@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import Head from 'next/head';
 
@@ -10,9 +10,20 @@ import TopicBody from '../../components/topics/TopicBody';
 import PostForm from '../../components/forms/PostForm';
 import PostBody from '../../components/posts/PostBody';
 import Header from '../../components/Header';
+import Modal from '../../components/Modal';
 
 
 const Page = ({topic_data}) => {
+
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = (e, modal) => {
+    if(modal){
+      setModal(false);
+    } else {
+      setModal(true);
+    }
+  }
 
   const {topic} = topic_data;
   const topic_author = topic.user;
@@ -45,7 +56,15 @@ const Page = ({topic_data}) => {
         avatar={topic_author.avatar}
       />
       {posts_list}
-      <PostForm id={_id}/>
+      <PostForm
+        show={modal}
+        toggle={toggleModal}
+        id={_id}/>
+      <Modal
+        show={modal}
+        toggle={toggleModal}>
+        <h1>Post Successful!</h1>
+      </Modal>
     </div>
   )
 }

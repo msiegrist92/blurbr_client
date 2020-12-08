@@ -15,19 +15,11 @@ const RegisterUser = ({toggle, show}) => {
       email,
       password,
       username,
-      //remove signature when recreating database
-      signature: ''
     }).then((res) => {
-      //store token in sessionStorage for adding to API requests
-      //on success redirect user to customize with signature and avatar
       if(res.status === 201){
         toggle(e, show)
-
       }
       sessionStorage.setItem('token', res.data.token);
-      setTimeout(() => {
-        window.location.href = ('/topics');
-      }, 1000)
     }).catch((e) => {
       setStatus(e.response.data);
     })

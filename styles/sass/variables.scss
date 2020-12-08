@@ -1,3 +1,9 @@
 /*COLORS*/
 $midnight-purple: #6C186C !default;
 $pale-purple: #FAE9FA !default;
+
+
+/*MEDIA QUERIES*/
+$medium-screen: 800px !default;
+
+$medium-and-down: 'only screen and (max-width: #{$medium-screen})' !default;

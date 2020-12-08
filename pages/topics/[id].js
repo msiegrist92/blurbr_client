@@ -16,12 +16,10 @@ const Page = ({topic_data}) => {
 
   const {topic} = topic_data;
   const topic_author = topic.user;
-  console.log(topic_author);
 
   const {posts, _id, title, body, author, date_created} = topic;
 
   const posts_list = topic.posts.map((post) => {
-    console.log('user avatar');
     return (
       <PostBody
         key={post._id}

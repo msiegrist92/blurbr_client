@@ -17,10 +17,6 @@ const Modal = ({children, show, toggle}) => {
           onClick={(e) => {
             e.preventDefault()
             removeClassesTimeout('.modal', 1000, ['show_modal_opacity'], ['show_modal_pos']);
-            // document.querySelector('.modal').classList.remove('show_modal_opacity')
-            // setTimeout(() => {
-            //   document.querySelector('.modal').classList.remove('show_modal_pos')
-            // }, 1000)
             toggle(e, show)}}>
           Hide
         </button>

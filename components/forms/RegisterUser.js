@@ -21,12 +21,13 @@ const RegisterUser = ({toggle, show}) => {
       //store token in sessionStorage for adding to API requests
       //on success redirect user to customize with signature and avatar
       if(res.status === 201){
-        setStatus('Register successful!')
-        toggleModal(e, show)
+        toggle(e, show)
 
       }
       sessionStorage.setItem('token', res.data.token);
-      window.location.href = ('/topics');
+      setTimeout(() => {
+        window.location.href = ('/topics');
+      }, 1000)
     }).catch((e) => {
       setStatus(e.response.data);
     })

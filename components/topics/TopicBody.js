@@ -6,15 +6,15 @@ const TopicBody = ({title, author, body, date_created, signature, avatar, author
   //TopicBody has full length body and full-page threaded styling
 
   return (
-    <div>
+    <div className='topic_thread container'>
       <h1>{title}</h1>
-      <p>{body}</p>
+      <p className='post_body'>{body}</p>
       <a href={author_link}>
         <h2>{author}</h2>
       </a>
       <h4>{date_created}</h4>
-      <p>{signature}</p>
-      <img src={process.env.NEXT_PUBLIC_AVATAR_DIR + avatar}></img>
+      <p className='sig_text'>{signature}</p>
+      <img className='thread_avatar' src={process.env.NEXT_PUBLIC_AVATAR_DIR + avatar}></img>
     </div>
   )
 }

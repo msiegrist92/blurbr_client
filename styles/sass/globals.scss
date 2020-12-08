@@ -8,6 +8,7 @@
 @import './create_topic_form.scss';
 @import './modal.scss';
 @import './register_form.scss';
+@import './thread.scss';
 
 
 html,
@@ -41,17 +42,23 @@ li {
   width: 75%;
   display: grid;
   margin: 0 auto;
+
+  @media #{$medium-and-down}{
+    width: 100%;
+    margin: auto;
+  }
+
 }
 
 
-  .center_cont {
-    justify-self: center;
-  }
+.center_cont {
+  justify-self: center;
+}
 
 
-  .pos_right {
-    margin-left: auto;
-  }
+.pos_right {
+  margin-left: auto;
+}
 
 input[type='submit']{
   padding: 8px 12px;

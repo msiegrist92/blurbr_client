@@ -1,0 +1,15 @@
+.drop_nav {
+  position: absolute;
+  background-color: $steel-pink;
+  display: grid;
+  right: 10px;
+  top: 55px;
+  grid-template-rows: 40px;
+  grid-template-columns: repeat(2, 120px);
+
+  li {
+    align-self: center;
+    justify-self: center;
+    font-size: 1.25em;
+  }
+}

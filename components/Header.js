@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Head from 'next/head';
 
+import NavDropDown from './NavDropDown';
+
 
 const Header = () => {
 
@@ -15,8 +17,8 @@ const Header = () => {
         <h4>Say whatever</h4>
       </div>
       <nav>
-        <a href='/topics'><h2>Topics</h2></a>
-        <a href='/me'><h2>Me</h2></a>
+        <i className='bars icon huge'></i>
+        <NavDropDown />
       </nav>
     </header>
     </>

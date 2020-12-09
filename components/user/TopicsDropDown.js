@@ -27,7 +27,7 @@ const TopicsDropDown = ({topics}) => {
 
   return (
     <>
-    <h1 className='topics'>
+    <h1 className='topics center_text'>
       Topics
 
       {display === true &&

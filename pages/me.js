@@ -103,7 +103,7 @@ const Me = () => {
     <div>
       <Header />
       {!session &&
-        <h1>Please Log In</h1>
+        <h1 class='center_text'>Please Log In</h1>
       }
       {session &&
         <div>

@@ -10,6 +10,7 @@
 @import './register_form.scss';
 @import './thread.scss';
 @import './post_form.scss';
+@import './nav.scss';
 
 
 html,
@@ -24,6 +25,11 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+
+  &:hover{
+    color: $dark-blue-green;
+  }
+
 }
 
 * {
@@ -106,7 +112,7 @@ button {
   }
 
   &:disabled {
-    background-color: #551355;
+    background-color: grey !important;
   }
 }
 
@@ -142,4 +148,8 @@ textarea {
 
 .hide {
   display: none;
+}
+
+nav {
+  position: relative;
 }

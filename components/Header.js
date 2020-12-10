@@ -3,8 +3,23 @@ import Head from 'next/head';
 
 import NavDropDown from './NavDropDown';
 
-
 const Header = () => {
+
+  const [navDisplay, setNavDisplay] = useState(false);
+
+  const navController = (e, navDisplay) => {
+    const icon = document.querySelector('.bars');
+    const nav_list = document.querySelector('.drop_nav')
+    if(navDisplay){
+      icon.classList.toggle('grey');
+      nav_list.classList.toggle('show_nav');
+      setNavDisplay(false)
+    } else {
+      icon.classList.toggle('grey');
+      nav_list.classList.toggle('show_nav');
+      setNavDisplay(true);
+    }
+  }
 
   return (
     <>
@@ -17,8 +32,9 @@ const Header = () => {
         <h4>Say whatever</h4>
       </div>
       <nav>
-        <i className='bars icon huge'></i>
-        <NavDropDown />
+        <i className='bars icon huge'
+          onClick={(e) => navController(e, navDisplay)}></i>
+        <NavDropDown/>
       </nav>
     </header>
     </>

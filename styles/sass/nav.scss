@@ -2,14 +2,31 @@
   position: absolute;
   background-color: $steel-pink;
   display: grid;
-  right: 10px;
-  top: 55px;
   grid-template-rows: 40px;
   grid-template-columns: repeat(2, 120px);
+  right: 120vw;
+  top: 55px;
+  transition: right 1s cubic-bezier(0.88, 0.74, 0, 1.04);
+  border-radius: 14px;
+  box-shadow: 3px 3px lightgrey;
 
   li {
     align-self: center;
     justify-self: center;
     font-size: 1.25em;
   }
+}
+
+nav i {
+  color: white;
+  transition: color 1.25s;
+}
+
+.grey {
+  color: grey;
+}
+
+.show_nav {
+  right: 10px !important;
+  top: 55px;
 }

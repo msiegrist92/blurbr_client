@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const NavDropDown = () => {
+const NavDropDown = ({show}) => {
 
   return (
     <ul className='drop_nav'>

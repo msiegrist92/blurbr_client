@@ -41,3 +41,22 @@
   }
 
 }
+
+#no_sesh {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-tempalte-rows: auto;
+  gap: 1em;
+
+  i {
+    grid-column: 1 / 3;
+  }
+
+  h3 {
+    grid-column: 1 / 3;
+  }
+
+  a {
+    justify-self: center;
+  }
+}

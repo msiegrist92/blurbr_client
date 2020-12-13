@@ -15,6 +15,9 @@ const Topics = () => {
 
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
+  const [user, setUser] = useState('');
+  const [topics, setTopics] = useState([]);
+  const [groups, setGroups] = useState([]);
 
   const toggleModal = (e, modal) => {
     e.preventDefault();
@@ -34,19 +37,21 @@ const Topics = () => {
       axios.get(process.env.NEXT_PUBLIC_DEV_API + '/user_topics/' + user_id)
       .then((res) => {
         console.log(res)
+        //store user ID
+        setUser(user_id);
+        setTopics(res.data.user_topics);
+        setGroups(res.data.user_groups);
       }).catch((err) => {
         console.log(err);
       })
-      //retrieve user topics by user groups and generate topic list with
-      //set session to true to display on page
-      //get user groups
-      //get topics that belong to that group
-      //topic list conditonal if no groups
     }
-  })
+  }, [])
 
-  const topic_list = 'true'
-
+  //
+  //
+  // add conditonal for topic_list.length = 0
+  // edit to display with group information per topics
+  // //hide second create group button if list < 2
   // const topic_list = topics.map((topic) => {
   //   return (
   //     <TopicList
@@ -61,6 +66,7 @@ const Topics = () => {
   //     />
   //   )
   // })
+  const topic_list = 'allo'
 
   return (
     <div id='topics'>
@@ -84,7 +90,10 @@ const Topics = () => {
             show={modal}
             toggle={toggleModal}>
             <h1 className='center_text'>Create a new post</h1>
-            <TopicForm />
+            <TopicForm
+              user={user}
+              groups={groups}
+              />
           </Modal>
 
           <h1 className='center_text'>Topics</h1>

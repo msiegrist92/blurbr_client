@@ -20,6 +20,10 @@
 nav i {
   color: white;
   transition: color 1.25s;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .grey {

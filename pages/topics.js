@@ -47,26 +47,27 @@ const Topics = () => {
     }
   }, [])
 
-  //
-  //
+
+
   // add conditonal for topic_list.length = 0
   // edit to display with group information per topics
-  // //hide second create group button if list < 2
-  // const topic_list = topics.map((topic) => {
-  //   return (
-  //     <TopicList
-  //       key={topic._id}
-  //       title={topic.title}
-  //       body={topic.body}
-  //       author={topic.author.username}
-  //       author_link={'/users/' + topic.author._id}
-  //       date={formatDateFromDB(topic.date_created)}
-  //       topic_link={'/topics/' + topic._id}
-  //       length={topic.length}
-  //     />
-  //   )
-  // })
-  const topic_list = 'allo'
+  //hide second create group button if list < 2
+  const topic_list = topics.map((topic) => {
+    return (
+      <TopicList
+        key={topic._id}
+        title={topic.title}
+        body={topic.body}
+        author={topic.author.username}
+        author_link={'/users/' + topic.author._id}
+        date={formatDateFromDB(topic.date_created)}
+        topic_link={'/topics/' + topic._id}
+        length={topic.posts.length}
+        group_name={topic.group.name}
+        group_link={'/groups/' + topic.group._id}
+      />
+    )
+  })
 
   return (
     <div id='topics'>

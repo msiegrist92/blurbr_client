@@ -108,7 +108,7 @@ button {
   }
 
   &:active {
-    // border: 6px solid #651665;
+    box-shadow: none;
   }
 
   &:disabled {

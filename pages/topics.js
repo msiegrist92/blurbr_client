@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import TopicList from '../components/topics/TopicList.js';
 import TopicForm from '../components/forms/TopicForm';
 import Modal from '../components/Modal';
+import NoSessionLock from '../components/NoSessionLock';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 
@@ -52,22 +53,30 @@ const Topics = () => {
   // add conditonal for topic_list.length = 0
   // edit to display with group information per topics
   //hide second create group button if list < 2
-  const topic_list = topics.map((topic) => {
-    return (
-      <TopicList
-        key={topic._id}
-        title={topic.title}
-        body={topic.body}
-        author={topic.author.username}
-        author_link={'/users/' + topic.author._id}
-        date={formatDateFromDB(topic.date_created)}
-        topic_link={'/topics/' + topic._id}
-        length={topic.posts.length}
-        group_name={topic.group.name}
-        group_link={'/groups/' + topic.group._id}
-      />
-    )
-  })
+
+  let topic_list;
+
+  if(topics.length > 0){
+    topic_list = topics.map((topic) => {
+      return (
+        <TopicList
+          key={topic._id}
+          title={topic.title}
+          body={topic.body}
+          author={topic.author.username}
+          author_link={'/users/' + topic.author._id}
+          date={formatDateFromDB(topic.date_created)}
+          topic_link={'/topics/' + topic._id}
+          length={topic.posts.length}
+          group_name={topic.group.name}
+          group_link={'/groups/' + topic.group._id}
+        />
+      )
+    })
+  } else {
+    topic_list = <h2 className='center_text'>No topics available. Get one started!</h2>
+  }
+
 
   return (
     <div id='topics'>
@@ -77,12 +86,9 @@ const Topics = () => {
       <Header />
 
         {!session &&
-          <div id='no_sesh' className='container'>
-            <i style={{marginTop: '20px'}}className='yellow icon lock massive center_cont'></i>
+          <NoSessionLock>
             <h3 className='center_text'>Please log in or register to view topics</h3>
-            <a href='/register'><button className='big_button' >Register</button></a>
-            <a href='/login'><button className='big_button' >Log In</button></a>
-          </div>
+          </NoSessionLock>
         }
 
         {session &&
@@ -111,14 +117,16 @@ const Topics = () => {
             {topic_list}
           </ul>
 
-          <div className='container'>
-            <button
-              style={{marginBottom: '20px'}}
-              className='big_button pos_right'
-              onClick={(e, modal) => {
-                toggleModal(e, modal)
-                }}>Create Post</button>
-          </div>
+          {topics.length > 2 &&
+            <div className='container'>
+              <button
+                style={{marginBottom: '20px'}}
+                className='big_button pos_right'
+                onClick={(e, modal) => {
+                  toggleModal(e, modal)
+                  }}>Create Post</button>
+            </div>
+          }
           </>
         }
     </div>

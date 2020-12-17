@@ -9,6 +9,7 @@ import NoSessionLock from '../components/NoSessionLock';
 import GroupCard from '../components/groups/GroupCard';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
+import checkToken from '../lib/utils/checkToken';
 
 const Groups = ({groups}) => {
 
@@ -28,13 +29,9 @@ const Groups = ({groups}) => {
   }
 
   useEffect(() => {
-    if(!sessionStorage.token){
-      return setSession(false);
-    } else {
-      setSession(true);
-      const user_id = jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id;
-      setUser(user_id);
-      //axios call to user_groups
+    setSession(checkToken(sessionStorage.token));
+    if(session){
+      setUser(jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id);
     }
   }, [])
 
@@ -69,6 +66,7 @@ const Groups = ({groups}) => {
 
     {session &&
       <div className='container'>
+        <a href='/newgroup'><button className='call_to'>Create New Group</button></a>
         <ul className='group_card_grid'>
           {group_cards}
         </ul>

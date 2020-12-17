@@ -3,7 +3,8 @@
   background-color: rgba(255, 255, 255, 0);
   display: grid;
   grid-template-rows: 40px;
-  grid-template-columns: repeat(2, 120px);
+  grid-auto-columns: 120px;
+  grid-auto-flow: column;
   right: 120vw;
   top: 55px;
   transition: right 1s cubic-bezier(0.88, 0.74, 0, 1.04);

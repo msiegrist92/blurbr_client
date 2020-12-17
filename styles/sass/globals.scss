@@ -51,6 +51,21 @@ li {
   display: grid;
   margin: 0 auto;
 
+  .call_to {
+    width: 30%;
+    padding: 1em 1.25em;
+    font-size: 1.25em;
+    background-color: $chill-aqua;
+  }
+
+  .call_to:hover {
+    background-color: #31a6aa;
+  }
+
+  .call_to a:hover {
+    color: white;
+  }
+
   @media #{$medium-and-down}{
     width: 100%;
     margin: auto;

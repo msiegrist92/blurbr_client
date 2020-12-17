@@ -5,6 +5,7 @@ const NavDropDown = ({show}) => {
   return (
     <ul className='drop_nav'>
       <a href='/topics'><li>Topics</li></a>
+      <a href='/groups'><li>Groups</li></a>
       <a href='/me'><li>My Profile</li></a>
     </ul>
   )

@@ -10,6 +10,7 @@ import Modal from '../components/Modal';
 import NoSessionLock from '../components/NoSessionLock';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
+import checkToken from '../lib/utils/checkToken';
 
 
 const Topics = () => {
@@ -30,25 +31,25 @@ const Topics = () => {
   }
 
   useEffect(() => {
-    if(!sessionStorage.token){
-      return setSession(false)
-    } else {
-      setSession(true)
-      const user_id = jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id;
-      axios.get(process.env.NEXT_PUBLIC_DEV_API + '/user_topics/' + user_id)
+    setSession(checkToken(sessionStorage.token));
+  }, [])
+
+  useEffect(() => {
+    if(session){
+      setUser(jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id);
+    }
+  }, [session])
+
+  useEffect(() => {
+    axios.get(process.env.NEXT_PUBLIC_DEV_API + '/user_topics/' + user)
       .then((res) => {
         console.log(res)
-        //store user ID
-        setUser(user_id);
         setTopics(res.data.user_topics);
         setGroups(res.data.user_groups);
       }).catch((err) => {
         console.log(err);
       })
-    }
-  }, [])
-
-
+  }, [user])
 
   // add conditonal for topic_list.length = 0
   // edit to display with group information per topics
@@ -58,7 +59,6 @@ const Topics = () => {
 
   if(topics.length > 0){
     topic_list = topics.map((topic) => {
-      console.log(topic)
       return (
         <TopicList
           key={topic._id}

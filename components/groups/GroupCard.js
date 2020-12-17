@@ -8,7 +8,7 @@ const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent,
 
   return (
     <>
-    <div class='group_card'>
+    <div className='group_card'>
       <div className='group_card_content'>
         <h1 className='span_card'><a href={group_link}>{name}</a></h1>
         <h2 className='owner span_card'>Owner</h2>

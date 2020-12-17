@@ -58,6 +58,7 @@ const Topics = () => {
 
   if(topics.length > 0){
     topic_list = topics.map((topic) => {
+      console.log(topic)
       return (
         <TopicList
           key={topic._id}

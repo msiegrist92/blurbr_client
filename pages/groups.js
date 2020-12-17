@@ -38,7 +38,21 @@ const Groups = ({groups}) => {
     }
   }, [])
 
-
+  const group_cards = groups.map((group) => {
+    return (
+    <GroupCard
+      key={group._id}
+      group_id={group._id}
+      name={group.name}
+      owner={group.owner.username}
+      owner_id={group.owner._id}
+      topics={group.topics.length}
+      users={group.users.length}
+      most_recent={group.most_recent.title}
+      most_recent_id={group.most_recent._id}
+      />
+    )
+  })
 
   return (
     <>
@@ -52,6 +66,15 @@ const Groups = ({groups}) => {
         <h3 className='center_text'>Please log in or register to view groups</h3>
       </NoSessionLock>
     }
+
+    {session &&
+      <div className='container'>
+        <ul className='group_card_grid'>
+          {group_cards}
+        </ul>
+      </div>
+    }
+
     </>
 
   )

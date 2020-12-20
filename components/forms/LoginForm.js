@@ -20,23 +20,34 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={(e) => {loginUser(e, email, password)}}>
-        <label htmlFor='email'>Email</label>
+    <div className='container'>
+      <form
+        className='register_form center_cont'
+        onSubmit={(e) => {loginUser(e, email, password)}}>
+
         <input required type='email'
           value={email}
           id="email" name='email'
           onChange={e => setEmail(e.target.value)}
+          placeholder='Email'
+          className='center_cont text_focus'
         />
-      <label htmlFor='password'>Password</label>
-      <input required type='password'
-          value={password}
-          id='password' name='password'
-          onChange={e => setPassword(e.target.value)}
-        />
-      <input type='submit' />
-      </form>
-      <h2>{status}</h2>
+
+        <input required type='password'
+            value={password}
+            id='password' name='password'
+            onChange={e => setPassword(e.target.value)}
+            placeholder='Password'
+            className='center_cont text_focus'
+            />
+
+        <input
+          className='center_cont'
+          value="Log In"
+          type='submit' />
+
+        </form>
+      <h2 className='center_text'>{status}</h2>
     </div>
   )
 }

@@ -45,8 +45,7 @@ const Groups = ({groups}) => {
       owner_id={group.owner._id}
       topics={group.topics.length}
       users={group.users.length}
-      most_recent={group.most_recent.title}
-      most_recent_id={group.most_recent._id}
+      most_recent={group.most_recent}
       />
     )
   })
@@ -66,7 +65,7 @@ const Groups = ({groups}) => {
 
     {session &&
       <div className='container'>
-        <a href='/newgroup'><button className='call_to'>Create New Group</button></a>
+        <a className='center_cont' href='/newgroup'><button className='call_to'>Create New Group</button></a>
         <ul className='group_card_grid'>
           {group_cards}
         </ul>

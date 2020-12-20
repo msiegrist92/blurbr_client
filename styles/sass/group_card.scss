@@ -2,6 +2,7 @@
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: repeat(3, 1fr);
+  grid-gap: 4em 0;
 }
 
 .group_card {
@@ -9,6 +10,7 @@
   grid-template-rows: repeat(2, auto);
   display: grid;
   max-width: 300px;
+  min-height: 425px;
 
   .span_btn {
     box-shadow: none;
@@ -29,6 +31,7 @@
   grid-gap: 1em;
   border-radius: 1em 1em 0 0;
   background-color: lightgrey;
+  min-height: 380px;
 
 
   h1, h2, h3 {

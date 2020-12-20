@@ -11,6 +11,12 @@ const Login = () => {
   return (
     <div>
       <Header />
+      <div className='container'>
+        <i
+          style={{marginTop: '20px'}}
+          class="center_cont user circle outline yellow massive icon"></i>
+        <h2 className='center_cont'>Keep the conversation going!</h2>
+      </div>
       <LoginForm />
     </div>
   )

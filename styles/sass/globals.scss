@@ -50,12 +50,13 @@ li {
   width: 75%;
   display: grid;
   margin: 0 auto;
+  margin-top: 20px;
 
   .call_to {
-    width: 30%;
     padding: 1em 1.25em;
     font-size: 1.25em;
     background-color: $chill-aqua;
+    margin-bottom: 20px;
   }
 
   .call_to:hover {
@@ -76,6 +77,10 @@ li {
 
 .center_cont {
   justify-self: center;
+}
+
+.span_two_col {
+  grid-column: 1 / 3;
 }
 
 

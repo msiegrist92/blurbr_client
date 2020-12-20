@@ -6,6 +6,7 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import Modal from '../components/Modal';
 import NoSessionLock from '../components/NoSessionLock';
+import CreateGroup from '../components/forms/CreateGroup';
 
 import checkToken from '../lib/utils/checkToken';
 
@@ -13,13 +14,18 @@ const createGroup = () => {
 
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
-  const [user, setUser] = useState('');
+
+  const toggleModal = (e, modal) => {
+    e.preventDefault();
+    if(modal) {
+      setModal(false)
+    } else {
+      setModal(true)
+    }
+  }
 
   useEffect(() => {
     setSession(checkToken(sessionStorage.token));
-    if(session){
-      setUser(jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id);
-    }
   }, [])
 
   return (
@@ -36,7 +42,23 @@ const createGroup = () => {
     }
 
     {session &&
-      <h1>U log in </h1>
+      <>
+      <Modal
+        show={modal}
+        toggle={toggleModal}>
+        <h1>Group Created</h1>
+        <a className='span_two_col' href='#'><button className='call_to'>Invite Users</button></a>
+      </Modal>
+
+      <div className='container'>
+        <i className="users icon massive yellow center_cont"></i>
+        <h1 className='center_text'>Create a group</h1>
+        <CreateGroup
+          modal={modal}
+          toggleModal={toggleModal}
+        />
+      </div>
+      </>
     }
 
     </>

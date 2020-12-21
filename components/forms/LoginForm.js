@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-const Login = () => {
+const LoginForm = ({toggle, show, session}) => {
+
+  console.log(toggle, show)
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState('');
@@ -13,9 +16,11 @@ const Login = () => {
       password
     }).then((res) => {
       sessionStorage.setItem('token', res.data.token);
-      setStatus('Login successful!');
+      setSession(true)
+      toggle(e, show);
+
     }).catch((err) => {
-      setStatus(err.response.data)
+      setStatus(err.response)
     })
   }
 
@@ -52,4 +57,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default LoginForm;

@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import NavDropDown from './NavDropDown';
 
-const Header = () => {
+const Header = ({session}) => {
 
   const [navDisplay, setNavDisplay] = useState(false);
 
@@ -34,7 +34,9 @@ const Header = () => {
       <nav>
         <i className='bars icon huge'
           onClick={(e) => navController(e, navDisplay)}></i>
-        <NavDropDown/>
+        <NavDropDown
+          session={session}
+          />
       </nav>
     </header>
     </>

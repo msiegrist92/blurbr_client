@@ -24,7 +24,7 @@ const Register = () => {
         show={modal}
         toggle={toggleModal}>
         <h1 className='center_text'>Welcome to Blurbr!</h1>
-        <a href='/topics'><h2>Topics</h2></a>
+        <a href='/groups'><h2>Find a group</h2></a>
         <a href='/me'><h2>Customize Profile</h2></a>
       </Modal>
       <h1 className='center_text'>Let's hear it!</h1>

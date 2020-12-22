@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import Head from 'next/head';
 
-import getTopicIds from '../../lib/api/topics/getTopicIds';
-import getTopicById from '../../lib/api/topics/getTopicById';
+import {getIds, getDocById} from '../../lib/api/dynamicRouting';
 import formatDateFromDB from '../../lib/utils/formatDateFromDB';
 
 import TopicBody from '../../components/topics/TopicBody';
@@ -73,7 +72,7 @@ export async function getStaticProps({params}){
 
   return {
      props : {
-       topic_data : await getTopicById(params.id).then((res) => {
+       topic_data : await getDocById(process.env.NEXT_PUBLIC_DEV_API + '/topic/', params.id).then((res) => {
          return res;
        })
      }
@@ -82,7 +81,7 @@ export async function getStaticProps({params}){
 
 export async function getStaticPaths(){
   return {
-    paths: await getTopicIds().then((res) => {
+    paths: await getIds(process.env.NEXT_PUBLIC_DEV_API + '/topics', '_id').then((res) => {
       return res;
     }),
     fallback: false

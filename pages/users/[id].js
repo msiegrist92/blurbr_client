@@ -5,8 +5,7 @@ import UserInfo from '../../components/user/UserInfo';
 import Header from '../../components/Header';
 import TopicsDropDown from '../../components/user/TopicsDropDown';
 
-import getUserIds from '../../lib/api/user/getUserIds';
-import getUserById from '../../lib/api/user/getUserById';
+import {getIds, getDocById} from '../../lib/api/dynamicRouting';
 
 const Page = (props) => {
 
@@ -28,12 +27,11 @@ const Page = (props) => {
 
 
 export async function getStaticProps({params}){
-
+  console.log(params.id)
   return {
     props : {
-      user: await getUserById(params.id).then((res) => {
-        console.log('res.data', res.data);
-        return res.data
+      user: await getDocById(process.env.NEXT_PUBLIC_DEV_API + '/user/', params.id).then((res) => {
+        return res
       })
     }
   }
@@ -41,8 +39,8 @@ export async function getStaticProps({params}){
 
 export async function getStaticPaths(){
   return {
-    paths: await getUserIds().then((res) => {
-      return res.data
+    paths: await getIds(process.env.NEXT_PUBLIC_DEV_API + '/users', '_id').then((res) => {
+      return res
     }),
     fallback: false
   }

@@ -16,7 +16,6 @@ const LoginForm = ({toggle, show, session}) => {
       password
     }).then((res) => {
       sessionStorage.setItem('token', res.data.token);
-      setSession(true)
       toggle(e, show);
 
     }).catch((err) => {

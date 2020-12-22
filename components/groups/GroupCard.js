@@ -2,8 +2,6 @@ import React from 'react';
 
 const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent}) => {
 
-  console.log('most_recent' + most_recent)
-
   const group_link = 'groups/' + group_id;
   const owner_link = 'users/' + owner_id;
   let most_recent_link;
@@ -17,10 +15,9 @@ const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent}
     most_recent_title = 'N/A';
   }
 
-  // most_recent={group.most_recent.title}
-  // most_recent_id={group.most_recent._id}
-
-  console.log(most_recent_link)
+  if(name.length > 23){
+    name = name.slice(0, 23) + '...'
+  }
 
   return (
     <>

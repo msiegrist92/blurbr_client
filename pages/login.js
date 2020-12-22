@@ -29,7 +29,6 @@ const Login = () => {
   return (
     <div>
       <Header
-        session={session}
          />
       <div className='container'>
         <i

@@ -1,8 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-const NavDropDown = ({show, session}) => {
+import checkToken from '../lib/utils/checkToken';
 
-  console.log('sesh in ndd', session)
+const NavDropDown = ({show}) => {
+
+  const [session, setSession] = useState(false);
+
+  useEffect(() => {
+    setSession(checkToken(sessionStorage.token))
+  })
 
   return (
     <>
@@ -31,6 +37,7 @@ const NavDropDown = ({show, session}) => {
             <li><a href='/groups'>Global</a></li>
           </ul>
         </li>
+        <li><a href='/logout'>Logout</a></li>
       </ul>
     }
     </>

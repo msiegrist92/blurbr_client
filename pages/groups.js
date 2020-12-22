@@ -13,11 +13,8 @@ import checkToken from '../lib/utils/checkToken';
 
 const Groups = ({groups}) => {
 
-  console.log(groups);
-
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
-  const [user, setUser] = useState('');
 
   const toggleModal = (e, modal) => {
     e.preventDefault();
@@ -30,9 +27,6 @@ const Groups = ({groups}) => {
 
   useEffect(() => {
     setSession(checkToken(sessionStorage.token));
-    if(session){
-      setUser(jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id);
-    }
   }, [])
 
   const group_cards = groups.map((group) => {

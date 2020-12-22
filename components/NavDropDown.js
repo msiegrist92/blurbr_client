@@ -33,7 +33,7 @@ const NavDropDown = ({show}) => {
         </li>
         <li className='sub_nav_head'><a>Groups</a>
           <ul>
-            <li><a>My Groups</a></li>
+            <li><a href='/mygroups'>My Groups</a></li>
             <li><a href='/groups'>Global</a></li>
           </ul>
         </li>

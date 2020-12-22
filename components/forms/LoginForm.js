@@ -3,8 +3,6 @@ import axios from 'axios';
 
 const LoginForm = ({toggle, show, session}) => {
 
-  console.log(toggle, show)
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState('');

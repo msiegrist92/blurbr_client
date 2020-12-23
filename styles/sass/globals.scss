@@ -12,6 +12,7 @@
 @import './post_form.scss';
 @import './nav.scss';
 @import './group_card.scss';
+@import './group_info.scss';
 
 
 html,
@@ -183,4 +184,17 @@ nav {
   border: 3px solid lightgrey;
   padding: 1em;
   background-color: $pale-purple;
+}
+
+.drops_cont {
+  justify-items: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+
+  ul {
+    grid-row: 2 / 3;
+    align-self: start;
+  }
 }

@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
-import Link from 'next/link';
 import formatDateFromDB from '../../lib/utils/formatDateFromDB';
 
-const TopicListUser = ({topic}) => {
+const TopicListDropDown = ({topic}) => {
 
   return (
     <a className='link' href={'/topics/' + topic._id}>
@@ -11,4 +10,4 @@ const TopicListUser = ({topic}) => {
   )
 }
 
-export default TopicListUser;
+export default TopicListDropDown;

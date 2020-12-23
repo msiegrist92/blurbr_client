@@ -5,17 +5,24 @@ import Head from 'next/head';
 
 import {getDocById, getIds} from '../../lib/api/dynamicRouting.js';
 
-// import formatDateFromDB from '../../lib/utils/formatDateFromDB';
-
-
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
-import TopicsDropDown from '../../components/user/TopicsDropDown'
+import CaretTurnDropDown from '../../components/CaretTurnDropDown'
+import TopicListDropDown from '../../components/topics/TopicListDropDown';
 import GroupInfo from '../../components/groups/GroupInfo';
+import UserListDropDown from '../../components/user/UserListDropDown';
 
 const Page = ({group_data}) => {
 
   const {name, owner, topics, users} = group_data;
+
+  const topics_list = topics.map((topic) => {
+    return <TopicListDropDown key={topic._id} topic={topic} />
+  })
+
+  const user_list = users.map((user) => {
+    return <UserListDropDown key={user._id} user={user} />
+  })
 
   return (
     <>
@@ -23,16 +30,17 @@ const Page = ({group_data}) => {
       <GroupInfo
         name={name} owner={owner} num_topics={topics.length} num_users={users.length}
       />
-    <TopicsDropDown topics={topics} />
+    <div className='container drops_cont'>
+    <CaretTurnDropDown list={topics_list} class_name={'topics_list'}
+      list_name={'Topics'} h1_class={'topics'}
+    />
+    <CaretTurnDropDown list={user_list} class_name={'user_list'}
+      list_name={'Users'} h1_class={'users'}
+    />
+  </div>
     </>
   )
 }
-
-
-
-
-
-
 
 
 export async function getStaticProps({params}){

@@ -2,22 +2,29 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import Head from 'next/head';
 
+
 import {getDocById, getIds} from '../../lib/api/dynamicRouting.js';
-//
-// import getTopicIds from '../../lib/api/topics/getTopicIds';
-// import getTopicById from '../../lib/api/topics/getTopicById';
+
 // import formatDateFromDB from '../../lib/utils/formatDateFromDB';
 
 
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
+import TopicsDropDown from '../../components/user/TopicsDropDown'
+import GroupInfo from '../../components/groups/GroupInfo';
 
 const Page = ({group_data}) => {
 
-  console.log(group_data)
+  const {name, owner, topics, users} = group_data;
 
   return (
-    <div>Hey u champ</div>
+    <>
+      <Header />
+      <GroupInfo
+        name={name} owner={owner} num_topics={topics.length} num_users={users.length}
+      />
+    <TopicsDropDown topics={topics} />
+    </>
   )
 }
 
@@ -32,6 +39,7 @@ export async function getStaticProps({params}){
   return {
      props : {
        group_data : await getDocById(process.env.NEXT_PUBLIC_DEV_API + '/group/', params.id).then((res) => {
+         console.log(res)
          return res;
        })
      }

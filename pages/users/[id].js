@@ -9,6 +9,7 @@ import {getIds, getDocById} from '../../lib/api/dynamicRouting';
 
 const Page = (props) => {
 
+
   const {username, avatar, signature, number_posts} = props.user;
   const topics = props.user.topics;
 

@@ -1,7 +1,7 @@
 .topic_list {
   display: grid;
   grid-template-columns: 75% 25%;
-  grid-template-rows: repeat(3, auto);
+  grid-template-rows: repeat(4, auto);
   align-items: center;
   background-color: $pale-purple;
   margin: 1em;
@@ -40,4 +40,27 @@
     margin-left: 20px;
   }
 
+  .group_link {
+    margin-left: 20px;
+  }
+
+}
+
+#no_sesh {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-tempalte-rows: auto;
+  gap: 1em;
+
+  i {
+    grid-column: 1 / 3;
+  }
+
+  h3 {
+    grid-column: 1 / 3;
+  }
+
+  a {
+    justify-self: center;
+  }
 }

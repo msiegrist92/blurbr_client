@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 
-const TopicList = ({title, body, author, date, topic_link, length, author_link}) => {
+const TopicList = ({title, body, author, date, topic_link,
+    length, author_link, group_name, group_link}) => {
 
   //ListTopic has truncated body and container-card styling
   const replies = "Replies: " + length;
@@ -19,6 +20,9 @@ const TopicList = ({title, body, author, date, topic_link, length, author_link})
       <h4 className='date'>{date}</h4>
       <p>{body}</p>
       <h4 className='replies'>{replies}</h4>
+      <a className='group_link' href={group_link}>
+        <h3>{group_name}</h3>
+      </a>
     </div>
   )
 }

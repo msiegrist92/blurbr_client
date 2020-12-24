@@ -16,9 +16,13 @@ const PostForm = ({id, show, toggle}) => {
       id,
       token: sessionStorage.token
     }).then((res) => {
-      console.log(res.status)
+      console.log(res.status.data)
       if(res.status === 201){
         toggle(event, show);
+      }
+      if (res.status == []){
+        //can we add another arg to this function to display you are not in a group
+        alert('You must join a group to make a post ')
       }
     }).catch((err) => {
       console.log(err);

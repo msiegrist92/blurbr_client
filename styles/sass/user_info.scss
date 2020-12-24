@@ -1,13 +1,6 @@
 .user_info {
-  margin: 1em auto !important;
-  display: grid !important;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, auto);
-  align-items: center;
-  justify-items: center;
-  border: 3px solid lightgrey;
-  padding: 1em;
-  background-color: $pale-purple;
 
   h1, p, .number_posts {
     margin: 0;

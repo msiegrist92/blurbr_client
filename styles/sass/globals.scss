@@ -11,6 +11,8 @@
 @import './thread.scss';
 @import './post_form.scss';
 @import './nav.scss';
+@import './group_card.scss';
+@import './group_info.scss';
 
 
 html,
@@ -43,12 +45,34 @@ ul {
 
 li {
   text-decoration: none;
+
+  a {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .container {
   width: 75%;
   display: grid;
   margin: 0 auto;
+  margin-top: 20px;
+
+  .call_to {
+    padding: 1em 1.25em;
+    font-size: 1.25em;
+    background-color: $chill-aqua;
+    margin-bottom: 20px;
+  }
+
+  .call_to:hover {
+    background-color: #31a6aa;
+  }
+
+  .call_to a:hover {
+    color: white;
+  }
 
   @media #{$medium-and-down}{
     width: 100%;
@@ -60,6 +84,10 @@ li {
 
 .center_cont {
   justify-self: center;
+}
+
+.span_two_col {
+  grid-column: 1 / 3;
 }
 
 
@@ -108,7 +136,7 @@ button {
   }
 
   &:active {
-    // border: 6px solid #651665;
+    box-shadow: none;
   }
 
   &:disabled {
@@ -129,9 +157,9 @@ textarea {
 }
 
 .big_button {
-    padding: 25px;
-    font-size: 1.45em;
-    width: 200px;
+    padding: .75em;
+    font-size: 1.25em;
+    width: 175px;
 }
 
 .text_focus {
@@ -152,4 +180,27 @@ textarea {
 
 nav {
   position: relative;
+}
+
+.color_container {
+  margin: 1em auto !important;
+  display: grid !important;
+  align-items: center;
+  justify-items: center;
+  border: 3px solid lightgrey;
+  padding: 1em;
+  background-color: $pale-purple;
+}
+
+.drops_cont {
+  justify-items: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+
+  ul {
+    grid-row: 2 / 3;
+    align-self: start;
+  }
 }

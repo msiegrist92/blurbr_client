@@ -25,8 +25,6 @@ const RegisterUser = ({toggle, show}) => {
     })
   }
 
-  //we want modal to pop up with a welcome message when new user registers
-
   return (
     <div className='container'>
       <form

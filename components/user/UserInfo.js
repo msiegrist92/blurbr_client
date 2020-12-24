@@ -13,7 +13,7 @@ const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
 
 
   return (
-    <div className='user_info container'>
+    <div className='user_info container color_container'>
       <Head>
         <title>Blurbr User {username}</title>
       </Head>

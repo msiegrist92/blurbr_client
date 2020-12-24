@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-const Login = () => {
+const LoginForm = ({toggle, show, session}) => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState('');
@@ -13,32 +14,44 @@ const Login = () => {
       password
     }).then((res) => {
       sessionStorage.setItem('token', res.data.token);
-      setStatus('Login successful!');
+      toggle(e, show);
+
     }).catch((err) => {
-      setStatus(err.response.data)
+      setStatus(err.response)
     })
   }
 
   return (
-    <div>
-      <form onSubmit={(e) => {loginUser(e, email, password)}}>
-        <label htmlFor='email'>Email</label>
+    <div className='container'>
+      <form
+        className='register_form center_cont'
+        onSubmit={(e) => {loginUser(e, email, password)}}>
+
         <input required type='email'
           value={email}
           id="email" name='email'
           onChange={e => setEmail(e.target.value)}
+          placeholder='Email'
+          className='center_cont text_focus'
         />
-      <label htmlFor='password'>Password</label>
-      <input required type='password'
-          value={password}
-          id='password' name='password'
-          onChange={e => setPassword(e.target.value)}
-        />
-      <input type='submit' />
-      </form>
-      <h2>{status}</h2>
+
+        <input required type='password'
+            value={password}
+            id='password' name='password'
+            onChange={e => setPassword(e.target.value)}
+            placeholder='Password'
+            className='center_cont text_focus'
+            />
+
+        <input
+          className='center_cont'
+          value="Log In"
+          type='submit' />
+
+        </form>
+      <h2 className='center_text'>{status}</h2>
     </div>
   )
 }
 
-export default Login;
+export default LoginForm;

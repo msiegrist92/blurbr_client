@@ -35,7 +35,7 @@ const Header = ({session}) => {
         <i className='bars icon huge'
           onClick={(e) => navController(e, navDisplay)}></i>
         <NavDropDown
-          session={session}
+
           />
       </nav>
     </header>

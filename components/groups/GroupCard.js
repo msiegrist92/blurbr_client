@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent}) => {
 
@@ -19,6 +20,16 @@ const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent}
     name = name.slice(0, 23) + '...'
   }
 
+  const requestToJoin = e => {
+    e.preventDefault();
+    axios.post(process.env.NEXT_PUBLIC_DEV_API + '/group/joinrequest/' + sessionStorage.token)
+    .then((res) => {
+      console.log(res)
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+
   return (
     <>
     <div className='group_card'>
@@ -34,7 +45,7 @@ const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent}
         <a className='span_card' href={most_recent_link}>{most_recent_title}</a>
       </div>
       <div className='btn_attach'>
-        <button className='span_card span_btn'>Join Group</button>
+        <button onClick={(e) => requestToJoin(e)}className='span_card span_btn'>Join Group</button>
       </div>
     </div>
   </>

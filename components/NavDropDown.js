@@ -1,14 +1,37 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 import checkToken from '../lib/utils/checkToken';
+import Modal from './Modal';
 
-const NavDropDown = ({show}) => {
+const NavDropDown = () => {
 
   const [session, setSession] = useState(false);
 
   useEffect(() => {
     setSession(checkToken(sessionStorage.token))
   })
+
+
+
+  const endSessions = e => {
+    e.preventDefault();
+    const token = sessionStorage.token;
+    if(!token){
+      return alert('No current session');
+    }
+    axios.post(process.env.NEXT_PUBLIC_DEV_API + '/users/logout', {
+      token: sessionStorage.token
+    }).then((res) => {
+      sessionStorage.removeItem('token');
+      setSession(false);
+      const icon = document.querySelector('.bars');
+      icon.classList.toggle('grey')
+    }).catch((err) => {
+      console.log(err);
+    })
+
+  }
 
   return (
     <>
@@ -22,6 +45,7 @@ const NavDropDown = ({show}) => {
     }
 
     {session &&
+      <>
       <ul className='drop_nav'>
         <li><a href='/me'>My Profile</a></li>
         <li><a>Help</a></li>
@@ -37,8 +61,9 @@ const NavDropDown = ({show}) => {
             <li><a href='/groups'>Global</a></li>
           </ul>
         </li>
-        <li><a href='/logout'>Logout</a></li>
+        <li><a onClick={(e) => endSessions(e)}>Logout</a></li>
       </ul>
+      </>
     }
     </>
   )

@@ -3,13 +3,16 @@
   grid-template-rows: auto;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 4em 0;
+  width: 90%;
+  margin: 0 auto;
+  justify-items: center;
 }
 
 .group_card {
 
   grid-template-rows: repeat(2, auto);
   display: grid;
-  max-width: 300px;
+  width: 300px;
   min-height: 425px;
 
   .span_btn {

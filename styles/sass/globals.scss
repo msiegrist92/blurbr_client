@@ -45,6 +45,12 @@ ul {
 
 li {
   text-decoration: none;
+
+  a {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .container {

@@ -27,7 +27,7 @@ const NavDropDown = ({show}) => {
         <li><a>Help</a></li>
         <li className='sub_nav_head'><a>Topics</a>
           <ul>
-            <li><a href='/topics'>My Topics</a></li>
+            <li><a href='/mytopics'>My Topics</a></li>
             <li><a>Latest</a></li>
           </ul>
         </li>

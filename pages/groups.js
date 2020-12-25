@@ -58,12 +58,14 @@ const Groups = ({groups}) => {
     }
 
     {session &&
+      <>
       <div className='container'>
         <a className='center_cont' href='/newgroup'><button className='call_to'>Create New Group</button></a>
       </div>
       <ul className='group_card_grid'>
         {group_cards}
       </ul>
+      </>
     }
 
     </>

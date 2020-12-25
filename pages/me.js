@@ -7,7 +7,9 @@ import AvatarForm from '../components/forms/AvatarForm';
 import SigForm from '../components/forms/SigForm';
 import UserInfo from '../components/user/UserInfo';
 import Header from '../components/Header';
-import TopicsDropDown from '../components/user/TopicsDropDown';
+import TopicListDropDown from '../components/topics/TopicListDropDown'
+import CaretTurnDropDown from '../components/CaretTurnDropDown'
+
 
 import getAvatar from '../lib/api/user/getAvatar';
 import getSig from '../lib/api/user/getSig';
@@ -97,6 +99,14 @@ const Me = () => {
     }
   }
 
+  let topics_list = [];
+
+  if(user != null){
+    topics_list = user.topics.map((topic) => {
+      return <TopicListDropDown key={topic._id} topic={topic} />
+    })
+  }
+
 
 
   return (
@@ -127,7 +137,9 @@ const Me = () => {
             />
           </div>
           <h2 style={{textAlign: 'center'}}>{status}</h2>
-            <TopicsDropDown topics={user.topics} />
+            <CaretTurnDropDown list={topics_list} class_name={'topics_list'}
+                list_name={"Topics"} h1_class={'topics'}
+            />
           </>
           }
         </div>

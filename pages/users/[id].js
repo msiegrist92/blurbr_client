@@ -3,8 +3,8 @@ import axios from 'axios';
 
 import UserInfo from '../../components/user/UserInfo';
 import Header from '../../components/Header';
-import TopicsDropDown from '../../components/CaretTurnDropDown';
 import TopicListDropDown from '../../components/topics/TopicListDropDown';
+import CaretTurnDropDown from '../../components/CaretTurnDropDown';
 
 import {getIds, getDocById} from '../../lib/api/dynamicRouting';
 

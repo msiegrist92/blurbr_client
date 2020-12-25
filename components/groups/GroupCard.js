@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import jwt from 'jsonwebtoken'
 
 const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent}) => {
+
+  console.log(group_id)
 
   const group_link = 'groups/' + group_id;
   const owner_link = 'users/' + owner_id;
@@ -20,9 +23,19 @@ const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent}
     name = name.slice(0, 23) + '...'
   }
 
+  const formatRequestToken = (user_id, group_id) => {
+    const req_token = jwt.sign({user_id, group_id}, process.env.NEXT_PUBLIC_JWT_SECRET);
+    return req_token;
+  }
+
   const requestToJoin = e => {
     e.preventDefault();
-    axios.post(process.env.NEXT_PUBLIC_DEV_API + '/group/joinrequest/' + sessionStorage.token)
+
+    const user_id = jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id;
+
+    const join_req_token = formatRequestToken(user_id, group_id);
+
+    axios.post(process.env.NEXT_PUBLIC_DEV_API + '/group/joinrequest/' + join_req_token)
     .then((res) => {
       console.log(res)
     }).catch((err) => {

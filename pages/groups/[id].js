@@ -7,7 +7,7 @@ import {getDocById, getIds} from '../../lib/api/dynamicRouting.js';
 
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
-import CaretTurnDropDown from '../../components/CaretTurnDropDown'
+import CaretTurnDropDown from '../../components/CaretTurnDropDown';
 import TopicListDropDown from '../../components/topics/TopicListDropDown';
 import GroupInfo from '../../components/groups/GroupInfo';
 import UserListDropDown from '../../components/user/UserListDropDown';

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Head from 'next/head';
 
 
-import TopicListUser from '../topics/TopicListUser';
+
 import {animateToggle, animateToggleDisplayTimeOut} from '../../lib/utils/animationHandler';
 
 const UserInfo = ({username, avatar, signature, number_posts, topics}) => {

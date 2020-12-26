@@ -1,20 +1,23 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Head from 'next/head';
 
 import {getIds, getDocById} from '../../lib/api/dynamicRouting';
 import formatDateFromDB from '../../lib/utils/formatDateFromDB';
+import checkToken from '../../lib/utils/checkToken';
 
 import TopicBody from '../../components/topics/TopicBody';
 import PostForm from '../../components/forms/PostForm';
 import PostBody from '../../components/posts/PostBody';
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
+import NoSessionLock from '../../components/NoSessionLock';
 
 
 const Page = ({topic_data}) => {
 
   const [modal, setModal] = useState(false);
+  const [session, setSession] = useState(false);
 
   const toggleModal = (e, modal) => {
     if(modal){
@@ -23,6 +26,10 @@ const Page = ({topic_data}) => {
       setModal(true);
     }
   }
+
+  useEffect(() => {
+    setSession(checkToken(sessionStorage.token));
+  }, [])
 
   const {topic} = topic_data;
   const topic_author = topic.user;
@@ -44,27 +51,38 @@ const Page = ({topic_data}) => {
   })
 
   return (
-    <div>
+      <>
       <Head>
         <title>Blurbr - {title}</title>
       </Head>
       <Header />
-      <TopicBody title={title} author={topic_author.username}
-        body={body} date_created={formatDateFromDB(date_created)}
-        signature={topic_author.signature} author_link={'/users/' + topic_author._id}
-        avatar={topic_author.avatar}
-      />
-      {posts_list}
-      <PostForm
-        show={modal}
-        toggle={toggleModal}
-        id={_id}/>
-      <Modal
-        show={modal}
-        toggle={toggleModal}>
-        <h1>Post Successful!</h1>
-      </Modal>
-    </div>
+
+        {!session &&
+          <NoSessionLock>
+            <h3 className='center_text'>Please log in or register to view topics</h3>
+          </NoSessionLock>
+        }
+
+        {session &&
+          <>
+          <TopicBody title={title} author={topic_author.username}
+            body={body} date_created={formatDateFromDB(date_created)}
+            signature={topic_author.signature} author_link={'/users/' + topic_author._id}
+            avatar={topic_author.avatar}
+          />
+          {posts_list}
+          <PostForm
+            show={modal}
+            toggle={toggleModal}
+            id={_id}/>
+          <Modal
+            show={modal}
+            toggle={toggleModal}>
+            <h1>Post Successful!</h1>
+          </Modal>
+          </>
+        }
+      </>
   )
 }
 

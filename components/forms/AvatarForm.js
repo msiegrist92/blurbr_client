@@ -6,8 +6,6 @@ import {animateToggle, animateToggleDisplayTimeOut} from '../../lib/utils/animat
 
 const AvatarForm = (props) => {
 
-  //process.env.NEXT_PUBLIC_DEV_API + '/user/' + "5fb4082408eb0123095db14e" + '/avatar'
-
   const [pressed, setPressed] = useState(false);
 
   return (
@@ -36,6 +34,7 @@ const AvatarForm = (props) => {
           id='sub_file'
           type='submit'
         />
+      <p>{props.status}</p>
       </div>
       </form>
     </div>

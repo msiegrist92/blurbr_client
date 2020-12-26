@@ -21,16 +21,17 @@ const SigForm = (props) => {
           >
           Change Your Signature</button>
         <div className='off_left' id="sig_input">
-        <input
-          required id='signature'
-          onChange={(e) => props.updateSig(e.target.value)}
+          <input
+            required id='signature'
+            onChange={(e) => props.updateSig(e.target.value)}
 
-        />
-        <input
-          id='signature_sub'
-          type='submit'
-        />
-    </div>
+          />
+          <input
+            id='signature_sub'
+            type='submit'
+          />
+        <p className='center_text'>{props.status}</p>
+        </div>
       </form>
     </div>
   )

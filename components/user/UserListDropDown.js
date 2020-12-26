@@ -5,7 +5,7 @@ const UserListDropDown = ({user}) => {
   return (
     <>
     <a className='link' href={'/users/' + user._id}>
-      <li>{user.username}<hr />Topics Created: {user.topics.length}</li>
+      <li>{user.username} - Topics Created: {user.topics.length}</li>
     </a>
     </>
   )

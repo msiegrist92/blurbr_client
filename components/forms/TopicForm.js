@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const TopicForm = ({user, groups}) => {
+const TopicForm = ({groups}) => {
 
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -42,7 +42,7 @@ const TopicForm = ({user, groups}) => {
   return (
     <div className='topic_form'>
       <form onSubmit={(e) => {createTopic(e, title, body, group)}}>
-        <label htmlFor='groups'>Groups</label>
+        <label htmlFor='groups'>Post To</label>
         <select
           onChange={(e) => {
             console.log('clicky')
@@ -54,13 +54,14 @@ const TopicForm = ({user, groups}) => {
           {user_groups}
         </select>
 
-        <label htmlFor='title'>Title</label>
         <input
+          placeholder='Title'
+          className='text_focus center_cont'
           type='text' required id='title'
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-      <h2 className='center_text'>Body</h2>
+      <h3 className='center_text'>Body</h3>
       <textarea required id="body"
           rows='6'
           cols='50'

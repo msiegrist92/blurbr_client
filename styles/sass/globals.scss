@@ -81,6 +81,9 @@ li {
 
 }
 
+.center_marg {
+  margin: 0 auto;
+}
 
 .center_cont {
   justify-self: center;
@@ -99,12 +102,12 @@ input[type='submit']{
   padding: 8px 12px;
   border-radius: 4px;
   margin: 10px;
-  background-color: $midnight-purple;
+  background-color: $steel-pink;
   color: white;
 
   &:hover {
     cursor: pointer;
-    background-color: $steel-pink;
+    background-color: $midnight-purple;
   }
   &:active {
     background-color: $dark-blue-green;
@@ -193,14 +196,61 @@ nav {
 }
 
 .drops_cont {
-  justify-items: center;
-  align-items: center;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
+  width: 80%;
+  margin: 0 auto;
 
   ul {
-    grid-row: 2 / 3;
     align-self: start;
+  }
+}
+
+.caret_drop_cont {
+
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  .caret_drop {
+    text-align: center;
+    display: grid;
+    border: 2px solid black;
+    width: 400px;
+    margin: 0 auto 2em auto;
+    box-shadow: 5px 2px 4px grey;
+
+    li {
+      width: 90%;
+      margin: .5em auto;
+      padding: .75em;
+      border: none;
+      border-bottom: 1px solid $steel-pink;
+    }
+  }
+}
+
+form {
+  input {
+    border: none;
+    border-bottom: 2px solid lightgrey;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  select {
+    outline: none;
+    padding: .5em;
+    border: 2px solid $chill-aqua;
+    background-color: white;
+    font-family: 'Ubuntu', sans-serif;
+
+    &::selection {
+      background-color: lightgrey !important;
+    }
+  }
+
+  option {
+    background-color: white;
   }
 }

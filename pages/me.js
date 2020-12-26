@@ -7,8 +7,9 @@ import AvatarForm from '../components/forms/AvatarForm';
 import SigForm from '../components/forms/SigForm';
 import UserInfo from '../components/user/UserInfo';
 import Header from '../components/Header';
-import TopicListDropDown from '../components/topics/TopicListDropDown'
-import CaretTurnDropDown from '../components/CaretTurnDropDown'
+import TopicListDropDown from '../components/topics/TopicListDropDown';
+import GroupListDropDown from '../components/groups/GroupListDropDown';
+import CaretTurnDropDown from '../components/CaretTurnDropDown';
 
 
 import getAvatar from '../lib/api/user/getAvatar';
@@ -16,6 +17,8 @@ import getSig from '../lib/api/user/getSig';
 import getUserById from '../lib/api/user/getUserById';
 import handleSessionErr from '../lib/utils/handleSessionErr';
 import {animateToggle, animateToggleDisplayTimeOut} from '../lib/utils/animationHandler';
+
+import checkToken from '../lib/utils/checkToken';
 
 
 const Me = () => {
@@ -32,13 +35,15 @@ const Me = () => {
 
 
   useEffect(() => {
-    if(!sessionStorage.token){
-      return setSession(false);
-    }
+    setSession(checkToken(sessionStorage.token));
+  })
+
+
+  useEffect(() => {
     getUserById(jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id).then((res) => {
       setUser(res.data);
     })
-  }, [])
+  }, [session])
 
 
   useEffect(() => {
@@ -107,6 +112,14 @@ const Me = () => {
     })
   }
 
+  let groups_list = [];
+
+  if (user != null){
+    groups_list = user.groups.map((group) => {
+      return <GroupListDropDown key={group._id} group={group} />
+    })
+  }
+
 
 
   return (
@@ -124,22 +137,29 @@ const Me = () => {
             />
           <div id='me_form_cont'>
             <SigForm
+              status={status}
               updateSig={setSig}
               changeSig={changeSig}
               sig={sig}
               showForm={animationControl}
             />
             <AvatarForm
+              status={status}
               setAvatar={setAvatar}
               uploadAvatar={uploadAvatar}
               img={avatar}
               showForm={animationControl}
             />
           </div>
-          <h2 style={{textAlign: 'center'}}>{status}</h2>
-            <CaretTurnDropDown list={topics_list} class_name={'topics_list'}
+          <div className='drops_cont'>
+            <CaretTurnDropDown
+              col={'1'} list={topics_list} class_name={'topics_list'}
                 list_name={"Topics"} h1_class={'topics'}
             />
+            <CaretTurnDropDown list={groups_list} class_name={'groups_list'}
+                col={'2'} list_name={'Groups'} h1_class={'groups'}
+            />
+          </div>
           </>
           }
         </div>

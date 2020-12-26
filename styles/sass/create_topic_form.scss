@@ -1,29 +1,30 @@
 .topic_form {
-  width: 80%;
-  margin: 2% auto;
+  width: 90%;
+  margin: 0 auto;
+
 
   form {
     display: grid;
     margin: 0 auto;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, auto);
-    gap: 1.5em;
+    gap: 1.25em;
   }
 
     label {
       justify-self: center;
     }
 
-    #title {
-      width: 80%;
-      font-size: 1.75em;
-    }
-
   input[type=submit]{
     grid-column: 1 / 3;
-    width: 100px;
+    width: 150px;
     justify-self: center;
+    padding: .5em 1em;
+  }
 
+  input[type=text]{
+    width: 40%;
+    grid-column: 1 / 3;
   }
 
   textarea {
@@ -32,13 +33,14 @@
     margin: auto;
     font-size: 1.5em;
     font-family: Oxygen;
+    outline: none;
   }
 
   label {
     font-size: 1.75em;
   }
 
-  h2 {
+  h3 {
     grid-column: 1 / 3;
     padding: 0;
   }

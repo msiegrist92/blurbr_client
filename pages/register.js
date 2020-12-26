@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import Head from 'next/head';
 
 import RegisterUser from '../components/forms/RegisterUser';
 import Header from '../components/Header';
@@ -19,6 +20,9 @@ const Register = () => {
 
   return (
     <div>
+      <Head>
+        <title>Blurbr - Register</title>
+      </Head>
       <Header />
       <Modal
         show={modal}

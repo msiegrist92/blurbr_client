@@ -25,33 +25,35 @@ const TopicsDropDown = ({list, class_name, list_name, h1_class}) => {
 
   return (
     <>
-    <h1 className={h1_class}>
-      {list_name}
+    <div className='caret_drop_cont'>
+      <h1 className={h1_class}>
+        {list_name}
 
-      {display === true &&
-        <i
-        onClick={(e) => {dropList(e, display)}}
-        className='caret down icon'></i>
-      }
+        {display === true &&
+          <i
+          onClick={(e) => {dropList(e, display)}}
+          className='caret down yellow icon'></i>
+        }
 
-      {display === false &&
-        <i
-        onClick={(e) => {dropList(e, display)}}
-        className='caret right icon'></i>
+        {display === false &&
+          <i
+          onClick={(e) => {dropList(e, display)}}
+          className='caret right yellow icon'></i>
+        }
+      </h1>
+      {list.length > 0 &&
+        <ul className={class_name + ' caret_drop'}
+            style={{display:'none'}}
+          >
+          {list}
+        </ul>
       }
-  </h1>
-    {list.length > 0 &&
-      <ul className={class_name + ' caret_drop'}
-          style={{display:'none'}}
-        >
-        {list}
-      </ul>
-    }
-    {list.length === 0 &&
-      <h4 className={class_name + ' caret_drop'}
-          style={{display:'none'}}>
-          List is empty</h4>
-    }
+      {list.length === 0 &&
+        <ul className={class_name + ' caret_drop'}
+            style={{display:'none'}}>
+            List is empty</ul>
+      }
+    </div>
     </>
   )
 }

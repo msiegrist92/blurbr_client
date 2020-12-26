@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import Head from 'next/head';
 
 import LoginForm from '../components/forms/LoginForm';
 import Header from '../components/Header';
@@ -30,6 +31,9 @@ const Login = () => {
     <div>
       <Header
          />
+       <Head>
+         <title>Blurbr - Login</title>
+        </Head>
       <div className='container'>
         <i
           style={{marginTop: '20px'}}

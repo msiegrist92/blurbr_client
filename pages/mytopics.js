@@ -82,7 +82,7 @@ const Topics = () => {
   return (
     <div id='topics'>
       <Head>
-          <title>Blurbr Topics</title>
+          <title>Blurbr - Topics</title>
       </Head>
       <Header />
 

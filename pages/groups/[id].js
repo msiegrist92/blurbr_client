@@ -70,13 +70,9 @@ const Page = ({group_data}) => {
               className='big_button center_cont'
               onClick={(e, modal) => {
                 toggleModal(e, modal)
-                }}>Create Post</button>
+              }}>Create Topic</button>
           </div>
-          <Modal
-            show={modal} toggle={toggleModal}
-            >
-            <TopicForm groups={groups} />
-          </Modal>
+
         <div className='container drops_cont'>
           <CaretTurnDropDown list={topics_list} class_name={'topics_list'}
             list_name={'Topics'} h1_class={'topics'}
@@ -85,6 +81,11 @@ const Page = ({group_data}) => {
             list_name={'Users'} h1_class={'users'}
           />
         </div>
+        <Modal
+          show={modal} toggle={toggleModal}
+          >
+          <TopicForm groups={groups} />
+        </Modal>
         </>
         }
     </>

@@ -1,10 +1,21 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import Modal from '../Modal.js';
 
 const UserInviteListItem = ({user, groups}) => {
 
 
-  const [group, setGroup] = useState('')
+  const [group, setGroup] = useState('');
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = (e, modal) => {
+    e.preventDefault();
+    if(modal) {
+      setModal(false)
+    } else {
+      setModal(true)
+    }
+  }
 
   const group_options = groups.map((group) => {
     return (
@@ -19,6 +30,7 @@ const UserInviteListItem = ({user, groups}) => {
       user_email
     }).then((res) => {
       console.log(res)
+      toggleModal(e, modal)
       //pop up modal on invite sent
     }).catch((err) => {
       console.log(err);
@@ -39,6 +51,11 @@ const UserInviteListItem = ({user, groups}) => {
       <input type='submit' className='big_button call_to' value='Invite' />
       </form>
     </li>
+    <Modal
+      show={modal} toggle={toggleModal}
+      >
+      <h2 className='center_text rowSpan'>User invite sent!</h2>
+    </Modal>
     <hr></hr>
     </>
   )

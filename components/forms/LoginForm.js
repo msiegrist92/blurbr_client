@@ -24,7 +24,7 @@ const LoginForm = ({toggle, show, session}) => {
   return (
     <div className='container'>
       <form
-        className='register_form center_cont'
+        className='purple_form center_cont'
         onSubmit={(e) => {loginUser(e, email, password)}}>
 
         <input required type='email'

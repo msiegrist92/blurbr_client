@@ -134,19 +134,6 @@ const Topics = () => {
   )
 }
 
-//topics cannot be generated server side to be populated with unique topics per user based on users access token
-// export async function getServerSideProps(){
-//
-//   return axios.get(process.env.NEXT_PUBLIC_DEV_API + '/topic').then((res) => {
-//     return {
-//       props : {
-//         topics: res.data
-//       }
-//     }
-//   }).catch((err) => {
-//     console.log(err);
-//   })
-//
-// }
+
 
 export default Topics;

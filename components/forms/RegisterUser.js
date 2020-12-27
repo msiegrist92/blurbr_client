@@ -28,7 +28,7 @@ const RegisterUser = ({toggle, show}) => {
   return (
     <div className='container'>
       <form
-        className='register_form center_cont'
+        className='purple_form center_cont'
         onSubmit={(e) => {registerUser(e)}}>
 
         <input

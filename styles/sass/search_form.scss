@@ -1,0 +1,17 @@
+.search_form {
+
+  input[type=text]{
+    width: 80%;
+    justify-self: center;
+  }
+
+  select {
+    width: 50%;
+  }
+
+  input[type=submit]{
+    width: 60%;
+    font-size: 1.25em;
+  }
+
+}

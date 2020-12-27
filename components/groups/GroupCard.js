@@ -45,7 +45,7 @@ const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent}
 
   return (
     <>
-    <div className='group_card'>
+    <li className='group_card'>
       <div className='group_card_content'>
         <h1 className='span_card'><a href={group_link}>{name}</a></h1>
         <h2 className='owner span_card'>Owner</h2>
@@ -60,7 +60,7 @@ const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent}
       <div className='btn_attach'>
         <button onClick={(e) => requestToJoin(e)}className='span_card span_btn'>Join Group</button>
       </div>
-    </div>
+    </li>
   </>
   )
 }

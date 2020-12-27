@@ -4,11 +4,13 @@ import axios from 'axios';
 const CreateGroup = ({modal, toggleModal}) => {
 
   const [name, setName] = useState('');
+  const [description, setDescription] = useState('')
 
   const postGroup = e => {
     e.preventDefault();
     axios.post(process.env.NEXT_PUBLIC_DEV_API + '/group', {
       name,
+      description,
       token: sessionStorage.token
     }).then((res) => {
       toggleModal(e, modal);
@@ -32,6 +34,15 @@ const CreateGroup = ({modal, toggleModal}) => {
           type='text'
           value={name}
           onChange={(e) => setName(e.target.value)}
+        />
+
+        <input
+          className='center_cont text_focus'
+          placeholder='Description'
+          required
+          type='text'
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
 
         <input

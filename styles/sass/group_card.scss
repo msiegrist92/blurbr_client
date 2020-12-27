@@ -6,6 +6,15 @@
   width: 90%;
   margin: 0 auto;
   justify-items: center;
+
+  @media #{$large-and-down}{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media only screen and (max-width: 580px){
+    grid-template-columns: 1fr;
+  }
+
 }
 
 .group_card {
@@ -14,6 +23,15 @@
   display: grid;
   width: 300px;
   min-height: 425px;
+
+  @media only screen and (max-width: 698px){
+    width: 250px;
+  }
+
+  @media only screen and (max-width: 580px){
+    width: 300px;
+  }
+
 
   .span_btn {
     box-shadow: none;

@@ -6,8 +6,6 @@ import ResultsList from './ResultsList';
 
 const SearchUser = ({groups}) => {
 
-  console.log(groups)
-
   const [option, setOption] = useState('Email');
   const [term, setTerm] = useState('');
   const [results, setResults] = useState([]);
@@ -18,7 +16,6 @@ const SearchUser = ({groups}) => {
 
     axios.get(process.env.NEXT_PUBLIC_DEV_API + `/users/searchby/${option.toLowerCase()}/${term}`
     ).then((res) => {
-      console.log(res)
       setResults(res.data);
     }).catch((err) => {
       setErr(err.response.data);
@@ -46,7 +43,9 @@ const SearchUser = ({groups}) => {
         <h3 className='center_cont'>{err}</h3>
       </form>
 
-      <ResultsList results={results} />
+      <ResultsList
+        groups={groups}
+        results={results} />
     </>
   )
 }

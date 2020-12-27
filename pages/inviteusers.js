@@ -12,6 +12,8 @@ import SearchUser from '../components/user/SearchUser';
 const Page = () => {
 
   const [session, setSession] = useState(false);
+
+  //groups is equal to the groups that are owned by the user on session
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
@@ -19,9 +21,9 @@ const Page = () => {
   }, [])
 
   useEffect(() => {
-    axios.get(process.env.NEXT_PUBLIC_DEV_API + `/users/me/${sessionStorage.token}`)
+    axios.get(process.env.NEXT_PUBLIC_DEV_API + `/users/own_groups/${sessionStorage.token}`)
     .then((res) => {
-      setGroups(res.data.groups);
+      setGroups(res.data.groups_owned);
     })
   }, [session])
 

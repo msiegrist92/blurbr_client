@@ -1,0 +1,24 @@
+.invite_list {
+  display: grid;
+  grid-template-rows: auto;
+
+  form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-auto-flow: column;
+    align-items: center;
+
+    h2, h3 {
+      align-self: center;
+      margin: 0;
+    }
+
+    input, select {
+      align-self: center;
+      justify-self: center;
+      margin: 0;
+    }
+
+  }
+}

@@ -1,14 +1,14 @@
 import React from 'react';
 import UserInviteListItem from './UserInviteListItem';
 
-const ResultsList = ({results}) => {
+const ResultsList = ({results, groups}) => {
 
   const results_list = results.map((user) => {
-    return <UserInviteListItem user={user} />
+    return <UserInviteListItem key={user._id} user={user} groups={groups}/>
   })
 
   return (
-    <ul>
+    <ul className='invite_list'>
       {results_list}
     </ul>
   )

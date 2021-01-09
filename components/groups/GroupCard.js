@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import jwt from 'jsonwebtoken'
 
-const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent}) => {
+const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent, user, owns}) => {
 
-  console.log(group_id)
+  let manage_link = '/managegroups/'
+
+  if(owns){
+    manage_link += `${group_id}`
+  }
 
   const group_link = 'groups/' + group_id;
   const owner_link = 'users/' + owner_id;
@@ -58,7 +62,12 @@ const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent}
         <a className='span_card' href={most_recent_link}>{most_recent_title}</a>
       </div>
       <div className='btn_attach'>
-        <button onClick={(e) => requestToJoin(e)}className='span_card span_btn'>Join Group</button>
+        {!owns &&
+          <button onClick={(e) => requestToJoin(e)}className='span_card span_btn'>Join Group</button>
+        }
+        {owns &&
+          <button className='span_card span_btn'><a href={manage_link}>ass</a></button>
+        }
       </div>
     </li>
   </>

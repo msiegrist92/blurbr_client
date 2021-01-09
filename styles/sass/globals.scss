@@ -14,6 +14,7 @@
 @import './group_info.scss';
 @import './search_form.scss';
 @import './invite_list.scss';
+@import './big_slider.scss';
 
 
 html,
@@ -276,4 +277,32 @@ form {
 hr {
   border: 1px solid $french-mauve;
   width: 100%;
+}
+
+.two_col_fr {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: auto;
+}
+
+.gap_4 {
+  grid-gap: 4em;
+}
+
+i {
+  transition: 1s;
+}
+
+.manage_card {
+  padding: 1em;
+  width: 80%;
+  display: grid;
+  justify-items: center;
+  background-color: white;
+  box-shadow: 3px 4px lightgrey;
+  transition: 1s;
+}
+
+.pressed_card {
+  box-shadow: -3px -3px lightgrey;
 }

@@ -1,13 +1,11 @@
-import React, {useEffect, useState, useLayoutEffect} from 'react';
+import React from 'react';
 import {addClasses, removeClassesTimeout} from '../lib/utils/animationHandler';
-const Modal = ({children, show, toggle}) => {
 
+const Modal = ({children, show, toggle}) => {
 
   if (show){
     addClasses('.modal', ['show_modal_pos', 'show_modal_opacity']);
   }
-
-
 
   return (
       <div className='modal'>

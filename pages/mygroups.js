@@ -61,6 +61,8 @@ const MyGroups = () => {
       topics={group.topics.length}
       users={group.users.length}
       most_recent={group.most_recent}
+      user={user}
+      owns={user === group.owner._id}
       />
     )
   })

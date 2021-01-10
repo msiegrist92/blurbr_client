@@ -66,7 +66,7 @@ const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent,
           <button onClick={(e) => requestToJoin(e)}className='span_card span_btn'>Join Group</button>
         }
         {owns &&
-          <button className='span_card span_btn'><a href={manage_link}>ass</a></button>
+          <button className='span_card span_btn'><a href={manage_link}>Manage Group</a></button>
         }
       </div>
     </li>

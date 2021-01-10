@@ -6,7 +6,7 @@ import checkToken from '../lib/utils/checkToken';
 
 import Header from '../components/Header';
 import NoSessionLock from '../components/NoSessionLock';
-import SearchUser from '../components/user/SearchUser';
+import SearchUser from '../components/search_user/SearchUser';
 
 
 const Page = () => {

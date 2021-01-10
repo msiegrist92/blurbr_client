@@ -7,10 +7,14 @@ import {getDocById, getIds} from '../../lib/api/dynamicRouting.js';
 import checkToken from '../../lib/utils/checkToken';
 import checkOwner from '../../lib/utils/checkOwner';
 
+import {pressCard, getSlideNum, depressCards} from '../../lib/utils/manageGroup';
+
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
 import GroupInfo from '../../components/groups/GroupInfo';
 import NoSessionLock from '../../components/NoSessionLock';
+import SearchUser from '../../components/search_user/SearchUser';
+import RemoveUsers from '../../components/manage_group/RemoveUsers';
 
 import BigSlider from '../../components/manage_group/BigSlider';
 
@@ -23,7 +27,7 @@ const Page = ({group_data}) => {
 
   const [index, setIndex] = useState(0);
 
-  const slides = ['', <h1>Invite Users</h1>, <h1>Remove Users</h1>, <h1>Remove Topics</h1>, <h1>Disband Groupr</h1>]
+  const slides = ['', <SearchUser groups={[group_data]} />, <RemoveUsers group_data={group_data} />, <h1>Remove Topics</h1>, <h1>Disband Groupr</h1>]
 
   const toggleModal = (e, modal) => {
     e.preventDefault();
@@ -36,31 +40,22 @@ const Page = ({group_data}) => {
 
   const changeSlide = e => {
 
-    const slide_REGEXP = /slide_link_\d/g
+    const cards = document.querySelectorAll('.manage_card');
 
     let card = e.target;
-
-    let slide_num;
 
     if(e.target.tagName !== 'DIV'){
       card = e.target.parentElement;
     }
     let icon = card.querySelector('i');
 
-    card.classList.add('pressed_card')
-    icon.classList.remove('yellow');
-    icon.classList.add('purple')
+    depressCards(cards, card);
+    pressCard(card, icon);
 
-
-    for(let clas of card.classList){
-      if(clas.match(slide_REGEXP) !== null)
-        slide_num = clas.charAt(clas.length - 1);
-    }
+    let slide_num = getSlideNum(card.classList);
     setIndex(slide_num)
   }
 
-
-  console.log(group_data)
 
   useEffect(() => {
     setSession(checkToken(sessionStorage.token));
@@ -86,7 +81,7 @@ const Page = ({group_data}) => {
         {session &&
           <>
             <div className='container'>
-              <h1>Welcome {owner.username}, manage your group "{name}"</h1>
+              <h1 className='center_text'>Welcome {owner.username}, manage your group "{name}"</h1>
 
               <div className='color_container two_col_fr container gap_4'>
 
@@ -121,7 +116,6 @@ const Page = ({group_data}) => {
               </div>
             </div>
             <BigSlider index={index} slides={slides}>
-              <h1>Shwaddup</h1>
             </BigSlider>
           </>
         }

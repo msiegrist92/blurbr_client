@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import UserInviteListItem from './UserInviteListItem';
 import ResultsList from './ResultsList';
 
 const SearchUser = ({groups}) => {

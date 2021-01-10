@@ -285,6 +285,14 @@ hr {
   grid-auto-rows: auto;
 }
 
+.two_col_70_30 {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-auto-rows: auto;
+}
+
+
+
 .gap_4 {
   grid-gap: 4em;
 }

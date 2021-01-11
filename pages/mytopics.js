@@ -75,7 +75,7 @@ const Topics = () => {
       )
     })
   } else {
-    topic_list = <h2 className='center_text'>No topics available. Get one started!</h2>
+    topic_list = [<h2 key='single' className='center_text'>No topics available. Get one started!</h2>]
   }
 
 
@@ -115,7 +115,7 @@ const Topics = () => {
           </div>
 
           <ul className='container'>
-            {topic_list}
+            {topic_list.reverse()}
           </ul>
 
           {topics.length > 2 &&

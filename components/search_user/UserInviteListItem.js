@@ -5,7 +5,7 @@ import Modal from '../Modal.js';
 const UserInviteListItem = ({user, groups}) => {
 
 
-  const [group, setGroup] = useState('');
+  const [group, setGroup] = useState(groups[0]._id);
   const [modal, setModal] = useState(false);
 
   const toggleModal = (e, modal) => {

@@ -10,6 +10,7 @@ const RemoveUsers = ({group_data}) => {
   const removeUsers = (e, selections) => {
     e.preventDefault();
     axios.post(process.env.NEXT_PUBLIC_DEV_API + '/group/removeusers', {
+      user_token: sessionStorage.token,
       group_id : group_data._id,
       selections
     }).then((res) => {

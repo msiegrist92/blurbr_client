@@ -66,8 +66,9 @@ const Page = ({group_data}) => {
     axios.post(process.env.NEXT_PUBLIC_DEV_API + '/group/disbandgroup', {
       group_id,
       user_token: sessionStorage.token
-    }).catch((res) => {
-      console.log(res)
+    }).then((res) => {
+      alert('Group disbanded');
+      location.href = '/mygroups';
     }).catch((err) => {
       console.log(err);
     })

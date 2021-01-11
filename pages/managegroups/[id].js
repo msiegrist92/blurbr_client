@@ -13,21 +13,15 @@ import Header from '../../components/Header';
 import Modal from '../../components/Modal';
 import GroupInfo from '../../components/groups/GroupInfo';
 import NoSessionLock from '../../components/NoSessionLock';
+
 import SearchUser from '../../components/search_user/SearchUser';
 import RemoveUsers from '../../components/manage_group/RemoveUsers';
+import RemoveTopics from '../../components/manage_group/RemoveTopics';
+import DisbandGroup from '../../components/manage_group/DisbandGroup';
 
 import BigSlider from '../../components/manage_group/BigSlider';
 
 const Page = ({group_data}) => {
-
-  const [modal, setModal] = useState(false);
-  const [session, setSession] = useState(false);
-
-  const {name, owner, topics, users, description} = group_data;
-
-  const [index, setIndex] = useState(0);
-
-  const slides = ['', <SearchUser groups={[group_data]} />, <RemoveUsers group_data={group_data} />, <h1>Remove Topics</h1>, <h1>Disband Groupr</h1>]
 
   const toggleModal = (e, modal) => {
     e.preventDefault();
@@ -37,6 +31,17 @@ const Page = ({group_data}) => {
       setModal(true)
     }
   }
+
+
+  const [modal, setModal] = useState(false);
+  const [session, setSession] = useState(false);
+
+  const {name, owner, topics, users, description} = group_data;
+
+  const [index, setIndex] = useState(0);
+
+  const slides = ['', <SearchUser groups={[group_data]} />, <RemoveUsers group_data={group_data} />,
+        <RemoveTopics group_data={group_data} />, <DisbandGroup toggleModal={toggleModal} modal={modal} group_data={group_data} />];
 
   const changeSlide = e => {
 
@@ -54,6 +59,18 @@ const Page = ({group_data}) => {
 
     let slide_num = getSlideNum(card.classList);
     setIndex(slide_num)
+  }
+
+  const disbandGroup = (e, group_id) => {
+    e.preventDefault();
+    axios.post(process.env.NEXT_PUBLIC_DEV_API + '/group/disbandgroup', {
+      group_id,
+      user_token: sessionStorage.token
+    }).catch((res) => {
+      console.log(res)
+    }).catch((err) => {
+      console.log(err);
+    })
   }
 
 
@@ -117,6 +134,16 @@ const Page = ({group_data}) => {
             </div>
             <BigSlider index={index} slides={slides}>
             </BigSlider>
+            <Modal
+              show={modal}
+              toggle={toggleModal}
+              >
+              <h2 className='center_cont span_two_col'>Are you sure you want to disband <i>{group_data.name}</i> ?</h2>
+              <button
+                className='center_cont call_to span_two_col'
+                onClick={(e) => {disbandGroup(e, group_data._id)}}
+                >Proceed</button>
+            </Modal>
           </>
         }
     </>

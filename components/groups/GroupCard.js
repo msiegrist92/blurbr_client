@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import jwt from 'jsonwebtoken'
 
-const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent, user, owns}) => {
+const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent, user, owns, users_list}) => {
+
+  console.log(users)
 
   let manage_link = '/managegroups/'
 
@@ -41,6 +43,7 @@ const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent,
 
     axios.post(process.env.NEXT_PUBLIC_DEV_API + '/group/joinrequest/' + join_req_token)
     .then((res) => {
+      alert('Request email sent');
       console.log(res)
     }).catch((err) => {
       console.log(err)
@@ -62,8 +65,11 @@ const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent,
         <a className='span_card' href={most_recent_link}>{most_recent_title}</a>
       </div>
       <div className='btn_attach'>
-        {!owns &&
+        {!owns && !users_list.includes(user) &&
           <button onClick={(e) => requestToJoin(e)}className='span_card span_btn'>Join Group</button>
+        }
+        {!owns && users_list.includes(user) &&
+          <button className='span_card span_btn'><a href={group_link}>Member</a></button>
         }
         {owns &&
           <button className='span_card span_btn'><a href={manage_link}>Manage Group</a></button>

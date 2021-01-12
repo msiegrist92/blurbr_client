@@ -327,6 +327,10 @@ i {
   background-color: white;
   box-shadow: 3px 4px lightgrey;
   transition: 1s;
+
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .pressed_card {

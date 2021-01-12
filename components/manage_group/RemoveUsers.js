@@ -32,7 +32,9 @@ const RemoveUsers = ({group_data}) => {
 
   return (
     <>
-    <form className='purple_form center_cont two_col_70_30'
+    <form
+      style={{gap: '0'}}
+      className='purple_form center_cont two_col_70_30'
       onSubmit={(e) => {removeUsers(e, selections)}}
       >
       <h2 className='self_center'>User Name</h2>

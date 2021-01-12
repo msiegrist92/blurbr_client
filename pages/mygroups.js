@@ -60,6 +60,7 @@ const MyGroups = () => {
       owner_id={group.owner._id}
       topics={group.topics.length}
       users={group.users.length}
+      users_list={group.users}
       most_recent={group.most_recent}
       user={user}
       owns={user === group.owner._id}

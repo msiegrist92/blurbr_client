@@ -49,6 +49,7 @@ const Groups = ({groups}) => {
       users={group.users.length}
       most_recent={group.most_recent}
       user={user}
+      users_list={group.users}
       owns={user === group.owner._id}
       />
     )

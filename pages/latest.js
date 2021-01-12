@@ -12,8 +12,7 @@ import NoSessionLock from '../components/NoSessionLock';
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
 
-
-const Topics = () => {
+const Latest = () => {
 
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
@@ -41,10 +40,11 @@ const Topics = () => {
   }, [session])
 
   useEffect(() => {
-    axios.get(process.env.NEXT_PUBLIC_DEV_API + '/user_topics/' + user)
+    console.log(user)
+    axios.get(process.env.NEXT_PUBLIC_DEV_API + '/member_topics/' + user)
       .then((res) => {
-        console.log(res)
-        setTopics(res.data.user_topics);
+        console.log('res', res)
+        setTopics(res.data.member_topics);
         setGroups(res.data.user_groups);
       }).catch((err) => {
         console.log(err);
@@ -75,14 +75,14 @@ const Topics = () => {
       )
     })
   } else {
-    topic_list = [<h2 key='single' className='center_text'>You haven't created any topics. Get one started!</h2>]
+    topic_list = [<h2 key='single' className='center_text'>Join a group or make a topic to get started!</h2>]
   }
 
 
   return (
     <div id='topics'>
       <Head>
-          <title>Blurbr - Topics</title>
+          <title>Blurbr - Latest</title>
       </Head>
       <Header />
 
@@ -135,5 +135,4 @@ const Topics = () => {
 }
 
 
-
-export default Topics;
+export default Latest;

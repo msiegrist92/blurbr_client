@@ -2,6 +2,8 @@ import React from 'react';
 
 const RemoveTopicItem = ({topic, selections, setSelections}) => {
 
+  const topic_link = `/topics/${topic._id}`;
+
   let body = topic.body;
   if(body.length > 70){
     body.length = 60;
@@ -23,7 +25,7 @@ const RemoveTopicItem = ({topic, selections, setSelections}) => {
   return (
     <>
     <li style={{marginBottom: '1em'}} className='two_col_70_30 gap_05'>
-      <h2 className='col_1'>{topic.title}</h2>
+      <h2 className='col_1'><a href={topic_link}>{topic.title}</a></h2>
       <p className='col_1'>{body}</p>
       <input
         onChange={(e) => {toggleSelection(e, selections)}}

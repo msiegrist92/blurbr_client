@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Modal from '../components/Modal';
 import NoSessionLock from '../components/NoSessionLock';
 import GroupCard from '../components/groups/GroupCard';
+import SearchGroups from '../components/groups/SearchGroups';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
@@ -18,6 +19,7 @@ const MyGroups = () => {
   const [session, setSession] = useState(false);
   const [user, setUser] = useState('');
   const [groups, setGroups] = useState([]);
+  const [show_groups, setShowGroups] = useState([]);
 
   const toggleModal = (e, modal) => {
     e.preventDefault();
@@ -44,13 +46,14 @@ const MyGroups = () => {
         .then((res) => {
           console.log(res)
           setGroups(res.data)
+          setShowGroups(res.data)
         }).catch((err) => {
           console.log(err);
         })
     }
   }, [user])
 
-  const group_cards = groups.map((group) => {
+  const group_cards = show_groups.map((group) => {
     return (
     <GroupCard
       key={group._id}
@@ -84,6 +87,7 @@ const MyGroups = () => {
     {session &&
       <>
       <div className='container'>
+        <SearchGroups groups={groups} setGroups={setShowGroups} />
         <a className='center_cont' href='/newgroup'><button style={{marginTop: '1em'}}
           className='call_to'>Create New Group</button></a>
       </div>

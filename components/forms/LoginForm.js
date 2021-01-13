@@ -17,7 +17,7 @@ const LoginForm = ({toggle, show, session}) => {
       toggle(e, show);
 
     }).catch((err) => {
-      setStatus(err.response)
+      setStatus('Login attempt failed')
     })
   }
 

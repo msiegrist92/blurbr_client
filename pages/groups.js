@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Modal from '../components/Modal';
 import NoSessionLock from '../components/NoSessionLock';
 import GroupCard from '../components/groups/GroupCard';
+import SearchGroups from '../components/groups/SearchGroups';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
@@ -18,6 +19,7 @@ const Groups = ({groups}) => {
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
   const [user, setUser] = useState('');
+  const [show_groups, setGroups] = useState([]);
 
   const toggleModal = (e, modal) => {
     e.preventDefault();
@@ -36,8 +38,12 @@ const Groups = ({groups}) => {
     if(session){
       setUser(jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id);
     }
-  })
-  const group_cards = groups.map((group) => {
+  }, [session])
+
+  useEffect(() => {
+    setGroups(groups)
+  }, [user])
+  const group_cards = show_groups.map((group) => {
     return (
     <GroupCard
       key={group._id}
@@ -71,6 +77,7 @@ const Groups = ({groups}) => {
     {session &&
       <>
       <div className='container'>
+        <SearchGroups groups={groups} setGroups={setGroups} />
         <a className='center_cont' href='/newgroup'><button
           style={{marginTop: '1em'}}
           className='call_to'>Create New Group</button></a>

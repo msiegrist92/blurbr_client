@@ -52,7 +52,7 @@ const NavDropDown = () => {
         <li className='sub_nav_head'><a>Topics</a>
           <ul>
             <li><a href='/mytopics'>My Topics</a></li>
-            <li><a href='/latest'>Latest</a></li>
+            <li><a href='/alltopics'>All Topics</a></li>
           </ul>
         </li>
         <li className='sub_nav_head'><a>Groups</a>

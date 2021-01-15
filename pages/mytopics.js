@@ -86,7 +86,7 @@ const Topics = () => {
   return (
     <div id='topics'>
       <Head>
-          <title>Blurbr - Topics</title>
+          <title>Blurbr - Your Topics</title>
       </Head>
       <Header />
 
@@ -113,9 +113,9 @@ const Topics = () => {
 
           <div className='container'>
 
-              <SearchTopics topics={topics} setShow={setShow}/>
+              <SearchTopics topics={topics} setTopics={setShow}/>
 
-            <SortOptions topics={topics} setShow={setShow} />
+            <SortOptions topics={show_topics} setShow={setShow} />
 
             <button
               className='big_button pos_right'

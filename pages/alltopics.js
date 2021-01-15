@@ -9,11 +9,12 @@ import TopicForm from '../components/forms/TopicForm';
 import Modal from '../components/Modal';
 import NoSessionLock from '../components/NoSessionLock';
 import SearchTopics from '../components/topics/SearchTopics';
+import SortOptions from '../components/topics/SortOptions';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
 
-const Latest = () => {
+const AllTopics= () => {
 
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
@@ -45,7 +46,6 @@ const Latest = () => {
     console.log(user)
     axios.get(process.env.NEXT_PUBLIC_DEV_API + '/member_topics/' + user)
       .then((res) => {
-        console.log('res', res)
         setTopics(res.data.member_topics);
         setShow(res.data.member_topics);
         setGroups(res.data.user_groups);
@@ -54,9 +54,6 @@ const Latest = () => {
       })
   }, [user])
 
-  // add conditonal for topic_list.length = 0
-  // edit to display with group information per topics
-  //hide second create group button if list < 2
 
   let topic_list;
 
@@ -85,7 +82,7 @@ const Latest = () => {
   return (
     <div id='topics'>
       <Head>
-          <title>Blurbr - Latest</title>
+          <title>Blurbr - Topics</title>
       </Head>
       <Header />
 
@@ -111,6 +108,7 @@ const Latest = () => {
 
           <div className='container'>
             <SearchTopics topics={topics} setTopics={setShow} />
+            <SortOptions topics={show_topics} setTopics={setShow} />
             <button
               className='big_button pos_right'
               onClick={(e, modal) => {
@@ -139,4 +137,4 @@ const Latest = () => {
 }
 
 
-export default Latest;
+export default AllTopics;

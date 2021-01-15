@@ -341,3 +341,7 @@ i {
   align-self: center;
   justify-self: center;
 }
+
+.span_three_col {
+  grid-column: 1 / 4;
+}

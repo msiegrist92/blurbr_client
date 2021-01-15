@@ -8,6 +8,8 @@ import TopicList from '../components/topics/TopicList.js';
 import TopicForm from '../components/forms/TopicForm';
 import Modal from '../components/Modal';
 import NoSessionLock from '../components/NoSessionLock';
+import SearchTopics from '../components/topics/SearchTopics';
+import SortOptions from '../components/topics/SortOptions';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
@@ -20,6 +22,7 @@ const Topics = () => {
   const [user, setUser] = useState('');
   const [topics, setTopics] = useState([]);
   const [groups, setGroups] = useState([]);
+  const [show_topics, setShow] = useState([]);
 
   const toggleModal = (e, modal) => {
     e.preventDefault();
@@ -45,6 +48,7 @@ const Topics = () => {
       .then((res) => {
         console.log(res)
         setTopics(res.data.user_topics);
+        setShow(res.data.user_topics)
         setGroups(res.data.user_groups);
       }).catch((err) => {
         console.log(err);
@@ -58,7 +62,7 @@ const Topics = () => {
   let topic_list;
 
   if(topics.length > 0){
-    topic_list = topics.map((topic) => {
+    topic_list = show_topics.map((topic) => {
       return (
         <TopicList
           key={topic._id}
@@ -97,7 +101,8 @@ const Topics = () => {
           <Modal
             show={modal}
             toggle={toggleModal}>
-            <h1 className='center_text'>Create a new post</h1>
+
+            <h1 className='center_text'>Create a new topics</h1>
             <TopicForm
               user={user}
               groups={groups}
@@ -107,15 +112,20 @@ const Topics = () => {
           <h1 className='center_text'>Topics</h1>
 
           <div className='container'>
+
+              <SearchTopics topics={topics} setShow={setShow}/>
+
+            <SortOptions topics={topics} setShow={setShow} />
+
             <button
               className='big_button pos_right'
               onClick={(e, modal) => {
                 toggleModal(e, modal)
-                }}>Create Post</button>
+              }}>Create Topic</button>
           </div>
 
           <ul className='container'>
-            {topic_list.reverse()}
+            {topic_list}
           </ul>
 
           {topics.length > 2 &&

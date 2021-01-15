@@ -57,8 +57,9 @@ const NavDropDown = () => {
         </li>
         <li className='sub_nav_head'><a>Groups</a>
           <ul>
-            <li><a href='/mygroups'>My Groups</a></li>
             <li><a href='/groups'>Global</a></li>
+            <li><a href='/mygroups'>My Groups</a></li>
+            <li><a href='/mycircle'>My Circle</a></li>
           </ul>
         </li>
         <li><a onClick={(e) => endSessions(e)}>Logout</a></li>

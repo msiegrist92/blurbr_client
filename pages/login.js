@@ -12,6 +12,7 @@ const Login = () => {
 
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
+  const [prev_link, setLink] = useState('');
 
   const toggleModal = (e, modal) => {
     if(modal){
@@ -19,6 +20,11 @@ const Login = () => {
     } else {
       setModal(true);
     }
+  }
+
+  const goBack = e => {
+    e.preventDefault();
+    history.back();
   }
 
   useEffect(() => {
@@ -51,6 +57,9 @@ const Login = () => {
          <h1 className='center_text'>Welcome back!</h1>
          <a href='/mytopics'><h2>My Topics</h2></a>
          <a href='/mygroups'><h2>My Groups</h2></a>
+         <a className='span_two_col'
+           onClick={(e) => goBack(e)}
+           ><h2>Return</h2></a>
        </Modal>
     </div>
   )

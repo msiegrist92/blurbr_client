@@ -13,7 +13,7 @@ import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
 
 
-const MyGroups = () => {
+const MyCircle = () => {
 
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
@@ -42,7 +42,7 @@ const MyGroups = () => {
 
   useEffect(() => {
     if(session){
-      axios.get(process.env.NEXT_PUBLIC_DEV_API + '/user_groups/' + user)
+      axios.get(process.env.NEXT_PUBLIC_DEV_API + '/member_groups/' + user)
         .then((res) => {
           console.log(res)
           setGroups(res.data)
@@ -74,7 +74,7 @@ const MyGroups = () => {
   return (
     <>
     <Head>
-      <title>Blurbr - My Groups</title>
+      <title>Blurbr - My Circle</title>
     </Head>
     <Header />
 
@@ -92,14 +92,7 @@ const MyGroups = () => {
           className='call_to'>Create New Group</button></a>
       </div>
       <ul className='group_card_grid'>
-
-        {group_cards.length < 1 &&
-          <h1 className='span_three_col'>You don't own any groups. Get one started!</h1>
-        }
-
-        {group_cards.length > 1 &&
-          {group_cards}
-        }
+        {group_cards}
       </ul>
       </>
     }
@@ -108,4 +101,4 @@ const MyGroups = () => {
   )
 }
 
-export default MyGroups;
+export default MyCircle;

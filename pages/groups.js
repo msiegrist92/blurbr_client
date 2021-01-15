@@ -64,7 +64,7 @@ const Groups = ({groups}) => {
   return (
     <>
     <Head>
-      <title>Blurbr Groups</title>
+      <title>Blurbr - Groups</title>
     </Head>
     <Header />
 

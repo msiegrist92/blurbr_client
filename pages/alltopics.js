@@ -9,6 +9,8 @@ import TopicForm from '../components/forms/TopicForm';
 import Modal from '../components/Modal';
 import NoSessionLock from '../components/NoSessionLock';
 import SearchTopics from '../components/topics/SearchTopics';
+import SearchRenderList from '../components/SearchRenderList';
+
 import SortOptions from '../components/topics/SortOptions';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
@@ -54,6 +56,13 @@ const AllTopics= () => {
       })
   }, [user])
 
+  const search_options = [{
+    value: 'title',
+    title: "Title"
+  }, {
+    value: 'body',
+    title: 'Body'
+  }]
 
   let topic_list;
 
@@ -107,8 +116,12 @@ const AllTopics= () => {
           <h1 className='center_text'>Topics</h1>
 
           <div className='container'>
-            <SearchTopics topics={topics} setTopics={setShow} />
+
+            <SearchRenderList to_search={topics} setList={setShow}
+                default_option='title' title='Search Topics' options={search_options} />
+
             <SortOptions topics={show_topics} setTopics={setShow} />
+
             <button
               className='big_button pos_right'
               onClick={(e, modal) => {

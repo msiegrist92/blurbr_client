@@ -3,11 +3,11 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import Head from 'next/head';
 
-import Header from '../components/Header';
-import Modal from '../components/Modal';
-import NoSessionLock from '../components/NoSessionLock';
+import Header from '../components/global/Header';
+import Modal from '../components/utils/Modal';
+import NoSessionLock from '../components/utils/NoSessionLock';
 import GroupCard from '../components/groups/GroupCard';
-import SearchGroups from '../components/groups/SearchGroups';
+import SearchRenderList  from '../components/utils/SearchRenderList';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
@@ -41,7 +41,7 @@ const MyCircle = () => {
   }, [session])
 
   useEffect(() => {
-    if(session){
+    if(user){
       axios.get(process.env.NEXT_PUBLIC_DEV_API + '/member_groups/' + user)
         .then((res) => {
           console.log(res)
@@ -71,6 +71,15 @@ const MyCircle = () => {
     )
   })
 
+  const search_options = [{
+    value: 'name',
+    title: "Name"
+  },
+  {
+    value: 'description',
+    title: "Description"
+  }]
+
   return (
     <>
     <Head>
@@ -87,7 +96,10 @@ const MyCircle = () => {
     {session &&
       <>
       <div className='container'>
-        <SearchGroups groups={groups} setGroups={setShowGroups} />
+
+        <SearchRenderList to_search={groups} setList={setShowGroups}
+            default_option='name' title='Search Groups' options={search_options} />
+
         <a className='center_cont' href='/newgroup'><button style={{marginTop: '1em'}}
           className='call_to'>Create New Group</button></a>
       </div>

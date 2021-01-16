@@ -3,12 +3,13 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import Head from 'next/head';
 
-import Header from '../components/Header';
+import Header from '../components/global/Header';
 import TopicList from '../components/topics/TopicList.js';
 import TopicForm from '../components/forms/TopicForm';
-import Modal from '../components/Modal';
-import NoSessionLock from '../components/NoSessionLock';
-import SearchTopics from '../components/topics/SearchTopics';
+import Modal from '../components/utils/Modal';
+
+import SearchRenderList from '../components/utils/SearchRenderList'
+import NoSessionLock from '../components/utils/NoSessionLock';
 import SortOptions from '../components/topics/SortOptions';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
@@ -46,7 +47,6 @@ const Topics = () => {
   useEffect(() => {
     axios.get(process.env.NEXT_PUBLIC_DEV_API + '/user_topics/' + user)
       .then((res) => {
-        console.log(res)
         setTopics(res.data.user_topics);
         setShow(res.data.user_topics)
         setGroups(res.data.user_groups);
@@ -55,9 +55,13 @@ const Topics = () => {
       })
   }, [user])
 
-  // add conditonal for topic_list.length = 0
-  // edit to display with group information per topics
-  //hide second create group button if list < 2
+  const search_options = [{
+    value: 'title',
+    title: "Title"
+  }, {
+    value: 'body',
+    title: 'Body'
+  }]
 
   let topic_list;
 
@@ -85,6 +89,7 @@ const Topics = () => {
 
   return (
     <div id='topics'>
+
       <Head>
           <title>Blurbr - Your Topics</title>
       </Head>
@@ -113,7 +118,8 @@ const Topics = () => {
 
           <div className='container'>
 
-              <SearchTopics topics={topics} setTopics={setShow}/>
+            <SearchRenderList to_search={topics} setList={setShow}
+              default_option='title' title="Search Topics" options={search_options} />
 
             <SortOptions topics={show_topics} setShow={setShow} />
 

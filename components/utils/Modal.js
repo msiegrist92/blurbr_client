@@ -1,5 +1,5 @@
 import React from 'react';
-import {addClasses, removeClassesTimeout} from '../lib/utils/animationHandler';
+import {addClasses, removeClassesTimeout} from '../../lib/utils/animationHandler';
 
 const Modal = ({children, show, toggle}) => {
 

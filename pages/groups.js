@@ -3,18 +3,18 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import Head from 'next/head';
 
-import Header from '../components/Header';
-import Modal from '../components/Modal';
-import NoSessionLock from '../components/NoSessionLock';
+import Header from '../components/global/Header';
+import Modal from '../components/utils/Modal';
+import NoSessionLock from '../components/utils/NoSessionLock';
 import GroupCard from '../components/groups/GroupCard';
-import SearchGroups from '../components/groups/SearchGroups';
+
+import SearchRenderList from '../components/utils/SearchRenderList';
+;
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
 
 const Groups = ({groups}) => {
-
-  console.log(groups)
 
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
@@ -41,8 +41,12 @@ const Groups = ({groups}) => {
   }, [session])
 
   useEffect(() => {
-    setGroups(groups)
+    if(user){
+          setGroups(groups)
+    }
+
   }, [user])
+
   const group_cards = show_groups.map((group) => {
     return (
     <GroupCard
@@ -61,6 +65,15 @@ const Groups = ({groups}) => {
     )
   })
 
+  const search_options = [{
+    value: 'name',
+    title: "Name"
+  },
+  {
+    value: 'description',
+    title: "Description"
+  }]
+
   return (
     <>
     <Head>
@@ -77,7 +90,10 @@ const Groups = ({groups}) => {
     {session &&
       <>
       <div className='container'>
-        <SearchGroups groups={groups} setGroups={setGroups} />
+
+        <SearchRenderList to_search={groups} setList={setGroups}
+            default_option='name' title='Search Groups' options={search_options} />
+
         <a className='center_cont' href='/newgroup'><button
           style={{marginTop: '1em'}}
           className='call_to'>Create New Group</button></a>

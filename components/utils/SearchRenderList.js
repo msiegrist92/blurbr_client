@@ -1,32 +1,33 @@
 import React, {useState} from 'react';
 
-//search topics by title, body
-//sort by post number, date
+const SearchRenderList = ({to_search, setList, default_option, title, options}) => {
 
-const SearchTopics = ({topics, setTopics}) => {
-
-  const [option, setOption] = useState('title');
+  const [option, setOption] = useState(default_option)
   const [search_val, setVal] = useState('');
 
-  const searchTopics = (e, option, search_val, groups) => {
+  const searchList = (e, option, search_val, to_search) => {
     e.preventDefault();
-    const filtered_groups = groups.filter((group) => {
-      return group[option].includes(search_val)
+    const filtered_list = to_search.filter((item) => {
+      return item[option].includes(search_val)
     })
-    setTopics(filtered_groups)
+    setList(filtered_list);
   }
 
-  const resetTopics = (e, topics) => {
+  const resetList = (e, to_search) => {
     e.preventDefault();
-    setTopics(topics);
+    setList(to_search);
   }
+
+  const options_list = options.map((option, i) => {
+    return <option key={i} value={option.value}>{option.title}</option>
+  })
 
   return (
     <>
     <form
       style={{gap: '.5em'}}
       className='purple_form two_col_fr center_cont'>
-      <h2 className='span_two_col center_cont'>Filter Topics</h2>
+      <h2 className='span_two_col center_cont'>{title}</h2>
       <div className='two_col_70_30 span_two_col'>
         <input
           value={search_val}
@@ -35,19 +36,19 @@ const SearchTopics = ({topics, setTopics}) => {
         <select value={option}
           onChange={(e) => setOption(e.target.value)}
           >
-          <option value='title'>Title</option>
-          <option value='body'>Body</option>
+          {options_list}
         </select>
       </div>
       <input className='span_two_col center_cont' type='submit' value="Search"
-        onClick={(e) => searchTopics(e, option, search_val, topics)}
+        onClick={(e) => searchList(e, option, search_val, to_search)}
         />
       <input
-        onClick={(e) => resetTopics(e, topics)}
+        onClick={(e) => resetList(e, to_search)}
         type='submit' value="Reset" className='span_two_col center_cont call_to' />
     </form>
     </>
   )
+
 }
 
-export default SearchTopics;
+export default SearchRenderList;

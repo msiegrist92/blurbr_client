@@ -3,9 +3,9 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import Head from 'next/head';
 
-import Header from '../components/Header';
-import Modal from '../components/Modal';
-import NoSessionLock from '../components/NoSessionLock';
+import Header from '../components/global/Header';
+import Modal from '../components/utils/Modal';
+import NoSessionLock from '../components/utils/NoSessionLock';
 import CreateGroup from '../components/forms/CreateGroup';
 
 import checkToken from '../lib/utils/checkToken';

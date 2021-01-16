@@ -3,8 +3,8 @@ import axios from 'axios';
 import Head from 'next/head';
 
 import LoginForm from '../components/forms/LoginForm';
-import Header from '../components/Header';
-import Modal from '../components/Modal';
+import Header from '../components/global/Header';
+import Modal from '../components/utils/Modal';
 
 import checkToken from '../lib/utils/checkToken';
 

@@ -3,11 +3,11 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import Head from 'next/head';
 
-import Header from '../components/Header';
-import Modal from '../components/Modal';
-import NoSessionLock from '../components/NoSessionLock';
+import Header from '../components/global/Header';
+import Modal from '../components/utils/Modal';
+import NoSessionLock from '../components/utils/NoSessionLock';
 import GroupCard from '../components/groups/GroupCard';
-import SearchGroups from '../components/groups/SearchGroups';
+import SearchRenderList from '../components/utils/SearchRenderList';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
@@ -41,10 +41,10 @@ const MyGroups = () => {
   }, [session])
 
   useEffect(() => {
-    if(session){
+    if(user){
       axios.get(process.env.NEXT_PUBLIC_DEV_API + '/user_groups/' + user)
         .then((res) => {
-          console.log(res)
+          console.log(res.data)
           setGroups(res.data)
           setShowGroups(res.data)
         }).catch((err) => {
@@ -69,7 +69,18 @@ const MyGroups = () => {
       owns={user === group.owner._id}
       />
     )
-  })
+  });
+
+
+  const search_options = [{
+    value: 'name',
+    title: "Name"
+  },
+  {
+    value: 'description',
+    title: "Description"
+  }];
+
 
   return (
     <>
@@ -87,19 +98,16 @@ const MyGroups = () => {
     {session &&
       <>
       <div className='container'>
-        <SearchGroups groups={groups} setGroups={setShowGroups} />
+
+        <SearchRenderList to_search={groups} setList={setShowGroups}
+            default_option='name' title='Search Groups' options={search_options} />
+
         <a className='center_cont' href='/newgroup'><button style={{marginTop: '1em'}}
           className='call_to'>Create New Group</button></a>
       </div>
       <ul className='group_card_grid'>
 
-        {group_cards.length < 1 &&
-          <h1 className='span_three_col'>You don't own any groups. Get one started!</h1>
-        }
-
-        {group_cards.length > 1 &&
-          {group_cards}
-        }
+        {group_cards}
       </ul>
       </>
     }

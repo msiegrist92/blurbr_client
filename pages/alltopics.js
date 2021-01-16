@@ -3,11 +3,11 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import Head from 'next/head';
 
-import Header from '../components/Header';
+import Header from '../components/global/Header';
 import TopicList from '../components/topics/TopicList.js';
 import TopicForm from '../components/forms/TopicForm';
-import Modal from '../components/Modal';
-import NoSessionLock from '../components/NoSessionLock';
+import Modal from '../components/utils/Modal';
+import NoSessionLock from '../components/utils/NoSessionLock';
 import SearchTopics from '../components/topics/SearchTopics';
 import SearchRenderList from '../components/SearchRenderList';
 

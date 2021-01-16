@@ -22,6 +22,7 @@ const SigForm = (props) => {
           Change Your Signature</button>
         <div className='off_left' id="sig_input">
           <input
+            className='text_focus'
             required id='signature'
             onChange={(e) => props.updateSig(e.target.value)}
 

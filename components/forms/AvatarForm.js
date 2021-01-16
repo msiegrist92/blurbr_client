@@ -26,6 +26,7 @@ const AvatarForm = (props) => {
       <div id='avatar_input'
         className='off_right'>
         <input id='file' required
+          className='text_focus'
           type='file' name='avatar'
           accept='image/jpeg'
           onChange={(event) => props.setAvatar(event.target.files[0])}

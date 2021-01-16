@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import TopicListUser from './topics/TopicListDropDown';
-import {animateToggle, animateToggleDisplayTimeOut} from '../lib/utils/animationHandler';
+import TopicListUser from '../topics/TopicListDropDown';
+import {animateToggle, animateToggleDisplayTimeOut} from '../../lib/utils/animationHandler';
 
 const TopicsDropDown = ({list, class_name, list_name, h1_class}) => {
 

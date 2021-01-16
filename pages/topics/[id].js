@@ -9,9 +9,9 @@ import checkToken from '../../lib/utils/checkToken';
 import TopicBody from '../../components/topics/TopicBody';
 import PostForm from '../../components/forms/PostForm';
 import PostBody from '../../components/posts/PostBody';
-import Header from '../../components/Header';
-import Modal from '../../components/Modal';
-import NoSessionLock from '../../components/NoSessionLock';
+import Header from '../../components/global/Header';
+import Modal from '../../components/utils/Modal';
+import NoSessionLock from '../../components/utils/NoSessionLock';
 
 
 const Page = ({topic_data}) => {

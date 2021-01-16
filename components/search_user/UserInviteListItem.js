@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import Modal from '../Modal.js';
+import Modal from '../utils/Modal.js';
 
 const UserInviteListItem = ({user, groups}) => {
 

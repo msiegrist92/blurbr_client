@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 
 import RegisterUser from '../components/forms/RegisterUser';
-import Header from '../components/Header';
-import Modal from '../components/Modal';
+import Header from '../components/global/Header';
+import Modal from '../components/utils/Modal';
 
 const Register = () => {
 

@@ -6,14 +6,14 @@ import Head from 'next/head';
 import {getDocById, getIds} from '../../lib/api/dynamicRouting.js';
 import checkToken from '../../lib/utils/checkToken';
 
-import Header from '../../components/Header';
-import Modal from '../../components/Modal';
-import CaretTurnDropDown from '../../components/CaretTurnDropDown';
+import Header from '../../components/global/Header';
+import Modal from '../../components/utils/Modal';
+import CaretTurnDropDown from '../../components/utils/CaretTurnDropDown';
 import TopicListDropDown from '../../components/topics/TopicListDropDown';
 import GroupInfo from '../../components/groups/GroupInfo';
 import UserListDropDown from '../../components/user/UserListDropDown';
 import TopicForm from '../../components/forms/TopicForm';
-import NoSessionLock from '../../components/NoSessionLock';
+import NoSessionLock from '../../components/utils/NoSessionLock';
 
 const Page = ({group_data}) => {
 

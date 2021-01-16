@@ -234,9 +234,11 @@ nav {
 }
 
 form {
-  input {
+    input {
     border: none;
-    border-bottom: 2px solid lightgrey;
+    border-bottom: 3px solid lightgrey;
+    border-left: 2px solid lightgtrey;
+    border-right: 2px solid lightgrey;
     border-radius: 8px;
     padding: 10px;
   }

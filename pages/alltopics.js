@@ -8,8 +8,7 @@ import TopicList from '../components/topics/TopicList.js';
 import TopicForm from '../components/forms/TopicForm';
 import Modal from '../components/utils/Modal';
 import NoSessionLock from '../components/utils/NoSessionLock';
-import SearchTopics from '../components/topics/SearchTopics';
-import SearchRenderList from '../components/SearchRenderList';
+import SearchRenderList from '../components/utils/SearchRenderList';
 
 import SortOptions from '../components/topics/SortOptions';
 

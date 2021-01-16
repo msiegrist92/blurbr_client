@@ -9,10 +9,10 @@ import checkOwner from '../../lib/utils/checkOwner';
 
 import {pressCard, getSlideNum, depressCards} from '../../lib/utils/manageGroup';
 
-import Header from '../../components/Header';
-import Modal from '../../components/Modal';
+import Header from '../../components/global/Header';
+import Modal from '../../components/utils/Modal';
 import GroupInfo from '../../components/groups/GroupInfo';
-import NoSessionLock from '../../components/NoSessionLock';
+import NoSessionLock from '../../components/utils/NoSessionLock';
 
 import SearchUser from '../../components/search_user/SearchUser';
 import RemoveUsers from '../../components/manage_group/RemoveUsers';

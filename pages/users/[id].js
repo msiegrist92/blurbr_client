@@ -5,11 +5,11 @@ import Head from 'next/head'
 import checkToken from '../../lib/utils/checkToken';
 
 import UserInfo from '../../components/user/UserInfo';
-import Header from '../../components/Header';
+import Header from '../../components/global/Header';
 import TopicListDropDown from '../../components/topics/TopicListDropDown';
-import CaretTurnDropDown from '../../components/CaretTurnDropDown';
+import CaretTurnDropDown from '../../components/utils/CaretTurnDropDown';
 import GroupListDropDown from '../../components/groups/GroupListDropDown';
-import NoSessionLock from '../../components/NoSessionLock';
+import NoSessionLock from '../../components/utils/NoSessionLock';
 
 import {getIds, getDocById} from '../../lib/api/dynamicRouting';
 

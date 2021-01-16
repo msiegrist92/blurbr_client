@@ -6,10 +6,10 @@ import Head from 'next/head';
 import AvatarForm from '../components/forms/AvatarForm';
 import SigForm from '../components/forms/SigForm';
 import UserInfo from '../components/user/UserInfo';
-import Header from '../components/Header';
+import Header from '../components/global/Header';
 import TopicListDropDown from '../components/topics/TopicListDropDown';
 import GroupListDropDown from '../components/groups/GroupListDropDown';
-import CaretTurnDropDown from '../components/CaretTurnDropDown';
+import CaretTurnDropDown from '../components/utils/CaretTurnDropDown';
 
 
 import getAvatar from '../lib/api/user/getAvatar';
@@ -47,10 +47,7 @@ const Me = () => {
 
 
   useEffect(() => {
-    if(!sessionStorage.token){
-      return setSession(false);
-    } else {
-      let id = jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET);
+      let id = jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)
       setUserID(id._id);
       getAvatar(userID).then((res) => {
         setDBAvatar(res);
@@ -58,7 +55,6 @@ const Me = () => {
       getSig(userID).then((res) => {
         setDBSig(res);
       })
-    }
   }, [DBSig, DBAvatar])
 
 
@@ -151,14 +147,18 @@ const Me = () => {
               showForm={animationControl}
             />
           </div>
+
           <div className='drops_cont'>
+
             <CaretTurnDropDown
               col={'1'} list={topics_list} class_name={'topics_list'}
                 list_name={"Topics"} h1_class={'topics'}
             />
+
             <CaretTurnDropDown list={groups_list} class_name={'groups_list'}
                 col={'2'} list_name={'Groups'} h1_class={'groups'}
             />
+
           </div>
           </>
           }

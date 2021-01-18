@@ -19,14 +19,10 @@ const TopicForm = ({groups}) => {
   })
 
   const createTopic = (e, title, body, group) => {
+    e.preventDefault();
     if(group === ''){
       group = groups[0]._id
     }
-    e.preventDefault();
-    if(!sessionStorage.token){
-      return setStatus('Please log in to create new topics')
-    }
-    console.log(group);
     axios.post(process.env.NEXT_PUBLIC_DEV_API + '/topic', {
       group,
       title,
@@ -35,7 +31,7 @@ const TopicForm = ({groups}) => {
     }).then((res) => {
       setStatus('Topic created!')
     }).catch((err) => {
-      setStatus(err.response.data);
+      setStatus('Internal server error please try again later');
     })
   }
 
@@ -43,11 +39,11 @@ const TopicForm = ({groups}) => {
     <div className='topic_form'>
       <form onSubmit={(e) => {createTopic(e, title, body, group)}}>
         <label htmlFor='groups'>Post To</label>
+
         <select
           onChange={(e) => {
-            console.log('clicky')
-            console.log(e.target.value);
-            setGroup(e.target.value)}}
+            setGroup(e.target.value)}
+          }
           name='groups' required id='groups'
           value={group}
           >
@@ -61,6 +57,7 @@ const TopicForm = ({groups}) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
+
       <h3 className='center_text'>Body</h3>
       <textarea required id="body"
           rows='6'
@@ -68,6 +65,7 @@ const TopicForm = ({groups}) => {
           value={body}
           onChange={(e) => setBody(e.target.value)}
         />
+
         <input
           className='big_button'
           type='submit' />

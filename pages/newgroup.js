@@ -35,7 +35,7 @@ const createGroup = () => {
           show={modal}
           toggle={toggleModal}>
           <h1>Group Created</h1>
-          <a className='span_two_col' href='#'><button className='call_to'>Invite Users</button></a>
+          <a className='span_two_col' href='/inviteusers'><button className='call_to'>Invite Users</button></a>
         </Modal>
 
         <div className='container'>

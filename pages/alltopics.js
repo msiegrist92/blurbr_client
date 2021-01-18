@@ -1,21 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import jwt from 'jsonwebtoken';
-import Head from 'next/head';
+import axios from 'axios'
+import jwt from 'jsonwebtoken'
 
-import Header from '../components/global/Header';
-import TopicList from '../components/topics/TopicList.js';
-import TopicForm from '../components/forms/TopicForm';
+import SessionProtectPage from '../components/SessionProtectPage';
 import Modal from '../components/utils/Modal';
-import NoSessionLock from '../components/utils/NoSessionLock';
 import SearchRenderList from '../components/utils/SearchRenderList';
 
+import TopicList from '../components/topics/TopicList.js';
+import TopicForm from '../components/forms/TopicForm';
 import SortOptions from '../components/topics/SortOptions';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
-import checkToken from '../lib/utils/checkToken';
+import checkToken from '../lib/utils/checkToken'
 
-const AllTopics= () => {
+
+const AllTopics = () => {
 
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
@@ -33,6 +32,14 @@ const AllTopics= () => {
     }
   }
 
+  const search_options = [{
+    value: 'title',
+    title: "Title"
+  }, {
+    value: 'body',
+    title: 'Body'
+  }]
+
   useEffect(() => {
     setSession(checkToken(sessionStorage.token));
   }, [])
@@ -44,7 +51,6 @@ const AllTopics= () => {
   }, [session])
 
   useEffect(() => {
-    console.log(user)
     axios.get(process.env.NEXT_PUBLIC_DEV_API + '/member_topics/' + user)
       .then((res) => {
         setTopics(res.data.member_topics);
@@ -54,14 +60,6 @@ const AllTopics= () => {
         console.log(err);
       })
   }, [user])
-
-  const search_options = [{
-    value: 'title',
-    title: "Title"
-  }, {
-    value: 'body',
-    title: 'Body'
-  }]
 
   let topic_list;
 
@@ -87,66 +85,62 @@ const AllTopics= () => {
   }
 
 
+
+
+
   return (
-    <div>
-      <Head>
-          <title>Blurbr - Topics</title>
-      </Head>
-      <Header />
+    <>
+    <SessionProtectPage page_title='All Topics' no_session_title='Please log in to view topics'
+      session={session}>
 
-        {!session &&
-          <NoSessionLock>
-            <h3 className='center_text'>Please log in or register to view topics</h3>
-          </NoSessionLock>
-        }
-
-        {session &&
-          <>
-          <Modal
-            show={modal}
-            toggle={toggleModal}>
+        <Modal
+          show={modal}
+          toggle={toggleModal}
+          setModal={setModal}
+        >
             <h1 className='center_text'>Create a new topic</h1>
             <TopicForm
               user={user}
               groups={groups}
               />
-          </Modal>
+        </Modal>
 
-          <h1 className='center_text'>Topics</h1>
+        <h1 className='center_text'>Topics</h1>
 
+        <div className='container'>
+
+          <SearchRenderList to_search={topics} setList={setShow}
+              default_option='title' title='Search Topics' options={search_options} />
+
+          <SortOptions topics={show_topics} setTopics={setShow} />
+
+          <button
+            className='big_button pos_right'
+            onClick={(e, modal) => {
+              toggleModal(e, modal)
+            }}>Create Topic</button>
+        </div>
+
+        <ul className='container'>
+          {topic_list.reverse()}
+        </ul>
+
+        {topics.length > 2 &&
+          <>
           <div className='container'>
-
-            <SearchRenderList to_search={topics} setList={setShow}
-                default_option='title' title='Search Topics' options={search_options} />
-
-            <SortOptions topics={show_topics} setTopics={setShow} />
-
             <button
+              style={{marginBottom: '20px'}}
               className='big_button pos_right'
-              onClick={(e, modal) => {
+              onClick={(e, modal, setModal) => {
+                console.log(e, modal)
                 toggleModal(e, modal)
-              }}>Create Topic</button>
+                }}>Create Post</button>
           </div>
-
-          <ul className='container'>
-            {topic_list.reverse()}
-          </ul>
-
-          {topics.length > 2 &&
-            <div className='container'>
-              <button
-                style={{marginBottom: '20px'}}
-                className='big_button pos_right'
-                onClick={(e, modal) => {
-                  toggleModal(e, modal)
-                  }}>Create Post</button>
-            </div>
-          }
           </>
         }
-    </div>
+    </SessionProtectPage>
+    </>
   )
 }
-
 
 export default AllTopics;

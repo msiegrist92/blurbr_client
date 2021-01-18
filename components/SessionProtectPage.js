@@ -15,7 +15,7 @@ const SessionProtectPage = ({page_title, no_session_title, children, session
   return (
     <>
       <Head>
-        <title>{page_title}</title>
+        <title>Blurbr - {page_title}</title>
       </Head>
       <Header />
 

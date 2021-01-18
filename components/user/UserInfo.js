@@ -1,9 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Head from 'next/head';
-
-
-
-import {animateToggle, animateToggleDisplayTimeOut} from '../../lib/utils/animationHandler';
 
 const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
 
@@ -14,9 +9,6 @@ const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
 
   return (
     <div className='user_info container color_container'>
-      <Head>
-        <title>Blurbr User {username}</title>
-      </Head>
       <h1 className='username'>{username}</h1>
       <img src={avatar}></img>
       <p>{signature}</p>

@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import Head from 'next/head';
 
-import Header from '../components/global/Header';
 import Modal from '../components/utils/Modal';
-import NoSessionLock from '../components/utils/NoSessionLock';
 import CreateGroup from '../components/forms/CreateGroup';
+import SessionProtectPage from '../components/SessionProtectPage';
 
 import checkToken from '../lib/utils/checkToken';
 
@@ -30,36 +28,28 @@ const createGroup = () => {
 
   return (
     <>
-    <Head>
-      <title>Create a Group</title>
-    </Head>
-    <Header />
+      <SessionProtectPage page_title='New Group' no_session_title='Please log in to manage groups'
+        session={session}>
 
-    {!session &&
-      <NoSessionLock>
-        <h3 className='center_text'>Please log in or register to create groups</h3>
-      </NoSessionLock>
-    }
+        <Modal
+          show={modal}
+          toggle={toggleModal}>
+          <h1>Group Created</h1>
+          <a className='span_two_col' href='#'><button className='call_to'>Invite Users</button></a>
+        </Modal>
 
-    {session &&
-      <>
-      <Modal
-        show={modal}
-        toggle={toggleModal}>
-        <h1>Group Created</h1>
-        <a className='span_two_col' href='#'><button className='call_to'>Invite Users</button></a>
-      </Modal>
+        <div className='container'>
 
-      <div className='container'>
-        <i className="users icon massive yellow center_cont"></i>
-        <h1 className='center_text'>Create a group</h1>
-        <CreateGroup
-          modal={modal}
-          toggleModal={toggleModal}
-        />
-      </div>
-      </>
-    }
+          <i className="users icon massive yellow center_cont"></i>
+          <h1 className='center_text'>Create a group</h1>
+          <CreateGroup
+            modal={modal}
+            toggleModal={toggleModal}
+          />
+
+        </div>
+
+      </SessionProtectPage>
 
     </>
   )

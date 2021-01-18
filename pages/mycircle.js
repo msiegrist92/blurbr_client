@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import Head from 'next/head';
 
-import Header from '../components/global/Header';
 import Modal from '../components/utils/Modal';
-import NoSessionLock from '../components/utils/NoSessionLock';
 import GroupCard from '../components/groups/GroupCard';
 import SearchRenderList  from '../components/utils/SearchRenderList';
+import SessionProtectPage from '../components/SessionProtectPage';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
@@ -82,19 +80,8 @@ const MyCircle = () => {
 
   return (
     <>
-    <Head>
-      <title>Blurbr - My Circle</title>
-    </Head>
-    <Header />
-
-    {!session &&
-      <NoSessionLock>
-        <h3 className='center_text'>Please log in or register to view groups</h3>
-      </NoSessionLock>
-    }
-
-    {session &&
-      <>
+      <SessionProtectPage page_title='My Circle' no_session_title='Please log in to view groups'
+          session={session}>
       <div className='container'>
 
         <SearchRenderList to_search={groups} setList={setShowGroups}
@@ -106,9 +93,7 @@ const MyCircle = () => {
       <ul className='group_card_grid'>
         {group_cards}
       </ul>
-      </>
-    }
-
+      </SessionProtectPage>
     </>
   )
 }

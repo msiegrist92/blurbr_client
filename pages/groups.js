@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import Head from 'next/head';
 
-import Header from '../components/global/Header';
+
+
 import Modal from '../components/utils/Modal';
-import NoSessionLock from '../components/utils/NoSessionLock';
 import GroupCard from '../components/groups/GroupCard';
 
 import SearchRenderList from '../components/utils/SearchRenderList';
-;
+import SessionProtectPage from '../components/SessionProtectPage';
+
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
@@ -42,7 +42,7 @@ const Groups = ({groups}) => {
 
   useEffect(() => {
     if(user){
-          setGroups(groups)
+      setGroups(groups)
     }
 
   }, [user])
@@ -76,19 +76,9 @@ const Groups = ({groups}) => {
 
   return (
     <>
-    <Head>
-      <title>Blurbr - Groups</title>
-    </Head>
-    <Header />
+      <SessionProtectPage page_title='All Groups' no_session_title='Please log in to view groups'
+        session={session}>
 
-    {!session &&
-      <NoSessionLock>
-        <h3 className='center_text'>Please log in or register to view groups</h3>
-      </NoSessionLock>
-    }
-
-    {session &&
-      <>
       <div className='container'>
 
         <SearchRenderList to_search={groups} setList={setGroups}
@@ -101,11 +91,8 @@ const Groups = ({groups}) => {
       <ul className='group_card_grid'>
         {group_cards}
       </ul>
-      </>
-    }
-
+      </SessionProtectPage>
     </>
-
   )
 
 }

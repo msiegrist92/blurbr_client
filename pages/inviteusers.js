@@ -4,9 +4,9 @@ import axios from 'axios';
 
 import checkToken from '../lib/utils/checkToken';
 
-import Header from '../components/global/Header';
-import NoSessionLock from '../components/utils/NoSessionLock';
 import SearchUser from '../components/search_user/SearchUser';
+
+import SessionProtectPage from '../components/SessionProtectPage';
 
 
 const Page = () => {
@@ -29,25 +29,13 @@ const Page = () => {
 
   return (
     <>
-    <Head>
-      <title>Blurbr - Invite Users</title>
-    </Head>
-    <Header />
-
-    {!session &&
-      <NoSessionLock>
-        <h3 className='center_text'>Please log in to manage your groups</h3>
-      </NoSessionLock>
-    }
-
-    {session &&
-      <>
+    <SessionProtectPage page_title='Invite Users' no_session_title='Please log in to manage your groups'
+      session={session}>
       <div className='container'>
         <h2 className='center_cont'>Search for a user to request that they join your group!</h2>
         <SearchUser groups={groups} />
-    </div>
-      </>
-    }
+      </div>
+    </SessionProtectPage>
     </>
   )
 }

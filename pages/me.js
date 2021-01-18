@@ -1,14 +1,14 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
+
+import SessionProtectPage from '../components/SessionProtectPage';
 
 import AvatarForm from '../components/forms/AvatarForm';
 import SigForm from '../components/forms/SigForm';
 import UserInfo from '../components/user/UserInfo';
-import Header from '../components/global/Header';
-import TopicListDropDown from '../components/topics/TopicListDropDown';
-import GroupListDropDown from '../components/groups/GroupListDropDown';
+
+import genListIfUser from '../lib/utils/genListIfUser';
 import CaretTurnDropDown from '../components/utils/CaretTurnDropDown';
 
 
@@ -25,8 +25,8 @@ const Me = () => {
 
   const [avatar, setAvatar] = useState('');
   const [sig, setSig] = useState('');
-  const [DBSig, setDBSig] = useState('');
-  const [DBAvatar, setDBAvatar] = useState('');
+    const [DBSig, setDBSig] = useState('');
+    const [DBAvatar, setDBAvatar] = useState('');
 
   const [userID, setUserID] = useState('');
   const [session, setSession] = useState(true);
@@ -100,53 +100,42 @@ const Me = () => {
     }
   }
 
-  let topics_list = [];
+  let topics_list = genListIfUser(user, 'topic');
+  let groups_list = genListIfUser(user, 'group');
 
-  if(user != null){
-    topics_list = user.topics.map((topic) => {
-      return <TopicListDropDown key={topic._id} topic={topic} />
-    })
-  }
-
-  let groups_list = [];
-
-  if (user != null){
-    groups_list = user.groups.map((group) => {
-      return <GroupListDropDown key={group._id} group={group} />
-    })
-  }
-
-
+  console.log(user)
 
   return (
-    <div>
-      <Header />
-      {!session &&
-        <h1 class='center_text'>Please Log In</h1>
-      }
-      {session &&
-        <div>
+    <>
+      <SessionProtectPage page_title='Your Profile' no_session_title='Please log in to mange your profile'
+        session={session}>
+
           {user &&
             <>
+
             <UserInfo username={user.username} avatar={DBAvatar}
               signature={DBSig} number_posts={user.number_posts}
             />
-          <div id='me_form_cont'>
-            <SigForm
-              status={status}
-              updateSig={setSig}
-              changeSig={changeSig}
-              sig={sig}
-              showForm={animationControl}
-            />
-            <AvatarForm
-              status={status}
-              setAvatar={setAvatar}
-              uploadAvatar={uploadAvatar}
-              img={avatar}
-              showForm={animationControl}
-            />
-          </div>
+
+            <div id='me_form_cont'>
+
+              <SigForm
+                status={status}
+                updateSig={setSig}
+                changeSig={changeSig}
+                sig={sig}
+                showForm={animationControl}
+              />
+
+              <AvatarForm
+                status={status}
+                setAvatar={setAvatar}
+                uploadAvatar={uploadAvatar}
+                img={avatar}
+                showForm={animationControl}
+              />
+
+            </div>
 
           <div className='drops_cont'>
 
@@ -162,9 +151,8 @@ const Me = () => {
           </div>
           </>
           }
-        </div>
-      }
-    </div>
+      </SessionProtectPage>
+    </>
   )
 }
 

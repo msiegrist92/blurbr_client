@@ -1,16 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import Head from 'next/head';
 
-import Header from '../components/global/Header';
 import TopicList from '../components/topics/TopicList.js';
 import TopicForm from '../components/forms/TopicForm';
 import Modal from '../components/utils/Modal';
 
 import SearchRenderList from '../components/utils/SearchRenderList'
-import NoSessionLock from '../components/utils/NoSessionLock';
 import SortOptions from '../components/topics/SortOptions';
+import SessionProtectPage from '../components/SessionProtectPage';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
@@ -88,21 +86,10 @@ const Topics = () => {
 
 
   return (
-    <div id='topics'>
+      <>
+        <SessionProtectPage page_title='My Topics' no_session_title='Please log in to view topics'
+              session={session}>
 
-      <Head>
-          <title>Blurbr - Your Topics</title>
-      </Head>
-      <Header />
-
-        {!session &&
-          <NoSessionLock>
-            <h3 className='center_text'>Please log in or register to view topics</h3>
-          </NoSessionLock>
-        }
-
-        {session &&
-          <>
           <Modal
             show={modal}
             toggle={toggleModal}>
@@ -112,6 +99,7 @@ const Topics = () => {
               user={user}
               groups={groups}
               />
+
           </Modal>
 
           <h1 className='center_text'>Topics</h1>
@@ -128,6 +116,7 @@ const Topics = () => {
               onClick={(e, modal) => {
                 toggleModal(e, modal)
               }}>Create Topic</button>
+
           </div>
 
           <ul className='container'>
@@ -144,9 +133,8 @@ const Topics = () => {
                   }}>Create Post</button>
             </div>
           }
-          </>
-        }
-    </div>
+        </SessionProtectPage>
+      </>
   )
 }
 

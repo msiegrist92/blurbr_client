@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import Head from 'next/head';
 
-import Header from '../components/global/Header';
 import Modal from '../components/utils/Modal';
-import NoSessionLock from '../components/utils/NoSessionLock';
 import GroupCard from '../components/groups/GroupCard';
 import SearchRenderList from '../components/utils/SearchRenderList';
+import SessionProtectPage from '../components/SessionProtectPage';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
 import checkToken from '../lib/utils/checkToken';
@@ -83,35 +81,23 @@ const MyGroups = () => {
 
 
   return (
-    <>
-    <Head>
-      <title>Blurbr - My Groups</title>
-    </Head>
-    <Header />
-
-    {!session &&
-      <NoSessionLock>
-        <h3 className='center_text'>Please log in or register to view groups</h3>
-      </NoSessionLock>
-    }
-
-    {session &&
       <>
-      <div className='container'>
+      <SessionProtectPage page_title='My Groups' no_session_title='Please log in to view groups'
+          session={session}
+        >
+        <div className='container'>
 
-        <SearchRenderList to_search={groups} setList={setShowGroups}
-            default_option='name' title='Search Groups' options={search_options} />
+          <SearchRenderList to_search={groups} setList={setShowGroups}
+              default_option='name' title='Search Groups' options={search_options} />
 
-        <a className='center_cont' href='/newgroup'><button style={{marginTop: '1em'}}
-          className='call_to'>Create New Group</button></a>
-      </div>
-      <ul className='group_card_grid'>
+          <a className='center_cont' href='/newgroup'><button style={{marginTop: '1em'}}
+            className='call_to'>Create New Group</button></a>
+        </div>
+        <ul className='group_card_grid'>
 
-        {group_cards}
-      </ul>
-      </>
-    }
-
+          {group_cards}
+        </ul>
+      </SessionProtectPage>
     </>
   )
 }

@@ -8,7 +8,7 @@ import AvatarForm from '../components/forms/AvatarForm';
 import SigForm from '../components/forms/SigForm';
 import UserInfo from '../components/user/UserInfo';
 
-import genListIfUser from '../lib/utils/genListIfUser';
+import {genListIfUser} from '../lib/utils/genListIfUser';
 import CaretTurnDropDown from '../components/utils/CaretTurnDropDown';
 
 
@@ -138,6 +138,7 @@ const Me = () => {
             </div>
 
           <div className='drops_cont'>
+
 
             <CaretTurnDropDown
               col={'1'} list={topics_list} class_name={'topics_list'}

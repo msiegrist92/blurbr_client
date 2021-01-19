@@ -25,7 +25,7 @@ const UserInviteListItem = ({user, groups}) => {
 
   const sendInvite = (e, group, user_email) => {
     e.preventDefault();
-    axios.post(process.env.NEXT_PUBLIC_DEV_API + `/group/inviteuser/${sessionStorage.token}`, {
+    axios.post(process.env.NEXT_PUBLIC_DEV_API + `/groupmgmt/inviteuser/${sessionStorage.token}`, {
       group,
       user_email
     }).then((res) => {

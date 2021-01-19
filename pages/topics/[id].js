@@ -1,23 +1,32 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import Head from 'next/head';
 
 import {getIds, getDocById} from '../../lib/api/dynamicRouting';
 import formatDateFromDB from '../../lib/utils/formatDateFromDB';
 import checkToken from '../../lib/utils/checkToken';
 
+import SessionProtectPage from '../../components/SessionProtectPage';
 import TopicBody from '../../components/topics/TopicBody';
 import PostForm from '../../components/forms/PostForm';
 import PostBody from '../../components/posts/PostBody';
-import Header from '../../components/global/Header';
 import Modal from '../../components/utils/Modal';
-import NoSessionLock from '../../components/utils/NoSessionLock';
 
 
 const Page = ({topic_data}) => {
 
+  const {topic} = topic_data;
+  const topic_author = topic.user;
+
+  const {posts, _id, title, body, author, date_created} = topic;
+
+  const page_title = `Blurbr - ${title}`;
+
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
+
+  useEffect(() => {
+    setSession(checkToken(sessionStorage.token));
+  }, [])
 
   const toggleModal = (e, modal) => {
     if(modal){
@@ -27,14 +36,6 @@ const Page = ({topic_data}) => {
     }
   }
 
-  useEffect(() => {
-    setSession(checkToken(sessionStorage.token));
-  }, [])
-
-  const {topic} = topic_data;
-  const topic_author = topic.user;
-
-  const {posts, _id, title, body, author, date_created} = topic;
 
   const posts_list = topic.posts.map((post) => {
     return (
@@ -51,38 +52,33 @@ const Page = ({topic_data}) => {
   })
 
   return (
-      <>
-      <Head>
-        <title>Blurbr - {title}</title>
-      </Head>
-      <Header />
 
-        {!session &&
-          <NoSessionLock>
-            <h3 className='center_text'>Please log in or register to view topics</h3>
-          </NoSessionLock>
-        }
-
-        {session &&
           <>
-          <TopicBody title={title} author={topic_author.username}
-            body={body} date_created={formatDateFromDB(date_created)}
-            signature={topic_author.signature} author_link={'/users/' + topic_author._id}
-            avatar={topic_author.avatar}
-          />
-          {posts_list}
-          <PostForm
-            show={modal}
-            toggle={toggleModal}
-            id={_id}/>
-          <Modal
-            show={modal}
-            toggle={toggleModal}>
-            <h1>Post Successful!</h1>
-          </Modal>
+          <SessionProtectPage page_title={page_title} no_session_title='Please log in to view topics'
+            session={session}>
+
+            <TopicBody title={title} author={topic_author.username}
+              body={body} date_created={formatDateFromDB(date_created)}
+              signature={topic_author.signature} author_link={'/users/' + topic_author._id}
+              avatar={topic_author.avatar}
+            />
+
+            {posts_list}
+
+            <PostForm
+              show={modal}
+              toggle={toggleModal}
+              id={_id}/>
+
+            <Modal
+              show={modal}
+              toggle={toggleModal}>
+              <h1>Post Successful!</h1>
+            </Modal>
+
+          </SessionProtectPage>
           </>
-        }
-      </>
+
   )
 }
 

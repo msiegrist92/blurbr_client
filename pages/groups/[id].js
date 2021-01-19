@@ -1,40 +1,36 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import Head from 'next/head';
-
 
 import {getDocById, getIds} from '../../lib/api/dynamicRouting.js';
 import checkToken from '../../lib/utils/checkToken';
 
-import Header from '../../components/global/Header';
+import SessionProtectPage from '../../components/SessionProtectPage';
 import Modal from '../../components/utils/Modal';
+import {genList} from '../../lib/utils/genListIfUser';
+
 import CaretTurnDropDown from '../../components/utils/CaretTurnDropDown';
-import TopicListDropDown from '../../components/topics/TopicListDropDown';
 import GroupInfo from '../../components/groups/GroupInfo';
-import UserListDropDown from '../../components/user/UserListDropDown';
 import TopicForm from '../../components/forms/TopicForm';
-import NoSessionLock from '../../components/utils/NoSessionLock';
+
 
 const Page = ({group_data}) => {
 
-  const [modal, setModal] = useState(false);
-  const [session, setSession] = useState(false);
+  const page_title = `Blurbr - ${group_data.name}`;
 
   const {name, owner, topics, users, description} = group_data;
 
-  const groups = [group_data]
+  const groups = [group_data];
+
+  const [modal, setModal] = useState(false);
+  const [session, setSession] = useState(false);
 
   useEffect(() => {
     setSession(checkToken(sessionStorage.token));
   }, [])
 
-  const topics_list = topics.map((topic) => {
-    return <TopicListDropDown key={topic._id} topic={topic} />
-  })
+  const topics_list = genList(topics, 'topic');
 
-  const user_list = users.map((user) => {
-    return <UserListDropDown key={user._id} user={user} />
-  })
+  const user_list = genList(users, 'user');
 
   const toggleModal = (e, modal) => {
     e.preventDefault();
@@ -47,23 +43,14 @@ const Page = ({group_data}) => {
 
   return (
     <>
-      <Head>
-        <title>Blurbr - {name}</title>
-      </Head>
-      <Header />
+      <SessionProtectPage page_title={page_title} no_session_title="Please log in to view groups"
+          session={session}>
 
-        {!session &&
-          <NoSessionLock>
-            <h3 className='center_text'>Please log in or register to view groups</h3>
-          </NoSessionLock>
-        }
-
-        {session &&
-          <>
           <GroupInfo
             name={name} owner={owner} num_topics={topics.length} num_users={users.length}
             description={description}
           />
+
           <div className='container'>
             <button
               style={{marginBottom: '1.5em'}}
@@ -74,20 +61,24 @@ const Page = ({group_data}) => {
           </div>
 
         <div className='container drops_cont'>
+
           <CaretTurnDropDown list={topics_list} class_name={'topics_list'}
             list_name={'Topics'} h1_class={'topics'}
           />
+
           <CaretTurnDropDown list={user_list} class_name={'user_list'}
             list_name={'Users'} h1_class={'users'}
           />
+
         </div>
+
         <Modal
           show={modal} toggle={toggleModal}
           >
           <TopicForm groups={groups} />
         </Modal>
-        </>
-        }
+
+      </SessionProtectPage>
     </>
   )
 }

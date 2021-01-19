@@ -1,19 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import Head from 'next/head'
 
 import checkToken from '../../lib/utils/checkToken';
-
-import UserInfo from '../../components/user/UserInfo';
-import Header from '../../components/global/Header';
-import TopicListDropDown from '../../components/topics/TopicListDropDown';
-import CaretTurnDropDown from '../../components/utils/CaretTurnDropDown';
-import GroupListDropDown from '../../components/groups/GroupListDropDown';
-import NoSessionLock from '../../components/utils/NoSessionLock';
-
+import {genListIfUser} from '../../lib/utils/genListIfUser';
 import {getIds, getDocById} from '../../lib/api/dynamicRouting';
 
+import UserInfo from '../../components/user/UserInfo';
+import CaretTurnDropDown from '../../components/utils/CaretTurnDropDown';
+import SessionProtectPage from '../../components/SessionProtectPage';
+
 const Page = (props) => {
+
+  const {username, avatar, signature, number_posts, topics, groups} = props.user;
+  const {user} = props;
+  const page_title = `Blurbr - ${username}`;
 
   const [token, setToken] = useState(false);
   const [session, setSession] = useState(false)
@@ -22,49 +22,36 @@ const Page = (props) => {
     setSession(checkToken(sessionStorage.token));
   }, [])
 
-  const {username, avatar, signature, number_posts} = props.user;
-  const topics = props.user.topics;
-  const groups = props.user.groups;
+  const topics_list = genListIfUser(user, 'topic');
 
-  const topics_list = topics.map((topic) => {
-    return <TopicListDropDown key={topic._id} topic={topic} />
-  })
-
-  const groups_list = groups.map((group) => {
-    return <GroupListDropDown key={group._id} group={group} />
-  })
-
+  const groups_list = genListIfUser(user, 'group');
 
   return (
-    <>
-      <Head>
-        <title>Blurbr - {username}</title>
-      </Head>
-      <Header />
 
-        {!session &&
-          <NoSessionLock>
-            <h3 className='center_text'>Please log in or register to view user profiles</h3>
-          </NoSessionLock>
-        }.
 
-        {session &&
           <>
-          <UserInfo
-            username={username} avatar={avatar} signature={signature}
-            number_posts={number_posts} topics={topics}
-          />
-          <div className='drops_cont'>
-            <CaretTurnDropDown list={topics_list} class_name={'topics_list'}
-              list_name={'Topics'} h1_class={'topics'}
+          <SessionProtectPage page_title={page_title} no_session_title="Please log in to view profiles"
+              session={session}>
+
+            <UserInfo
+              username={username} avatar={avatar} signature={signature}
+              number_posts={number_posts} topics={topics}
             />
-            <CaretTurnDropDown list={groups_list} class_name={'groups_list'}
-                list_name={'Groups'} h1_class={'groups'}
-            />
-          </div>
-          </>
-        }
-      </>
+
+            <div className='drops_cont'>
+
+              <CaretTurnDropDown list={topics_list} class_name={'topics_list'}
+                list_name={'Topics'} h1_class={'topics'}
+              />
+
+              <CaretTurnDropDown list={groups_list} class_name={'groups_list'}
+                  list_name={'Groups'} h1_class={'groups'}
+              />
+            </div>
+
+          </SessionProtectPage>
+        </>
+
   )
 }
 

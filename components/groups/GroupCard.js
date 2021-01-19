@@ -4,8 +4,6 @@ import jwt from 'jsonwebtoken'
 
 const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent, user, owns, users_list}) => {
 
-  console.log(users)
-
   let manage_link = '/managegroups/'
 
   if(owns){
@@ -41,7 +39,7 @@ const GroupCard = ({name, group_id, owner, owner_id, topics, users, most_recent,
 
     const join_req_token = formatRequestToken(user_id, group_id);
 
-    axios.post(process.env.NEXT_PUBLIC_DEV_API + '/group/joinrequest/' + join_req_token)
+    axios.post(process.env.NEXT_PUBLIC_DEV_API + '/groupmgmt/joinrequest/' + join_req_token)
     .then((res) => {
       alert('Request email sent');
       console.log(res)

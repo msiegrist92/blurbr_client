@@ -11,7 +11,7 @@ const RemoveTopics = ({group_data}) => {
 
   const removeTopics = (e, selections) => {
     e.preventDefault();
-    axios.post(process.env.NEXT_PUBLIC_DEV_API + '/group/removetopics', {
+    axios.post(process.env.NEXT_PUBLIC_DEV_API + '/groupmgmt/removetopics', {
       user_token: sessionStorage.token,
       selections,
       group_id: group_data._id

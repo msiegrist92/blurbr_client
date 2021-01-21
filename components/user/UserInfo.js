@@ -3,6 +3,8 @@ import React, {useState, useEffect} from 'react';
 const UserInfo = ({username, avatar, signature, number_posts, topics}) => {
 
   avatar = process.env.NEXT_PUBLIC_AVATAR_DIR + avatar;
+
+
   number_posts = 'Posts: ' + number_posts;
 
 

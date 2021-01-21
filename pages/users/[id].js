@@ -57,7 +57,6 @@ const Page = (props) => {
 
 
 export async function getStaticProps({params}){
-  console.log(params.id)
   return {
     props : {
       user: await getDocById(process.env.NEXT_PUBLIC_DEV_API + '/user/', params.id).then((res) => {

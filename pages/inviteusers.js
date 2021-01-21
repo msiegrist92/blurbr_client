@@ -21,7 +21,12 @@ const Page = () => {
   }, [])
 
   useEffect(() => {
-    axios.get(process.env.NEXT_PUBLIC_DEV_API + `/users/own_groups/${sessionStorage.token}`)
+    axios.get(process.env.NEXT_PUBLIC_DEV_API + `/users/own_groups/${sessionStorage.token}`,
+    {
+      headers: {
+        'Authorization': sessionStorage.token
+      }
+    })
     .then((res) => {
       setGroups(res.data.groups_owned);
     })

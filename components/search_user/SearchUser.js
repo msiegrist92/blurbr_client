@@ -13,7 +13,12 @@ const SearchUser = ({groups}) => {
   const searchUsers = (e, term, option) => {
     e.preventDefault();
 
-    axios.get(process.env.NEXT_PUBLIC_DEV_API + `/users/searchby/${option.toLowerCase()}/${term}`
+    axios.get(process.env.NEXT_PUBLIC_DEV_API + `/users/searchby/${option.toLowerCase()}/${term}`,
+      {
+        headers : {
+          'Authorization': sessionStorage.token
+        }
+      }
     ).then((res) => {
       setResults(res.data);
     }).catch((err) => {

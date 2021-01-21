@@ -40,7 +40,12 @@ const MyGroups = () => {
 
   useEffect(() => {
     if(user){
-      axios.get(process.env.NEXT_PUBLIC_DEV_API + '/user_groups/' + user)
+      axios.get(process.env.NEXT_PUBLIC_DEV_API + '/user_groups/' + user,
+    {
+      headers: {
+        'Authorization': sessionStorage.token
+      }
+    })
         .then((res) => {
           console.log(res.data)
           setGroups(res.data)

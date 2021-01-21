@@ -99,7 +99,11 @@ const Groups = ({groups}) => {
 
 export async function getStaticProps(){
 
-  return axios.get(process.env.NEXT_PUBLIC_DEV_API + '/groups').then((res) => {
+  return axios.get(process.env.NEXT_PUBLIC_DEV_API + '/groups', {
+    headers: {
+      'Authorization': process.env.NEXT_PUBLIC_PATHS_SECRET
+    }
+  }).then((res) => {
     return {
       props: {
         groups: res.data

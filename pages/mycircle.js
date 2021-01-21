@@ -40,7 +40,12 @@ const MyCircle = () => {
 
   useEffect(() => {
     if(user){
-      axios.get(process.env.NEXT_PUBLIC_DEV_API + '/member_groups/' + user)
+      axios.get(process.env.NEXT_PUBLIC_DEV_API + '/member_groups/' + user,
+    {
+      headers: {
+        'Authorization': sessionStorage.token
+      }
+    })
         .then((res) => {
           console.log(res)
           setGroups(res.data)

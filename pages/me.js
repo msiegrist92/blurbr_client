@@ -25,11 +25,10 @@ const Me = () => {
 
   const [avatar, setAvatar] = useState('');
   const [sig, setSig] = useState('');
-    const [DBSig, setDBSig] = useState('');
-    const [DBAvatar, setDBAvatar] = useState('');
+  const [DBSig, setDBSig] = useState('');
+  const [DBAvatar, setDBAvatar] = useState('');
 
-  const [userID, setUserID] = useState('');
-  const [session, setSession] = useState(true);
+  const [session, setSession] = useState(false);
   const [status, setStatus] = useState('');
   const [user, setUser] = useState(null);
 
@@ -40,28 +39,35 @@ const Me = () => {
 
 
   useEffect(() => {
-    getUserById(jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id).then((res) => {
-      setUser(res.data);
-    })
+    if(session){
+      getUserById(jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)._id, sessionStorage.token)
+      .then((res) => {
+        setUser(res.data);
+        setDBSig(res.data.signature)
+        setDBAvatar(res.data.avatar)
+      })
+    }
   }, [session])
 
 
   useEffect(() => {
-      let id = jwt.verify(sessionStorage.token, process.env.NEXT_PUBLIC_JWT_SECRET)
-      setUserID(id._id);
-      getAvatar(userID).then((res) => {
-        setDBAvatar(res);
+    if(session){
+      getAvatar(user._id, sessionStorage.token).then((res) => {
+        if(res != null){
+          setDBAvatar(res);
+        }
       })
-      getSig(userID).then((res) => {
+      getSig(user._id, sessionStorage.token).then((res) => {
         setDBSig(res);
       })
+    }
   }, [DBSig, DBAvatar])
 
 
   const changeSig = (event, sig) => {
     event.preventDefault();
     axios.post(process.env.NEXT_PUBLIC_DEV_API + '/user/' +
-      userID + '/signature',
+      user._id + '/signature',
       {
         signature: sig,
         token: sessionStorage.token
@@ -80,8 +86,7 @@ const Me = () => {
     data.append("file", avatar);
     data.append('token', sessionStorage.token)
     axios.post(process.env.NEXT_PUBLIC_DEV_API +
-        '/user/' + userID + '/avatar', data,
-      {
+        '/user/' + user._id + '/avatar', data, {
         headers: {
         "Content-Type": "multipart/form-data"
       }
@@ -103,11 +108,9 @@ const Me = () => {
   let topics_list = genListIfUser(user, 'topic');
   let groups_list = genListIfUser(user, 'group');
 
-  console.log(user)
-
   return (
     <>
-      <SessionProtectPage page_title='Your Profile' no_session_title='Please log in to mange your profile'
+      <SessionProtectPage page_title='Your Profile' no_session_title='Please log in to manage your profile'
         session={session}>
 
           {user &&

@@ -43,7 +43,11 @@ const Topics = () => {
   }, [session])
 
   useEffect(() => {
-    axios.get(process.env.NEXT_PUBLIC_DEV_API + '/user_topics/' + user)
+    axios.get(process.env.NEXT_PUBLIC_DEV_API + '/user_topics/' + user, {
+      headers: {
+        'Authorization': sessionStorage.token
+      }
+    })
       .then((res) => {
         setTopics(res.data.user_topics);
         setShow(res.data.user_topics)

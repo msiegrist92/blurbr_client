@@ -1,7 +1,6 @@
 import React from 'react';
 
 const RemoveTopicItem = ({topic, selections, setSelections}) => {
-
   const topic_link = `/topics/${topic._id}`;
 
   let body = topic.body;

@@ -6,14 +6,14 @@ import checkToken from '../../lib/utils/checkToken';
 import checkOwner from '../../lib/utils/checkOwner';
 
 import {pressCard, getSlideNum, depressCards} from '../../lib/utils/manageGroup';
+import {removeUsers, removeTopics} from '../../lib/api/adminRemove';
 
 import Modal from '../../components/utils/Modal';
 import GroupInfo from '../../components/groups/GroupInfo';
 import SessionProtectPage from '../../components/SessionProtectPage';
 
+import RemoveList from '../../components/manage_group/RemoveList';
 import SearchUser from '../../components/search_user/SearchUser';
-import RemoveUsers from '../../components/manage_group/RemoveUsers';
-import RemoveTopics from '../../components/manage_group/RemoveTopics';
 import DisbandGroup from '../../components/manage_group/DisbandGroup';
 import AdminPanel from '../../components/manage_group/AdminPanel';
 
@@ -66,8 +66,11 @@ const Page = ({group_data}) => {
     title: 'Disband Group'
   }];
 
-  const slides = ['', <SearchUser groups={[group_data]} />, <RemoveUsers group_data={group_data} />,
-        <RemoveTopics group_data={group_data} />, <DisbandGroup toggleModal={toggleModal} modal={modal} group_data={group_data} />];
+  const slides = [<div key='1'></div>,
+    <SearchUser key='2' groups={[group_data]} />,
+    <RemoveList key='3' group_id={group_data._id} dataset={users} removerFunc={removeUsers} title='User Name' list_type='user'/>,
+    <RemoveList key='4' group_id={group_data._id} dataset={topics} removerFunc={removeTopics} title='Topic' list_type='topic' />,
+    <DisbandGroup key='5' toggleModal={toggleModal} modal={modal} group_data={group_data} />];
 
   const changeSlide = e => {
 
@@ -87,7 +90,8 @@ const Page = ({group_data}) => {
     e.preventDefault();
     axios.post(process.env.NEXT_PUBLIC_DEV_API + '/groupmgmt/disbandgroup', {
       group_id,
-      user_token: sessionStorage.token
+      user_token: sessionStorage.token,
+      token: sessionStorage.token
     }).then((res) => {
       alert('Group disbanded');
       location.href = '/mygroups';

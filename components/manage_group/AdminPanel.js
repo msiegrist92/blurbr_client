@@ -3,8 +3,8 @@ import AdminCard from './AdminCard';
 
 const AdminPanel = ({changeSlide, config}) => {
 
-  const cards = config.map((item) => {
-    return <AdminCard config_item={item} changeSlide={changeSlide} />
+  const cards = config.map((item, i) => {
+    return <AdminCard key={i} config_item={item} changeSlide={changeSlide} />
   })
 
   return (

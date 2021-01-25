@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import {getDocById, getIds} from '../../lib/api/dynamicRouting.js';
 import checkToken from '../../lib/utils/checkToken';
+import checkOwner from '../../lib/utils/checkOwner';
 
 import SessionProtectPage from '../../components/SessionProtectPage';
 import Modal from '../../components/utils/Modal';
@@ -18,14 +19,15 @@ const Page = ({group_data}) => {
   const page_title = `Blurbr - ${group_data.name}`;
 
   const {name, owner, topics, users, description} = group_data;
-
   const groups = [group_data];
 
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
+  const [isOwner, setOwner] = useState(false);
 
   useEffect(() => {
     setSession(checkToken(sessionStorage.token));
+    setOwner(checkOwner(sessionStorage.token, owner._id));
   }, [])
 
   const topics_list = genList(topics, 'topic');
@@ -58,6 +60,11 @@ const Page = ({group_data}) => {
               onClick={(e, modal) => {
                 toggleModal(e, modal)
               }}>Create Topic</button>
+            {isOwner &&
+              <a className='self_center' href='/'>
+                <button className='call_to'>Manage your group</button>
+              </a>
+            }
           </div>
 
         <div className='container drops_cont'>
@@ -88,7 +95,6 @@ export async function getStaticProps({params}){
   return {
      props : {
        group_data : await getDocById(process.env.NEXT_PUBLIC_DEV_API + '/group/', params.id).then((res) => {
-         console.log(res)
          return res;
        })
      }

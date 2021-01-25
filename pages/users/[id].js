@@ -17,6 +17,7 @@ const Page = (props) => {
 
   const [token, setToken] = useState(false);
   const [session, setSession] = useState(false)
+  const [isYou, setYou] = useState(false);
 
   useEffect(() => {
     setSession(checkToken(sessionStorage.token));

@@ -4,6 +4,7 @@ import axios from 'axios';
 import {getIds, getDocById} from '../../lib/api/dynamicRouting';
 import formatDateFromDB from '../../lib/utils/formatDateFromDB';
 import checkToken from '../../lib/utils/checkToken';
+import checkMember from '../../lib/utils/checkMember';
 
 import SessionProtectPage from '../../components/SessionProtectPage';
 import TopicBody from '../../components/topics/TopicBody';
@@ -12,7 +13,7 @@ import PostBody from '../../components/posts/PostBody';
 import Modal from '../../components/utils/Modal';
 
 
-const Page = ({topic_data}) => {
+const Page = ({topic_data, users_allowed}) => {
 
   const {topic} = topic_data;
   const topic_author = topic.user;
@@ -24,8 +25,11 @@ const Page = ({topic_data}) => {
   const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
 
+  const [member, setMember] = useState(false);
+
   useEffect(() => {
     setSession(checkToken(sessionStorage.token));
+    setSession(checkMember(users_allowed, sessionStorage.token));
   }, [])
 
   const toggleModal = (e, modal) => {
@@ -54,7 +58,7 @@ const Page = ({topic_data}) => {
   return (
 
           <>
-          <SessionProtectPage page_title={page_title} no_session_title='Please log in to view topics'
+          <SessionProtectPage page_title={page_title} no_session_title='Please join group to view this topic'
             session={session}>
 
             <TopicBody title={title} author={topic_author.username}
@@ -88,6 +92,13 @@ export async function getStaticProps({params}){
      props : {
        topic_data : await getDocById(process.env.NEXT_PUBLIC_DEV_API + '/topic/', params.id).then((res) => {
          return res;
+       }),
+       users_allowed: await axios.get(`${process.env.NEXT_PUBLIC_DEV_API}/topic/${params.id}/usersallowed`, {
+         headers  : {
+           'Authorization' : process.env.NEXT_PUBLIC_PATHS_SECRET
+         }
+       }).then((res) => {
+         return res.data
        })
      }
    }

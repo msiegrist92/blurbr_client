@@ -2,9 +2,6 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
-
-
-import Modal from '../components/utils/Modal';
 import GroupCard from '../components/groups/GroupCard';
 
 import SearchRenderList from '../components/utils/SearchRenderList';
@@ -16,19 +13,10 @@ import checkToken from '../lib/utils/checkToken';
 
 const Groups = ({groups}) => {
 
-  const [modal, setModal] = useState(false);
   const [session, setSession] = useState(false);
   const [user, setUser] = useState('');
   const [show_groups, setGroups] = useState([]);
 
-  const toggleModal = (e, modal) => {
-    e.preventDefault();
-    if(modal){
-      setModal(false);
-    } else {
-      setModal(true);
-    }
-  }
 
   useEffect(() => {
     setSession(checkToken(sessionStorage.token));

@@ -55,26 +55,26 @@ li {
   }
 }
 
+.call_to {
+  padding: 1em 1.25em;
+  font-size: 1.25em;
+  background-color: $chill-aqua;
+}
+
+.call_to:hover {
+  background-color: #31a6aa;
+}
+
+.call_to a:hover {
+  color: white;
+}
+
+
 .container {
   width: 75%;
   display: grid;
   margin: 0 auto;
   margin-top: 20px;
-
-  .call_to {
-    padding: 1em 1.25em;
-    font-size: 1.25em;
-    background-color: $chill-aqua;
-    margin-bottom: 20px;
-  }
-
-  .call_to:hover {
-    background-color: #31a6aa;
-  }
-
-  .call_to a:hover {
-    color: white;
-  }
 
   @media #{$medium-and-down}{
     width: 100%;

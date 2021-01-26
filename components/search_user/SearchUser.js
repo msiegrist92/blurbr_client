@@ -3,10 +3,10 @@ import axios from 'axios';
 
 import ResultsList from './ResultsList';
 
-const SearchUser = ({groups}) => {
+const SearchUser = ({groups, default_term}) => {
 
-  const [option, setOption] = useState('Email');
-  const [term, setTerm] = useState('');
+  const [option, setOption] = useState('Username');
+  const [term, setTerm] = useState(default_term);
   const [results, setResults] = useState([]);
   const [err, setErr] = useState('')
 
@@ -36,10 +36,11 @@ const SearchUser = ({groups}) => {
           <select
             className='center_cont'
             value={option} onChange={(e) => setOption(event.target.value)}>
-            <option value='Email'>Email</option>
             <option value='Username'>Username</option>
+            <option value='Email'>Email</option>
           </select>
         <input className='text_focus'
+          value={term}
           required
           onChange={(e) => setTerm(e.target.value)}
           type='text' placeholder={option} />

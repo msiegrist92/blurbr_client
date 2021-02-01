@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Head from 'next/head';
 import axios from 'axios';
 
-import checkToken from '../lib/utils/checkToken';
+import {checkToken} from '../lib/utils/rolesCheck'
 
 import SearchUser from '../components/search_user/SearchUser';
 

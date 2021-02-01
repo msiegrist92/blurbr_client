@@ -4,7 +4,7 @@ import Modal from '../components/utils/Modal';
 import CreateGroup from '../components/forms/CreateGroup';
 import SessionProtectPage from '../components/SessionProtectPage';
 
-import checkToken from '../lib/utils/checkToken';
+import {checkToken} from '../lib/utils/rolesCheck'
 
 const createGroup = () => {
 

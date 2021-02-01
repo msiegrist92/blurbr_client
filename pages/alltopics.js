@@ -11,7 +11,7 @@ import TopicForm from '../components/forms/TopicForm';
 import SortOptions from '../components/topics/SortOptions';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
-import checkToken from '../lib/utils/checkToken'
+import {checkToken} from '../lib/utils/rolesCheck'
 
 
 const AllTopics = () => {

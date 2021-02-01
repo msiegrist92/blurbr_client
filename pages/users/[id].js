@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
-import checkToken from '../../lib/utils/checkToken';
-import {checkIsYou} from '../../lib/utils/rolesCheck';
+import {checkIsYou, checkToken} from '../../lib/utils/rolesCheck';
 import {genListIfUser} from '../../lib/utils/genListIfUser';
 import {getIds, getDocById} from '../../lib/api/dynamicRouting';
 

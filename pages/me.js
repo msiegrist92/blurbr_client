@@ -18,7 +18,7 @@ import getUserById from '../lib/api/user/getUserById';
 import handleSessionErr from '../lib/utils/handleSessionErr';
 import {animateToggle, animateToggleDisplayTimeOut} from '../lib/utils/animationHandler';
 
-import checkToken from '../lib/utils/checkToken';
+import {checkToken} from '../lib/utils/rolesCheck'
 
 
 const Me = () => {

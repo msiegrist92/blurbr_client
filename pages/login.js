@@ -6,7 +6,7 @@ import LoginForm from '../components/forms/LoginForm';
 import Header from '../components/global/Header';
 import Modal from '../components/utils/Modal';
 
-import checkToken from '../lib/utils/checkToken';
+import {checkToken} from '../lib/utils/rolesCheck'
 
 const Login = () => {
 

@@ -5,7 +5,7 @@ import Header from '../components/global/Header';
 import Modal from '../components/utils/Modal';
 import NoSessionLock from '../components/utils/NoSessionLock';
 
-import checkToken from '../lib/utils/checkToken'
+import {checkToken} from '../lib/utils/rolesCheck'
 
 const SessionProtectPage = ({page_title, no_session_title, children, session
 

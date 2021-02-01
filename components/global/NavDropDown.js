@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import checkToken from '../../lib/utils/checkToken';
+import {checkToken} from '../../lib/utils/rolesCheck';
 import Modal from '../utils/Modal';
 
 const NavDropDown = () => {

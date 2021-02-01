@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import {getDocById, getIds} from '../../lib/api/dynamicRouting.js';
-import checkToken from '../../lib/utils/checkToken';
-import checkOwner from '../../lib/utils/checkOwner';
+import {checkToken, checkOwner} from '../../lib/utils/rolesCheck';
 
 import {pressCard, getSlideNum, depressCards} from '../../lib/utils/manageGroup';
 import {removeUsers, removeTopics} from '../../lib/api/adminRemove';

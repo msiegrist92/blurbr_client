@@ -8,7 +8,7 @@ import SearchRenderList  from '../components/utils/SearchRenderList';
 import SessionProtectPage from '../components/SessionProtectPage';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
-import checkToken from '../lib/utils/checkToken';
+import {checkToken} from '../lib/utils/rolesCheck'
 
 
 const MyCircle = () => {

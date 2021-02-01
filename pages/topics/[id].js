@@ -3,8 +3,7 @@ import axios from 'axios';
 
 import {getIds, getDocById} from '../../lib/api/dynamicRouting';
 import formatDateFromDB from '../../lib/utils/formatDateFromDB';
-import checkToken from '../../lib/utils/checkToken';
-import checkMember from '../../lib/utils/checkMember';
+import {checkToken, checkMember} from '../../lib/utils/rolesCheck';
 
 import SessionProtectPage from '../../components/SessionProtectPage';
 import TopicBody from '../../components/topics/TopicBody';

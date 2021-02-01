@@ -11,7 +11,7 @@ import SortOptions from '../components/topics/SortOptions';
 import SessionProtectPage from '../components/SessionProtectPage';
 
 import formatDateFromDB from '../lib/utils/formatDateFromDB';
-import checkToken from '../lib/utils/checkToken';
+import {checkToken} from '../lib/utils/rolesCheck'
 
 
 const Topics = () => {
@@ -49,6 +49,7 @@ const Topics = () => {
       }
     })
       .then((res) => {
+        console.log(res.data)
         setTopics(res.data.user_topics);
         setShow(res.data.user_topics)
         setGroups(res.data.user_groups);

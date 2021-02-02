@@ -77,8 +77,11 @@ li {
   margin-top: 20px;
 
   @media #{$medium-and-down}{
-    width: 100%;
+    width: 95%;
     margin: auto;
+  }
+  @media #{$small-and-down}{
+    width: 100%;
   }
 
 }
@@ -323,12 +326,16 @@ i {
 
 .manage_card {
   padding: 1em;
-  width: 80%;
+  width: 100%;
   display: grid;
   justify-items: center;
   background-color: white;
   box-shadow: 3px 4px lightgrey;
   transition: 1s;
+
+  h2 {
+    font-size: 1.5em;
+  }
 
   &:hover{
     cursor: pointer;

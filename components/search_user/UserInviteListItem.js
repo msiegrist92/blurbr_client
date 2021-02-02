@@ -7,6 +7,7 @@ const UserInviteListItem = ({user, groups}) => {
 
   const [group, setGroup] = useState(groups[0]._id);
   const [modal, setModal] = useState(false);
+  const [invite_message, setMsg] = useState('');
 
   const toggleModal = (e, modal) => {
     e.preventDefault();
@@ -30,11 +31,12 @@ const UserInviteListItem = ({user, groups}) => {
       group,
       user_email
     }).then((res) => {
-      console.log(res)
+      setMsg('User invite sent!')
       toggleModal(e, modal)
       //pop up modal on invite sent
     }).catch((err) => {
-      console.log(err);
+      setMsg('User is already a member of your group');
+      toggleModal(e, modal);
     })
   }
 
@@ -55,7 +57,7 @@ const UserInviteListItem = ({user, groups}) => {
     <Modal
       show={modal} toggle={toggleModal}
       >
-      <h2 className='center_text rowSpan'>User invite sent!</h2>
+      <h2 className='center_text rowSpan'>{invite_message}</h2>
     </Modal>
     <hr></hr>
     </>
